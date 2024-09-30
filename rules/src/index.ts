@@ -1,3 +1,3 @@
-export { GameTemplateRules } from './GameTemplateRules'
-export { GameTemplateOptionsSpec } from './GameTemplateOptions'
-export { GameTemplateSetup } from './GameTemplateSetup'
+export { ArchitectsOfAmytisRules } from './ArchitectsOfAmytisRules'
+export { ArchitectsOfAmytisOptionsSpec } from './ArchitectsOfAmytisOptions'
+export { ArchitectsOfAmytisSetup } from './ArchitectsOfAmytisSetup'

@@ -51,9 +51,9 @@ real-time.
 
 Search and replace in **every file**:
 
-- `Game Template` => `Name of your Game`
-- `GameTemplate` => `NameOfYourGame`
-- `game-template` => `name-of-your-game`
+- `Architects of Amytis` => `Name of your Game`
+- `ArchitectsOfAmytis` => `NameOfYourGame`
+- `architects-of-amytis` => `name-of-your-game`
 
 ### 3.1 The Material
 
@@ -123,7 +123,7 @@ export class PlayerHandLocator extends HandLocator<PlayerColor, MaterialType, Lo
 
 ### 3.3 The setup
 
-Once you have one Material type and one Location type, you can start to setup a new game in [GameTemplateRules.ts](/rules/src/GameTemplateRules.ts)
+Once you have one Material type and one Location type, you can start to setup a new game in [ArchitectsOfAmytisRules.ts](/rules/src/ArchitectsOfAmytisRules.ts)
 
 You can easily create and manipulate the material in the setup:
 
@@ -166,7 +166,7 @@ Then, run:
 ```
 rclone config
 > n (For "New remote)
-name> game-template
+name> architects-of-amytis
 Storage> s3 (Amazon S3 Compliant Storage Provider)
 provider> Other
 env_auth> false

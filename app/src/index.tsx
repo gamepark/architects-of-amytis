@@ -1,8 +1,8 @@
 /** @jsxImportSource @emotion/react */
-import { GameTemplateOptionsSpec } from '@gamepark/game-template/GameTemplateOptions'
-import { GameTemplateRules } from '@gamepark/game-template/GameTemplateRules'
-import { GameTemplateSetup } from '@gamepark/game-template/GameTemplateSetup'
-import { GameProvider, MaterialGameAnimations, setupTranslation } from '@gamepark/react-game'
+import { ArchitectsOfAmytisOptionsSpec } from '@gamepark/architects-of-amytis/ArchitectsOfAmytisOptions'
+import { ArchitectsOfAmytisRules } from '@gamepark/architects-of-amytis/ArchitectsOfAmytisRules'
+import { ArchitectsOfAmytisSetup } from '@gamepark/architects-of-amytis/ArchitectsOfAmytisSetup'
+import { GameProvider, setupTranslation } from '@gamepark/react-game'
 import { StrictMode } from 'react'
 import ReactDOM from 'react-dom'
 import { gameAnimations } from './animations/GameAnimations'
@@ -16,10 +16,10 @@ setupTranslation(translations, { debug: false })
 ReactDOM.render(
   <StrictMode>
     <GameProvider
-      game="game-template"
-      Rules={GameTemplateRules}
-      optionsSpec={GameTemplateOptionsSpec}
-      GameSetup={GameTemplateSetup}
+      game="architects-of-amytis"
+      Rules={ArchitectsOfAmytisRules}
+      optionsSpec={ArchitectsOfAmytisOptionsSpec}
+      GameSetup={ArchitectsOfAmytisSetup}
       material={Material}
       locators={Locators}
       animations={gameAnimations}>
