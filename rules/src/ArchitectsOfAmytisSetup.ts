@@ -4,8 +4,9 @@ import { ArchitectsOfAmytisRules } from './ArchitectsOfAmytisRules'
 import { buildings } from './material/Building'
 import { LocationType } from './material/LocationType'
 import { MaterialType } from './material/MaterialType'
-import { PlayerColor } from './PlayerColor'
+import { PlayerColor, playerColors } from './PlayerColor'
 import { RuleId } from './rules/RuleId'
+import { projects } from './material/Project'
 
 /**
  * This class creates a new Game based on the game options
@@ -15,6 +16,8 @@ export class ArchitectsOfAmytisSetup extends MaterialGameSetup<PlayerColor, Mate
 
   setupMaterial(_options: ArchitectsOfAmytisOptions) {
     this.setupBuildingTiles()
+    this.setupProjectCards()
+    this.setupPlayers()
   }
 
   setupBuildingTiles() {
@@ -31,6 +34,51 @@ export class ArchitectsOfAmytisSetup extends MaterialGameSetup<PlayerColor, Mate
       }
     }
     buildingsDeck.deleteItems()
+  }
+
+  setupProjectCards() {
+    this.material(MaterialType.ProjectCard).createItems(projects.map((project) => ({
+        id: project, location: { type: LocationType.ProjectCardsDeck }
+    })))
+    this.material(MaterialType.ProjectCard).shuffle()
+    const projectCardsDeck = this.material(MaterialType.ProjectCard).deck()
+    projectCardsDeck.deal({ type: LocationType.ProjectCardsDeck }, 3)
+  }
+
+  setupPlayers() {
+    for (const player of playerColors) {
+      this.setupPlayer(player)
+    }
+  }
+
+  setupPlayer(player: PlayerColor) {
+    this.material(MaterialType.PlayerBoard).createItem({
+      id: player,
+      location: {
+        type: LocationType.PlayerBoardSpot,
+        player: player
+      }
+    })
+
+    this.material(MaterialType.Pawn).createItem({
+      id: player,
+      location: {
+        type: LocationType.PlayerPawnsSupply,
+        player: player
+      },
+      quantity: 5
+    })
+    // TODO: Place 2 in the Player board and Score board
+
+    this.material(MaterialType.Architect).createItem({
+      id: player,
+      location: {
+        type: LocationType.PlayerArchitectsSupply,
+        player: player
+      },
+      quantity: 4
+    })
+
   }
 
   start() {

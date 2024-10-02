@@ -15,7 +15,7 @@ export const PlayerPanels: FC<any> = () => {
   return createPortal(
     <>
       {players.map((player, index) =>
-        <StyledPlayerPanel key={player.id} player={player} color={playerColorCode[player.id]} css={panelPosition(index)}/>
+        <StyledPlayerPanel key={player.id} player={player} color={playerColorCode[player.id as PlayerColor]} css={panelPosition(index)}/>
       )}
     </>,
     root
@@ -29,8 +29,6 @@ const panelPosition = (index: number) => css`
 `
 
 export const playerColorCode: Record<PlayerColor, string> = {
-  [PlayerColor.Red]: 'red',
-  [PlayerColor.Blue]: 'blue',
-  [PlayerColor.Green]: 'green',
-  [PlayerColor.Yellow]: 'yellow'
+  [PlayerColor.Black]: 'black',
+  [PlayerColor.White]: 'white'
 }

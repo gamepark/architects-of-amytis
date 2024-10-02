@@ -1,17 +1,19 @@
 export enum LocationType {
   MainBoardSpot = 1,
-  FavorBoardSpot,
-  ScoreBoardSpot,
   MainBoardStackSpace,
+  FavorBoardSpot,
+  FavorBoardSpace,
+  ScoreBoardSpot,
+  ScoreBoardSpace,
   ProjectCardsDeck,
   ProjectCardsDisplay,
   PlayerBoardSpot,
-  ScoreBoardSpace,
+  PlayerBoardStackSpace,
   ScoreRangeAreaSpace,
   PlayerArchitectsSupply,
   PlayerPawnsSupply,
   FirstPlayerCardSpot,
-  PlayerProjectCardsSpot,
   PlayerBuildingCardsSpot,
+  PlayerProjectCardsSpot,
   PlayerValidatedProjectCardsPile
 }

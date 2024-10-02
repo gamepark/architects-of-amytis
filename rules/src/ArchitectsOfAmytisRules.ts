@@ -22,6 +22,12 @@ export class ArchitectsOfAmytisRules extends MaterialRules<PlayerColor, Material
     }
   }
 
+  // hidingStrategies = {
+  //   [MaterialType.ProjectCard]: {
+  //     [LocationType.ProjectCardsDeck]: hideFront
+  //   }
+  // }
+
   giveTime(): number {
     return 60
   }

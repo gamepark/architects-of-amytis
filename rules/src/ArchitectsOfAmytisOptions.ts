@@ -31,13 +31,9 @@ export const ArchitectsOfAmytisOptionsSpec: OptionsSpec<ArchitectsOfAmytisOption
 
 export function getPlayerName(playerId: PlayerColor, t: TFunction) {
   switch (playerId) {
-    case PlayerColor.Red:
-      return t('Red')
-    case PlayerColor.Blue:
-      return t('Blue')
-    case PlayerColor.Green:
-      return t('Green')
-    case PlayerColor.Yellow:
-      return t('Yellow')
+    case PlayerColor.Black:
+      return t('Black')
+    case PlayerColor.White:
+      return t('White')
   }
 }

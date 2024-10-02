@@ -13,6 +13,8 @@ class MainBoardStackSpace extends Locator {
     const { x, y, z } = super.getItemCoordinates(item, context)
     return { x: x! - item.location.z! * 0.05, y: y! - item.location.z! * 0.05, z: z! + item.location.z! * 0.05 }
   }
+
+  // getHoverTransform = () => ['translateZ(10em)', 'scale(2)']
 }
 
 export const mainBoardStackSpace = new MainBoardStackSpace()
