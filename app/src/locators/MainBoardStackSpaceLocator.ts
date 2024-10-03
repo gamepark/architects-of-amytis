@@ -2,7 +2,7 @@ import { MaterialType } from '@gamepark/architects-of-amytis/material/MaterialTy
 import { ItemContext, Locator } from '@gamepark/react-game'
 import { Location, MaterialItem } from '@gamepark/rules-api'
 
-class MainBoardStackSpace extends Locator {
+class MainBoardStackSpaceLocator extends Locator {
   parentItemType = MaterialType.MainBoard
 
   getPositionOnParent(location: Location) {
@@ -17,4 +17,4 @@ class MainBoardStackSpace extends Locator {
   // getHoverTransform = () => ['translateZ(10em)', 'scale(2)']
 }
 
-export const mainBoardStackSpace = new MainBoardStackSpace()
+export const mainBoardStackSpaceLocator = new MainBoardStackSpaceLocator()

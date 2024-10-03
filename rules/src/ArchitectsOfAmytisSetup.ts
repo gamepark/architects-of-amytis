@@ -4,7 +4,7 @@ import { ArchitectsOfAmytisRules } from './ArchitectsOfAmytisRules'
 import { buildings } from './material/Building'
 import { LocationType } from './material/LocationType'
 import { MaterialType } from './material/MaterialType'
-import { PlayerColor, playerColors } from './PlayerColor'
+import { PlayerColor } from './PlayerColor'
 import { RuleId } from './rules/RuleId'
 import { projects } from './material/Project'
 
@@ -42,11 +42,11 @@ export class ArchitectsOfAmytisSetup extends MaterialGameSetup<PlayerColor, Mate
     })))
     this.material(MaterialType.ProjectCard).shuffle()
     const projectCardsDeck = this.material(MaterialType.ProjectCard).deck()
-    projectCardsDeck.deal({ type: LocationType.ProjectCardsDeck }, 3)
+    projectCardsDeck.deal({ type: LocationType.ProjectCardsDisplay }, 3)
   }
 
   setupPlayers() {
-    for (const player of playerColors) {
+    for (const player of this.players) {
       this.setupPlayer(player)
     }
   }
@@ -68,7 +68,14 @@ export class ArchitectsOfAmytisSetup extends MaterialGameSetup<PlayerColor, Mate
       },
       quantity: 5
     })
-    // TODO: Place 2 in the Player board and Score board
+    // this.material(MaterialType.Pawn).moveItem({
+    //   type: LocationType.ScoreRangeAreaSpace,
+    //   player: player
+    // }, 1)
+    // this.material(MaterialType.Pawn).moveItem({
+    //   type: LocationType.ScoreBoardSpace,
+    //   player: player
+    // }, 1)
 
     this.material(MaterialType.Architect).createItem({
       id: player,

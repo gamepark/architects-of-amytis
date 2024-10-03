@@ -6,15 +6,8 @@ class PlayerPawnsSupplyLocator extends PileLocator {
 
   getCoordinates(location: Location, context: ItemContext) {
     const playerIndex = getRelativePlayerIndex(context, location.player)
-    switch(playerIndex) {
-      case 0:
-        return { x: -10, y: 16}
-      case 1:
-        return { x: 10, y: -16}
-      default:
-        return { x: 0, y: 0}
-    }
+    return playerIndex === 0 ? { x: -10, y: 16 } : { x: 10, y: -16 }
   }
 }
 
-export const playerPawnsSupply = new PlayerPawnsSupplyLocator()
+export const playerPawnsSupplyLocator = new PlayerPawnsSupplyLocator()

@@ -1,18 +1,13 @@
-// import { MaterialType } from '@gamepark/architects-of-amytis/material/MaterialType'
-// import { ItemContext, Locator } from '@gamepark/react-game'
-// import { Location, MaterialItem } from '@gamepark/rules-api'
-// import { Location } from '@gamepark/rules-api'
-// import { MaterialItem } from '@gamepark/rules-api'
 import { ItemContext, Locator } from '@gamepark/react-game'
 import { mainBoardDescription } from '../material/MainBoardDescription'
-import { projectCardDescription } from '../material/ProjectCardDescription'
 import { MaterialItem } from '@gamepark/rules-api'
+import { mainBoardSpotLocator } from './MainBoardSpotLocator'
 
-class ProjectCardsDeck extends Locator {
+class ProjectCardsDeckLocator extends Locator {
   getCoordinates() {
     return { 
-      x: -mainBoardDescription.width / 2 + projectCardDescription.width / 2,
-      y: mainBoardDescription.height / 2 + projectCardDescription.height / 2 + 2
+      x: mainBoardSpotLocator.getCoordinates().x,
+      y: mainBoardSpotLocator.getCoordinates().y + mainBoardDescription.height / 2 + 5
     }
   }
 
@@ -22,10 +17,6 @@ class ProjectCardsDeck extends Locator {
   }
 
   // getHoverTransform = () => ['translateZ(10em)', 'scale(2)']
-
-  // isFlippedOnTable(): boolean {
-  //   return true
-  // }
 }
 
-export const projectCardsDeck = new ProjectCardsDeck()
+export const projectCardsDeckLocator = new ProjectCardsDeckLocator()
