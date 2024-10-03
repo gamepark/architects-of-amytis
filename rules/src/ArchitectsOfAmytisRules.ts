@@ -19,7 +19,8 @@ export class ArchitectsOfAmytisRules extends HiddenMaterialRules<PlayerColor, Ma
   locationsStrategies = {
     [MaterialType.ProjectCard]: {
       [LocationType.ProjectCardsDeck]: new PositiveSequenceStrategy(),
-      [LocationType.ProjectCardsDisplay]: new PositiveSequenceStrategy()
+      [LocationType.ProjectCardsDisplay]: new PositiveSequenceStrategy(),
+      [LocationType.PlayerProjectCardsSpot]: new PositiveSequenceStrategy()
     }
   }
 

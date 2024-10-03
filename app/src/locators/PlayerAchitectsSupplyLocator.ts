@@ -2,11 +2,11 @@ import { getRelativePlayerIndex, ItemContext, ListLocator } from '@gamepark/reac
 import { Location } from '@gamepark/rules-api'
 
 class PlayerArchitectsSupplyLocator extends ListLocator {
-  gap = { x: 1 }
+  gap = { x: 1.5 }
 
   getCoordinates(location: Location, context: ItemContext) {
     const playerIndex = getRelativePlayerIndex(context, location.player)
-    return playerIndex === 0 ? { x: -16, y: 16 } : { x: 12, y: -16 }
+    return playerIndex === 0 ? { x: 13, y: 16 } : { x: 13, y: -16 }
   }
 }
 

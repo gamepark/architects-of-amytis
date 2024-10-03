@@ -79,6 +79,11 @@ export class ArchitectsOfAmytisSetup extends MaterialGameSetup<PlayerColor, Mate
       quantity: 4
     })
 
+    const projectCardsDeck = this.material(MaterialType.ProjectCard).deck()
+    projectCardsDeck.deal({ 
+      type: LocationType.PlayerProjectCardsSpot,
+      player: player
+    }, 2)
   }
 
   start() {

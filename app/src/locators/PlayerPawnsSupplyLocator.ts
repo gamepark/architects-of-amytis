@@ -6,7 +6,7 @@ class PlayerPawnsSupplyLocator extends PileLocator {
 
   getCoordinates(location: Location, context: ItemContext) {
     const playerIndex = getRelativePlayerIndex(context, location.player)
-    return playerIndex === 0 ? { x: -10, y: 16 } : { x: 10, y: -16 }
+    return playerIndex === 0 ? { x: 10, y: 16 } : { x: 10, y: -16 }
   }
 }
 
