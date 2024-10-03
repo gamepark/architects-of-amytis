@@ -4,7 +4,7 @@ import { ArchitectsOfAmytisRules } from './ArchitectsOfAmytisRules'
 import { buildings } from './material/Building'
 import { LocationType } from './material/LocationType'
 import { MaterialType } from './material/MaterialType'
-import { PlayerColor } from './PlayerColor'
+import { PlayerColor, playerColors } from './PlayerColor'
 import { RuleId } from './rules/RuleId'
 import { projects } from './material/Project'
 
@@ -46,36 +46,29 @@ export class ArchitectsOfAmytisSetup extends MaterialGameSetup<PlayerColor, Mate
   }
 
   setupPlayers() {
-    for (const player of this.players) {
+    for (const player of playerColors) {
       this.setupPlayer(player)
     }
   }
 
   setupPlayer(player: PlayerColor) {
-    this.material(MaterialType.PlayerBoard).createItem({
-      id: player,
-      location: {
-        type: LocationType.PlayerBoardSpot,
-        player: player
-      }
-    })
-
     this.material(MaterialType.Pawn).createItem({
       id: player,
       location: {
         type: LocationType.PlayerPawnsSupply,
         player: player
       },
-      quantity: 5
+      quantity: 7
     })
-    // this.material(MaterialType.Pawn).moveItem({
-    //   type: LocationType.ScoreRangeAreaSpace,
-    //   player: player
-    // }, 1)
-    // this.material(MaterialType.Pawn).moveItem({
-    //   type: LocationType.ScoreBoardSpace,
-    //   player: player
-    // }, 1)
+    this.material(MaterialType.Pawn).location(LocationType.PlayerPawnsSupply).player(player).moveItem({
+      type: LocationType.ScoreRangeAreaSpace,
+      player: player,
+      x: 0
+    }, 1)
+    this.material(MaterialType.Pawn).location(LocationType.PlayerPawnsSupply).player(player).moveItem({
+      type: LocationType.ScoreBoardSpace,
+      x: 0
+    }, 1)
 
     this.material(MaterialType.Architect).createItem({
       id: player,

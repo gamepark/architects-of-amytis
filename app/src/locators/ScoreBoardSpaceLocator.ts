@@ -6,8 +6,12 @@ class ScoreBoardSpaceLocator extends Locator {
   parentItemType = MaterialType.ScoreBoard
 
   getPositionOnParent(location: Location) {
-    return { x: 20 + location.x! * 1.5, y: 20 + location.y! }
+    return this.positions[location.x!] ?? this.positionOnParent
   }
+
+  positions = [
+    { x: 7, y: 11 }
+  ]
 }
 
 export const scoreBoardSpaceLocator = new ScoreBoardSpaceLocator()
