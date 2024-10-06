@@ -1,8 +1,10 @@
 /** @jsxImportSource @emotion/react */
 import { RuleId } from '@gamepark/architects-of-amytis/rules/RuleId'
 import { ComponentType } from 'react'
-import { TheFirstStepHeader } from './TheFirstStepHeader'
+import { RetrieveArchitectsHeader } from './RetrieveArchitectsHeader'
+import { ChooseBuildingTileHeader } from './ChooseBuildingTileHeader'
 
 export const Headers: Partial<Record<RuleId, ComponentType>> = {
-  [RuleId.TheFirstStep]: TheFirstStepHeader
+  [RuleId.RetrieveArchitects]: RetrieveArchitectsHeader,
+  [RuleId.ChooseBuildingTile]: ChooseBuildingTileHeader
 }

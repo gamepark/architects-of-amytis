@@ -96,6 +96,6 @@ export class ArchitectsOfAmytisSetup extends MaterialGameSetup<PlayerColor, Mate
   }
 
   start() {
-    this.startPlayerTurn(RuleId.TheFirstStep, this.game.players[0])
+    this.startPlayerTurn(RuleId.RetrieveArchitects, this.game.players[0])
   }
 }

@@ -3,7 +3,8 @@ import { LocationType } from './material/LocationType'
 import { MaterialType } from './material/MaterialType'
 import { PlayerColor } from './PlayerColor'
 import { RuleId } from './rules/RuleId'
-import { TheFirstStepRule } from './rules/TheFirstStepRule'
+import { RetrieveArchitects } from './rules/RetrieveArchitects'
+import { ChooseBuildingTile } from './rules/ChooseBuildingTile'
 
 
 /**
@@ -13,7 +14,8 @@ import { TheFirstStepRule } from './rules/TheFirstStepRule'
 export class ArchitectsOfAmytisRules extends HiddenMaterialRules<PlayerColor, MaterialType, LocationType>
   implements TimeLimit<MaterialGame<PlayerColor, MaterialType, LocationType>, MaterialMove<PlayerColor, MaterialType, LocationType>, PlayerColor> {
   rules = {
-    [RuleId.TheFirstStep]: TheFirstStepRule
+    [RuleId.RetrieveArchitects]: RetrieveArchitects,
+    [RuleId.ChooseBuildingTile]: ChooseBuildingTile
   }
 
   locationsStrategies = {
