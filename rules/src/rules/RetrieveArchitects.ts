@@ -3,7 +3,7 @@ import { RuleId } from './RuleId'
 
 export class RetrieveArchitects extends PlayerTurnRule {
   getPlayerMoves() {
-    debugger;
+    // debugger;
     console.log("retrieving player moves in retrieve architects")
     // TODO: Check if architects need to be retrieved
     return[this.startRule(RuleId.ChooseBuildingTile)]
