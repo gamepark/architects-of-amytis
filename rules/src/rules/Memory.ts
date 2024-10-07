@@ -1,3 +1,3 @@
 export enum Memory {
-  MainBoardLocation = 1
+  MovedTile = 1
 }

@@ -67,27 +67,25 @@ export class ChooseBuildingTile extends PlayerTurnRule {
   }
 
   beforeItemMove(move: ItemMove, _context: PlayMoveContext) {
-    console.log("before item move")
     if (isMoveItemType(MaterialType.BuildingTile)(move)) {
       const movedTile = this.material(MaterialType.BuildingTile).getItem(move.itemIndex)
-      this.memorize(Memory.MainBoardLocation, movedTile.location)
+      this.memorize(Memory.MovedTile, movedTile)
     }
 
     return []
   }
 
   afterItemMove(move: ItemMove) {
-    console.log("after item move")
+    const moves: MaterialMove[] = []
     if (isMoveItemType(MaterialType.BuildingTile)(move)) {
-      const moves: MaterialMove[] = []
-      const mainBoardLocation = this.remind(Memory.MainBoardLocation)
+      const mainBoardLocation = this.remind(Memory.MovedTile).location
       mainBoardLocation.player = this.player
       moves.push(this.material(MaterialType.Architect).location(LocationType.PlayerArchitectsSupply).player(this.player).moveItem(mainBoardLocation))
-      moves.push(this.startRule(RuleId.RetrieveArchitects))
-
-      return moves
-    } else {
-      return []
+      // TODO: Include building effects
+      // moves.push(this.startRule(RuleId.RetrieveArchitects))
+      moves.push(this.startPlayerTurn(RuleId.RetrieveArchitects, this.nextPlayer))
     }
+
+    return moves
   }
 }
