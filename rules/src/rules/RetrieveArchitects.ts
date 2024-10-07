@@ -1,22 +1,25 @@
-import { PlayerTurnRule } from '@gamepark/rules-api';
+import { MaterialMove, PlayerTurnRule } from '@gamepark/rules-api';
 import { RuleId } from './RuleId'
+import { LocationType } from '../material/LocationType';
+import { MaterialType } from '../material/MaterialType';
 
 export class RetrieveArchitects extends PlayerTurnRule {
-  getPlayerMoves() {
-    // debugger;
-    console.log("retrieving player moves in retrieve architects")
-    // TODO: Check if architects need to be retrieved
-    return[this.startRule(RuleId.ChooseBuildingTile)]
-  }
-
   onRuleStart() {
-    console.log("Entering")
-    return []
-  }
+    console.log("Entering retrieve architects start")
 
-  onRuleEnd() {
-    console.log("Entering")
-    return []
+    const moves: MaterialMove [] = []
+    if (this.material(MaterialType.Architect).location(LocationType.PlayerArchitectsSupply).player(this.player).getQuantity() == 0) {
+      console.log("0 architects: retrieving them.")
+      moves.push(...this.material(MaterialType.Architect).location(LocationType.MainBoardStackSpace).player(this.player).moveItems(
+        {
+          type: LocationType.PlayerArchitectsSupply,
+          player: this.player
+        },
+      ))
+    }
+    moves.push(this.startRule(RuleId.ChooseBuildingTile))
+
+    return moves
   }
 
 }

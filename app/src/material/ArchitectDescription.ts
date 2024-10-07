@@ -4,8 +4,8 @@ import BlackArchitect from '../images/resources/BlackArchitect.png'
 import WhiteArchitect from '../images/resources/WhiteArchitect.png'
 
 class ArchitectDescription extends TokenDescription {
-  width = 1
-  height = 2
+  width = 2
+  height = 4
   
   images = {
     [PlayerColor.Black]: BlackArchitect,
