@@ -4,7 +4,7 @@ import { LocationType } from '../material/LocationType';
 import { MaterialType } from '../material/MaterialType';
 import { MainBoardHelper } from './helpers/MainBoardHelper';
 
-export class RetrieveArchitects extends PlayerTurnRule {
+export class RetrieveArchitectsRule extends PlayerTurnRule {
   onRuleStart() {
     console.log("Entering retrieve architects start")
 

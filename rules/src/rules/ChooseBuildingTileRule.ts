@@ -3,9 +3,8 @@ import { MaterialType } from '../material/MaterialType'
 import { LocationType } from '../material/LocationType'
 import { Memory } from './Memory'
 import { RuleId } from './RuleId'
-// import { RuleId } from './RuleId'
 
-export class ChooseBuildingTile extends PlayerTurnRule {
+export class ChooseBuildingTileRule extends PlayerTurnRule {
   getPlayerMoves() {
     console.log("retrieving player moves in choose building tile")
     const moves: MaterialMove[] = []
