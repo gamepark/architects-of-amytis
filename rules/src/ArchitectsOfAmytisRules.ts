@@ -1,11 +1,11 @@
-import { HiddenMaterialRules, hideItemId, MaterialGame, MaterialMove, PositiveSequenceStrategy, TimeLimit } from '@gamepark/rules-api'
+import { FillGapStrategy, HiddenMaterialRules, hideItemId, MaterialGame, MaterialMove, PositiveSequenceStrategy, TimeLimit } from '@gamepark/rules-api'
 import { LocationType } from './material/LocationType'
 import { MaterialType } from './material/MaterialType'
 import { PlayerColor } from './PlayerColor'
 import { RuleId } from './rules/RuleId'
 import { RetrieveArchitectsRule } from './rules/RetrieveArchitectsRule'
 import { ChooseBuildingTileRule } from './rules/ChooseBuildingTileRule'
-
+import { SelectProjectCardRule } from './rules/SelectProjectCardRule'
 
 /**
  * This class implements the rules of the board game.
@@ -15,14 +15,15 @@ export class ArchitectsOfAmytisRules extends HiddenMaterialRules<PlayerColor, Ma
   implements TimeLimit<MaterialGame<PlayerColor, MaterialType, LocationType>, MaterialMove<PlayerColor, MaterialType, LocationType>, PlayerColor> {
   rules = {
     [RuleId.RetrieveArchitects]: RetrieveArchitectsRule,
-    [RuleId.ChooseBuildingTile]: ChooseBuildingTileRule
+    [RuleId.ChooseBuildingTile]: ChooseBuildingTileRule,
+    [RuleId.SelectProjectCard]: SelectProjectCardRule
   }
 
   locationsStrategies = {
     [MaterialType.ProjectCard]: {
       [LocationType.ProjectCardsDeck]: new PositiveSequenceStrategy(),
-      [LocationType.ProjectCardsDisplay]: new PositiveSequenceStrategy(),
-      [LocationType.PlayerProjectCardsSpot]: new PositiveSequenceStrategy()
+      [LocationType.ProjectCardsDisplay]: new FillGapStrategy(),
+      [LocationType.PlayerProjectCardsSpot]: new PositiveSequenceStrategy(),
     }
   }
 

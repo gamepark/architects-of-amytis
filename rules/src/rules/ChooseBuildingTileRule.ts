@@ -4,7 +4,7 @@ import { LocationType } from '../material/LocationType'
 import { Memory } from './Memory'
 import { RuleId } from './RuleId'
 import { BuildingEffect } from './BuildingEffect'
-import { getBuildingType } from '../material/Building'
+import { BuildingType, getBuildingType } from '../material/Building'
 
 export class ChooseBuildingTileRule extends PlayerTurnRule {
   getPlayerMoves() {
@@ -56,20 +56,26 @@ export class ChooseBuildingTileRule extends PlayerTurnRule {
       const movedTile = this.material(MaterialType.BuildingTile).getItem(move.itemIndex)
       this.memorize(Memory.MovedTile, movedTile)
     }
-
     return []
   }
 
   afterItemMove(move: ItemMove) {
     const moves: MaterialMove[] = []
     if (isMoveItemType(MaterialType.BuildingTile)(move)) {
-      const movedTile = this.remind(Memory.MovedTile)
-      const mainBoardLocation = movedTile.location
-      BuildingEffect.createBuildingAction(this.game, getBuildingType(movedTile.id))?.getEffectMoves(move)
+      const previousLocation = this.remind(Memory.MovedTile).location
+      const movedTile = this.material(MaterialType.BuildingTile).getItem(move.itemIndex)
+      movedTile.location.z = this.material(MaterialType.BuildingTile).location(LocationType.PlayerBoardStackSpace).player(this.player).getItems().length + 1
+      moves.push(this.material(MaterialType.Architect).location(LocationType.PlayerArchitectsSupply).player(this.player).moveItem(previousLocation))
+
+      if (getBuildingType(movedTile.id) !== BuildingType.Palace) {
+        BuildingEffect.createBuildingAction(this.game, getBuildingType(movedTile.id))?.getEffectMoves(move)
+        previousLocation.player = this.player
+        moves.push(this.startPlayerTurn(RuleId.RetrieveArchitects, this.nextPlayer))
+      } else {
+        // moves.push(this.startPlayerTurn(RuleId.RetrieveArchitects, this.nextPlayer))
+        moves.push(this.startRule(RuleId.SelectProjectCard))
+      }
       
-      mainBoardLocation.player = this.player
-      moves.push(this.material(MaterialType.Architect).location(LocationType.PlayerArchitectsSupply).player(this.player).moveItem(mainBoardLocation))
-      moves.push(this.startPlayerTurn(RuleId.RetrieveArchitects, this.nextPlayer))
     }
 
     return moves
