@@ -1,5 +1,7 @@
 export enum RuleId {
   RetrieveArchitects = 1,
   ChooseBuildingTile,
-  SelectProjectCard
+  SelectProjectCard,
+  CheckProjects,
+  ClaimKingsFavor
 }

@@ -5,6 +5,7 @@ import { Memory } from './Memory'
 import { RuleId } from './RuleId'
 import { BuildingEffect } from './BuildingEffect'
 import { BuildingType, getBuildingType } from '../material/Building'
+import { BuildingCardSide } from '../material/BuildingCard'
 
 export class ChooseBuildingTileRule extends PlayerTurnRule {
   getPlayerMoves() {
@@ -63,19 +64,24 @@ export class ChooseBuildingTileRule extends PlayerTurnRule {
     const moves: MaterialMove[] = []
     if (isMoveItemType(MaterialType.BuildingTile)(move)) {
       const previousLocation = this.remind(Memory.MovedTile).location
-      const movedTile = this.material(MaterialType.BuildingTile).getItem(move.itemIndex)
-      movedTile.location.z = this.material(MaterialType.BuildingTile).location(LocationType.PlayerBoardStackSpace).player(this.player).getItems().length + 1
+      previousLocation.player = this.player
       moves.push(this.material(MaterialType.Architect).location(LocationType.PlayerArchitectsSupply).player(this.player).moveItem(previousLocation))
 
+      const movedTile = this.material(MaterialType.BuildingTile).getItem(move.itemIndex)
+      const tilesInStack = this.material(MaterialType.BuildingTile)
+                                .location(LocationType.PlayerBoardStackSpace)
+                                .location(location => location.x === movedTile.location.x && location.y === movedTile.location.y)
+                                .player(this.player)
+                                .getQuantity()
+      movedTile.location.z = tilesInStack + 1
       if (getBuildingType(movedTile.id) !== BuildingType.Palace) {
-        BuildingEffect.createBuildingAction(this.game, getBuildingType(movedTile.id))?.getEffectMoves(move)
-        previousLocation.player = this.player
-        moves.push(this.startPlayerTurn(RuleId.RetrieveArchitects, this.nextPlayer))
+        // TODO: Select correct side
+        const buildingCardSide = BuildingCardSide.SideA
+        BuildingEffect.createBuildingAction(this.game, getBuildingType(movedTile.id))?.getEffectMoves(buildingCardSide, move)
+        moves.push(this.startRule(RuleId.CheckProjects))
       } else {
-        // moves.push(this.startPlayerTurn(RuleId.RetrieveArchitects, this.nextPlayer))
         moves.push(this.startRule(RuleId.SelectProjectCard))
       }
-      
     }
 
     return moves

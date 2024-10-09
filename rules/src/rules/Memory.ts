@@ -1,3 +1,4 @@
 export enum Memory {
-  MovedTile = 1
+  MovedTile = 1,
+  Score
 }

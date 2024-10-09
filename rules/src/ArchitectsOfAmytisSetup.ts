@@ -7,6 +7,7 @@ import { MaterialType } from './material/MaterialType'
 import { PlayerColor, playerColors } from './PlayerColor'
 import { RuleId } from './rules/RuleId'
 import { projects } from './material/Project'
+import { Memory } from './rules/Memory'
 
 /**
  * This class creates a new Game based on the game options
@@ -93,6 +94,8 @@ export class ArchitectsOfAmytisSetup extends MaterialGameSetup<PlayerColor, Mate
         }
       })
     }
+
+    this.memorize(Memory.Score, { [this.game.players[0]]: 0, [this.game.players[1]]: 0})
   }
 
   start() {

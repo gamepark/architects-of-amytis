@@ -16,18 +16,22 @@ import { scoreBoardSpaceLocator } from './ScoreBoardSpaceLocator'
 import { playerProjectCardsSpotLocator } from './PlayerProjectCardsSpotLocator'
 import { firstPlayerCardSpotLocator } from './FirstPlayerCardSpotLocator'
 import { playerBoardStackSpaceLocator } from './PlayerBoardStackSpaceLocator'
+import { favorBoardSpaceLocator } from './FavorBoardSpaceLocator'
+import { playerValidatedProjectCardsPileLocator } from './PlayerValidatedProjectCardsPileLocator'
 
 export const Locators: Partial<Record<LocationType, Locator<PlayerColor, MaterialType, LocationType>>> = {
   [LocationType.MainBoardSpot]: mainBoardSpotLocator,
   [LocationType.ScoreBoardSpot]: scoreBoardSpotLocator,
   [LocationType.ScoreBoardSpace]: scoreBoardSpaceLocator,
   [LocationType.FavorBoardSpot]: favorBoardSpotLocator,
+  [LocationType.FavorBoardSpace]: favorBoardSpaceLocator,
   [LocationType.MainBoardStackSpace]: mainBoardStackSpaceLocator,
   [LocationType.ProjectCardsDeck]: projectCardsDeckLocator,
   [LocationType.ProjectCardsDisplay]: projectCardsDisplayLocator,
   [LocationType.PlayerBoardSpot]: playerBoardSpotLocator,
   [LocationType.PlayerBoardStackSpace]: playerBoardStackSpaceLocator,
   [LocationType.PlayerProjectCardsSpot]: playerProjectCardsSpotLocator,
+  [LocationType.PlayerValidatedProjectCardsPile]: playerValidatedProjectCardsPileLocator,
   [LocationType.ScoreRangeAreaSpace]: scoreRangeAreaSpaceLocator,
   [LocationType.PlayerPawnsSupply]: playerPawnsSupplyLocator,
   [LocationType.PlayerArchitectsSupply]: playerArchitectsSupplyLocator,

@@ -1,9 +1,9 @@
-import { MaterialGame, MaterialRulesPart } from "@gamepark/rules-api";
+import { Material, MaterialGame, MaterialRulesPart } from "@gamepark/rules-api";
 import { MaterialType } from "../../material/MaterialType";
 import { LocationType } from "../../material/LocationType";
 
-export class MainBoardHelper extends MaterialRulesPart {
-  constructor(game: MaterialGame, readonly player: number) {
+export class BoardHelper extends MaterialRulesPart {
+  constructor(game: MaterialGame, readonly player?: number) {
     super(game)
   }
 
@@ -51,5 +51,21 @@ export class MainBoardHelper extends MaterialRulesPart {
   
     return false;
   }
+
+  getVisibleTilesInStack(tilesInBoard: Material) : Material {
+    const topTiles: number[] = []
+    
+    for (let x = 0; x < 3; x++) {
+      for (let y = 0; y < 3; y++) {
+        const stack = tilesInBoard.location(location => location.x === x && location.y === y)
+        if (stack.length) {
+          topTiles.push(stack.sort(item => -item.location.z!).getIndex())
+        }
+      }
+    }
+
+    return tilesInBoard.index(index => topTiles.includes(index))
+  }
+
 }
 

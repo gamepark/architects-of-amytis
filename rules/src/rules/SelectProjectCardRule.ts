@@ -2,6 +2,9 @@ import { MaterialMove, PlayerTurnRule } from "@gamepark/rules-api"
 import { MaterialType } from "../material/MaterialType"
 import { LocationType } from "../material/LocationType"
 import { RuleId } from "./RuleId"
+import { BuildingCardSide } from "../material/BuildingCard"
+import { BuildingEffect } from "./BuildingEffect"
+import { BuildingType } from "../material/Building"
 
 export class SelectProjectCardRule extends PlayerTurnRule {
   getPlayerMoves() {
@@ -16,7 +19,11 @@ export class SelectProjectCardRule extends PlayerTurnRule {
   }
 
   afterItemMove() {
-    return[this.startPlayerTurn(RuleId.RetrieveArchitects, this.nextPlayer)]
+    // TODO: Select correct side
+    const buildingCardSide = BuildingCardSide.SideA
+    BuildingEffect.createBuildingAction(this.game, BuildingType.Palace)?.getEffectMoves(buildingCardSide)
+  
+    return [this.startRule(RuleId.CheckProjects)]
   }  
 
   onRuleEnd() {
