@@ -4,7 +4,7 @@ import { MaterialType } from "../material/MaterialType";
 import { LocationType } from "../material/LocationType";
 import { BuildingCardSide } from "../material/BuildingCard";
 import { Memory } from "./Memory";
-import { BoardHelper } from "./helpers/BoardHelper";
+import { BoardHelper, Corners } from "./helpers/BoardHelper";
 
 interface BuildingAction {
   getEffectMoves(side: number, move?: ItemMove): MaterialMove[];
@@ -36,27 +36,27 @@ export class BuildingEffect {
 class GardenAction extends PlayerTurnRule implements BuildingAction {
   getEffectMoves(side: number, move?: ItemMove) {
     if (move && isMoveItemType(MaterialType.BuildingTile)(move)) {
+      const playerTilesInStack = this.material(MaterialType.BuildingTile).location(LocationType.PlayerBoardStackSpace).player(this.player)
+      const destinationStackSize = playerTilesInStack.location(location => location.x === move.location.x && location.y === move.location?.y).getQuantity()
+      const score = this.remind(Memory.Score)
+      let points = 0
+
       if (side === BuildingCardSide.SideA) {
-        const playerTilesInStack = this.material(MaterialType.BuildingTile).location(LocationType.PlayerBoardStackSpace).player(this.player)
-        const destinationStackLength = playerTilesInStack.filter(item => item.location.x === move.location.x && item.location.y === move.location?.y).length
-        let newScore = 0
         for (let x = 0; x < 3; x++) {
           for (let y = 0; y < 3; y++) {
-            if (playerTilesInStack.filter(item => item.location.x === x && item.location.y === y).length === destinationStackLength) {
-              newScore++
+            if (playerTilesInStack.location(location => location.x === x && location.y === y).getQuantity() === destinationStackSize) {
+              points++
             }
           }
-        }
-        const score = this.remind(Memory.Score)
-        score[this.player] += newScore
-        this.memorize(Memory.Score, score)
-
-        console.log("Player got " + newScore + " points for Garden")
-        console.log(score)
+        }        
       } else {
-        
+        points = destinationStackSize * 2
       }
+
+      score[this.player] += points
+      this.memorize(Memory.Score, score)
     }
+    
     return []
   }
 }
@@ -64,22 +64,22 @@ class GardenAction extends PlayerTurnRule implements BuildingAction {
 class MarketAction extends PlayerTurnRule implements BuildingAction {
   getEffectMoves(side: number, move?: ItemMove) {
     if (move && isMoveItemType(MaterialType.BuildingTile)(move)) {
+      const playerTilesInStack = this.material(MaterialType.BuildingTile).location(LocationType.PlayerBoardStackSpace).player(this.player)
+      const topTiles = new BoardHelper(this.game).getVisibleTilesInStack(playerTilesInStack)
+      const movedTileColor = getBuildingColor(playerTilesInStack.index(move.itemIndex).getItem()?.id)
+      const score = this.remind(Memory.Score)
+      let points = 0
+
       if (side === BuildingCardSide.SideA) {
-        const playerTilesInStack = this.material(MaterialType.BuildingTile).location(LocationType.PlayerBoardStackSpace).player(this.player)
-        const topTiles = new BoardHelper(this.game).getVisibleTilesInStack(playerTilesInStack)
-        const movedTileColor = getBuildingColor(playerTilesInStack.index(move.itemIndex).getItem()?.id)
-
-        const newScore = topTiles.filter(tile => getBuildingColor(tile.id) === movedTileColor ).length * 2
-        const score = this.remind(Memory.Score)
-        score[this.player] += newScore
-        this.memorize(Memory.Score, score)
-
-        console.log("Player got " + newScore + " points for Market")
-        console.log(score)
+        points = topTiles.filter(tile => getBuildingColor(tile.id) === movedTileColor).length * 2
+      } else {
+        points = topTiles.filter(tile => getBuildingColor(tile.id) !== movedTileColor).length
       }
-    } else {
 
+      score[this.player] += points
+      this.memorize(Memory.Score, score)
     }
+
     return []
   }
 }
@@ -87,22 +87,43 @@ class MarketAction extends PlayerTurnRule implements BuildingAction {
 class WallAction extends PlayerTurnRule implements BuildingAction {
   getEffectMoves(side: number, move?: ItemMove) {
     if (move && isMoveItemType(MaterialType.BuildingTile)(move)) {
-      if (side === BuildingCardSide.SideA) {
-        const playerTilesInStack = this.material(MaterialType.BuildingTile).location(LocationType.PlayerBoardStackSpace).player(this.player)
-        const topTiles = new BoardHelper(this.game).getVisibleTilesInStack(playerTilesInStack)
-               
-        const newScore = topTiles.filter(tile => getBuildingType(tile.id) === BuildingType.Wall &&
+      const playerTilesInStack = this.material(MaterialType.BuildingTile).location(LocationType.PlayerBoardStackSpace).player(this.player)
+      const topTiles = new BoardHelper(this.game).getVisibleTilesInStack(playerTilesInStack)
+      const score = this.remind(Memory.Score)
+      let points = 0
+      if (side === BuildingCardSide.SideA) {              
+        points = topTiles.filter(tile => getBuildingType(tile.id) === BuildingType.Wall &&
                                         (tile.location.x !== 1 || tile.location.y !== 1)).length
-        const score = this.remind(Memory.Score)
-        score[this.player] += newScore
-        this.memorize(Memory.Score, score)
-
-        console.log("Player got " + newScore + " points for Walls")
-        console.log(score)
       } else {
+        let wallsInCorners = 0
 
+        Corners.forEach(corner => {
+          const cornerTile = topTiles.location(location => location.x === corner.x && location.y === corner.y).getItem()
+          if (getBuildingType(cornerTile?.id) === BuildingType.Wall) {
+            wallsInCorners++
+          }
+        })
+
+        switch(wallsInCorners) {
+          case 1:
+            points = 1
+            break          
+          case 2:
+            points = 4
+            break          
+          case 3:
+            points = 8
+            break          
+          case 4:
+            points = 10
+            break
+        }
       }
+
+      score[this.player] += points
+      this.memorize(Memory.Score, score)
     }
+
     return []
   }
 }
@@ -110,10 +131,7 @@ class WallAction extends PlayerTurnRule implements BuildingAction {
 class PalaceAction extends PlayerTurnRule implements BuildingAction {
   getEffectMoves(side: number, _move?: ItemMove) {
     if (side === BuildingCardSide.SideA) {
-      const playerTilesInStack = this.material(MaterialType.BuildingTile)
-                            .location(LocationType.PlayerBoardStackSpace)
-                            .player(this.player)
-                            // .getItems()
+      const playerTilesInStack = this.material(MaterialType.BuildingTile).location(LocationType.PlayerBoardStackSpace).player(this.player)
       const topTiles = new BoardHelper(this.game).getVisibleTilesInStack(playerTilesInStack)
       
       const newScore = topTiles.filter(tile => getBuildingType(tile.id) === BuildingType.Palace).length
@@ -133,41 +151,39 @@ class PalaceAction extends PlayerTurnRule implements BuildingAction {
 class ResidenceAction extends PlayerTurnRule implements BuildingAction {
   getEffectMoves(side: number, move?: ItemMove) {
     if (move && isMoveItemType(MaterialType.BuildingTile)(move)) {
-      if (side === BuildingCardSide.SideA) {
-        const playerTilesInStack = this.material(MaterialType.BuildingTile)
-                              .location(LocationType.PlayerBoardStackSpace)
-                              .player(this.player)
-                              // .getItems()
-        const topTiles = new BoardHelper(this.game).getVisibleTilesInStack(playerTilesInStack)      
-        
-        const newScore = new Set(topTiles.getItems().map(tile => getBuildingType(tile?.id))).size
-        const score = this.remind(Memory.Score)
-        score[this.player] += newScore
-        this.memorize(Memory.Score, score)
-
-        console.log("Player got " + newScore + " points for Residence")
-        console.log(score)
+      const playerTilesInStack = this.material(MaterialType.BuildingTile).location(LocationType.PlayerBoardStackSpace).player(this.player)
+      const topTiles = new BoardHelper(this.game).getVisibleTilesInStack(playerTilesInStack)      
+      const score = this.remind(Memory.Score)
+      let points = 0
+  
+      if (side === BuildingCardSide.SideA) {      
+        points = new Set(topTiles.getItems().map(tile => getBuildingType(tile?.id))).size
       } else {
-
+        points = topTiles.filter(tile => getBuildingType(tile.id) === BuildingType.Residence || getBuildingType(tile.id) === BuildingType.Market).length * 2
       }
+
+      score[this.player] += points
+      this.memorize(Memory.Score, score)
     }
+
     return []
   }
 }
 
 class TheaterAction extends PlayerTurnRule implements BuildingAction {
   getEffectMoves(side: number, _move?: ItemMove) {
+    const score = this.remind(Memory.Score)
+    let points = 0
+    
     if (side === BuildingCardSide.SideA) {
-      const newScore = this.material(MaterialType.Architect).location(LocationType.MainBoardStackSpace).getQuantity()
-      const score = this.remind(Memory.Score)
-      score[this.player] += newScore
-      this.memorize(Memory.Score, score)
-
-      console.log("Player got " + newScore + " points for Theater")
-      console.log(score)
+      points = this.material(MaterialType.Architect).location(LocationType.MainBoardStackSpace).getQuantity()
     } else {
-
+      points = this.material(MaterialType.Architect).location(LocationType.MainBoardStackSpace).player(this.player).getQuantity() * 2
     }
+
+    score[this.player] += points
+    this.memorize(Memory.Score, score)
+
     return []
   }
 }

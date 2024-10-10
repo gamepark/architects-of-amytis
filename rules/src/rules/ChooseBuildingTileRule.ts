@@ -5,7 +5,6 @@ import { Memory } from './Memory'
 import { RuleId } from './RuleId'
 import { BuildingEffect } from './BuildingEffect'
 import { BuildingType, getBuildingType } from '../material/Building'
-import { BuildingCardSide } from '../material/BuildingCard'
 
 export class ChooseBuildingTileRule extends PlayerTurnRule {
   getPlayerMoves() {
@@ -75,9 +74,9 @@ export class ChooseBuildingTileRule extends PlayerTurnRule {
                                 .getQuantity()
       movedTile.location.z = tilesInStack + 1
       if (getBuildingType(movedTile.id) !== BuildingType.Palace) {
-        // TODO: Select correct side
-        const buildingCardSide = BuildingCardSide.SideA
-        BuildingEffect.createBuildingAction(this.game, getBuildingType(movedTile.id))?.getEffectMoves(buildingCardSide, move)
+        const buildingType = getBuildingType(movedTile.id)
+        const buildingCardSide = this.remind(Memory.BuildingCardsSides)[buildingType]
+        BuildingEffect.createBuildingAction(this.game, buildingType)?.getEffectMoves(buildingCardSide, move)
         moves.push(this.startRule(RuleId.CheckProjects))
       } else {
         moves.push(this.startRule(RuleId.SelectProjectCard))

@@ -1,13 +1,14 @@
 import { MaterialGameSetup } from '@gamepark/rules-api'
 import { ArchitectsOfAmytisOptions } from './ArchitectsOfAmytisOptions'
 import { ArchitectsOfAmytisRules } from './ArchitectsOfAmytisRules'
-import { buildings } from './material/Building'
+import { buildings, buildingTypes } from './material/Building'
 import { LocationType } from './material/LocationType'
 import { MaterialType } from './material/MaterialType'
 import { PlayerColor, playerColors } from './PlayerColor'
 import { RuleId } from './rules/RuleId'
 import { projects } from './material/Project'
 import { Memory } from './rules/Memory'
+import { BuildingCardSide } from './material/BuildingCard'
 
 /**
  * This class creates a new Game based on the game options
@@ -19,6 +20,7 @@ export class ArchitectsOfAmytisSetup extends MaterialGameSetup<PlayerColor, Mate
     this.setupBuildingTiles()
     this.setupProjectCards()
     this.setupPlayers()
+    this.setupBuildingCards()
 
     this.memorize(Memory.LastTurn, false)
   }
@@ -98,6 +100,16 @@ export class ArchitectsOfAmytisSetup extends MaterialGameSetup<PlayerColor, Mate
     }
 
     this.memorize(Memory.Score, { [this.game.players[0]]: 0, [this.game.players[1]]: 0})
+  }
+
+  setupBuildingCards() {
+    const cardsSides: { [key: number]: number } = {};
+
+    buildingTypes.forEach(buildingType => {
+      cardsSides[buildingType] = Math.random() < 0.5 ? BuildingCardSide.SideA : BuildingCardSide.SideB
+    })
+    console.log(cardsSides)
+    this.memorize(Memory.BuildingCardsSides, cardsSides)
   }
 
   start() {
