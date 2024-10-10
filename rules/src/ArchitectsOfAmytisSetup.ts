@@ -19,6 +19,8 @@ export class ArchitectsOfAmytisSetup extends MaterialGameSetup<PlayerColor, Mate
     this.setupBuildingTiles()
     this.setupProjectCards()
     this.setupPlayers()
+
+    this.memorize(Memory.LastTurn, false)
   }
 
   setupBuildingTiles() {

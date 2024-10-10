@@ -8,6 +8,8 @@ import { ChooseBuildingTileRule } from './rules/ChooseBuildingTileRule'
 import { SelectProjectCardRule } from './rules/SelectProjectCardRule'
 import { ClaimKingsFavorRule } from './rules/ClaimKingsFavorRule'
 import { CheckProjectsRule } from './rules/CheckProjectsRule'
+import { CheckEndGameRule } from './rules/CheckEndGameRule'
+import { EndGameScoreRule } from './rules/EndGameScoreRule'
 
 /**
  * This class implements the rules of the board game.
@@ -21,6 +23,8 @@ export class ArchitectsOfAmytisRules extends HiddenMaterialRules<PlayerColor, Ma
     [RuleId.SelectProjectCard]: SelectProjectCardRule,
     [RuleId.CheckProjects]: CheckProjectsRule,
     [RuleId.ClaimKingsFavor]: ClaimKingsFavorRule,
+    [RuleId.CheckEndGame]: CheckEndGameRule,
+    [RuleId.EndGameScore]: EndGameScoreRule
   }
 
   locationsStrategies = {
@@ -33,7 +37,8 @@ export class ArchitectsOfAmytisRules extends HiddenMaterialRules<PlayerColor, Ma
 
   hidingStrategies = {
     [MaterialType.ProjectCard]: {
-      [LocationType.ProjectCardsDeck]: hideItemId
+      [LocationType.ProjectCardsDeck]: hideItemId,
+      [LocationType.PlayerValidatedProjectCardsPile]: hideItemId,
     }
   }
 

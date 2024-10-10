@@ -43,7 +43,7 @@ export class ClaimKingsFavorRule extends PlayerTurnRule {
   }
 
   afterItemMove() {
-    return[this.startPlayerTurn(RuleId.RetrieveArchitects, this.nextPlayer)]
+    return[this.startRule(RuleId.CheckEndGame)]
   }
 
 }

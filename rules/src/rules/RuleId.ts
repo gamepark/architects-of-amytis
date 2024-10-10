@@ -3,5 +3,7 @@ export enum RuleId {
   ChooseBuildingTile,
   SelectProjectCard,
   CheckProjects,
-  ClaimKingsFavor
+  ClaimKingsFavor,
+  CheckEndGame,
+  EndGameScore
 }

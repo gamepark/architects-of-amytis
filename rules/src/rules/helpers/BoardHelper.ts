@@ -13,7 +13,7 @@ export class BoardHelper extends MaterialRulesPart {
       return false; // Not enough for a line
     }
   
-    // Verificar horizontal, vertical and diagonal alignment
+    // Verify horizontal, vertical and diagonal alignment
     for (let i = 0; i < architects.length - 2; i++) {
       for (let j = i + 1; j < architects.length - 1; j++) {
         for (let k = j + 1; k < architects.length; k++) {
