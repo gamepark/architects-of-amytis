@@ -10,7 +10,7 @@ export class ClaimKingsFavorRule extends PlayerTurnRule {
       // TODO: Remove this occupiedSpaces control when I have all spaces. It's just to be able to continue the game during testing
       const occupiedSpaces = this.material(MaterialType.Pawn).location(LocationType.FavorBoardSpace).getItems().map(pawn => pawn.location.x).length
       if (!architectsAligned || occupiedSpaces === 3) {
-        return [this.startPlayerTurn(RuleId.RetrieveArchitects, this.nextPlayer)]
+        return[this.startRule(RuleId.CheckEndGame)]
       } else {
         return []
       }

@@ -6,6 +6,7 @@ import { LocationType } from '../material/LocationType';
 import { Project, projectsProperties } from "../material/Project";
 import { FavorType } from '../material/FavorType';
 import { Corners } from './helpers/BoardHelper';
+import { RuleId } from './RuleId';
 
 export class EndGameScoreRule extends PlayerTurnRule {
 
@@ -18,7 +19,10 @@ export class EndGameScoreRule extends PlayerTurnRule {
     for (const player of playerColors) {
       const validatedProjects = this.material(MaterialType.ProjectCard).location(LocationType.PlayerValidatedProjectCardsPile).player(player).getItems()
       validatedProjects.forEach(projectCard => {
-        score[player] += projectsProperties[projectCard?.id as Project].points
+        // TODO: Remove this control when the id is fixed
+        if (projectCard.id !== undefined) {
+          score[player] += projectsProperties[projectCard?.id as Project].points
+        }
       })
     }
 
@@ -38,7 +42,9 @@ export class EndGameScoreRule extends PlayerTurnRule {
 
     console.log(score)
 
-    return [this.endGame()]
+    // TODO: Restore this, just for testing purposes
+    return[this.startPlayerTurn(RuleId.RetrieveArchitects, this.nextPlayer)]
+    // return [this.endGame()]
   }
 
   getFavorScore(player: PlayerColor, space: number | undefined) {

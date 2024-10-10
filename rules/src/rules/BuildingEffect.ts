@@ -174,12 +174,13 @@ class TheaterAction extends PlayerTurnRule implements BuildingAction {
   getEffectMoves(side: number, _move?: ItemMove) {
     const score = this.remind(Memory.Score)
     let points = 0
-    
     if (side === BuildingCardSide.SideA) {
       points = this.material(MaterialType.Architect).location(LocationType.MainBoardStackSpace).getQuantity()
     } else {
       points = this.material(MaterialType.Architect).location(LocationType.MainBoardStackSpace).player(this.player).getQuantity() * 2
     }
+    // TODO: Remove this points++ when implementing correctly the sequence to get the tile and place the architect before placing the building
+    points++
 
     score[this.player] += points
     this.memorize(Memory.Score, score)
