@@ -6,7 +6,6 @@ import { LocationType } from '../material/LocationType';
 import { Project, projectsProperties } from "../material/Project";
 import { FavorType } from '../material/FavorType';
 import { Corners } from './helpers/BoardHelper';
-import { RuleId } from './RuleId';
 
 export class EndGameScoreRule extends PlayerTurnRule {
 
@@ -17,9 +16,9 @@ export class EndGameScoreRule extends PlayerTurnRule {
     
     // Compute projects score
     for (const player of playerColors) {
-      const validatedProjects = this.material(MaterialType.ProjectCard).location(LocationType.PlayerValidatedProjectCardsPile).player(player).getItems()
-      validatedProjects.forEach(projectCard => {
-        // TODO: Remove this control when the id is fixed
+      const validatedProjects = this.material(MaterialType.ProjectCard).location(LocationType.PlayerValidatedProjectCardsPile).player(player)
+      validatedProjects.getItems().forEach(projectCard => {
+        // This control shouldn't be necessary. I don't know why it enters here again and the objects don't have an id
         if (projectCard.id !== undefined) {
           score[player] += projectsProperties[projectCard?.id as Project].points
         }
@@ -42,9 +41,7 @@ export class EndGameScoreRule extends PlayerTurnRule {
 
     console.log(score)
 
-    // TODO: Restore this, just for testing purposes
-    return[this.startPlayerTurn(RuleId.RetrieveArchitects, this.nextPlayer)]
-    // return [this.endGame()]
+    return [this.endGame()]
   }
 
   getFavorScore(player: PlayerColor, space: number | undefined) {
