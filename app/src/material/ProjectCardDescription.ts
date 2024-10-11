@@ -24,8 +24,8 @@ import Project20 from '../images/cards/ProjectCard20.jpg'
 
 
 class ProjectCardDescription extends CardDescription {
-  width = 6
-  height = 6
+  width = 7
+  height = 7
   borderRadius = 0.5
   backImage = Back
   images = {
