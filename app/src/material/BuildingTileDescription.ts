@@ -24,11 +24,13 @@ import PurplePalaceTile from '../images/tiles/PurplePalaceTile.jpg'
 import PurpleResidenceTile from '../images/tiles/PurpleResidenceTile.jpg'
 import PurpleTheaterTile from '../images/tiles/PurpleTheaterTile.jpg'
 import PurpleWallTile from '../images/tiles/PurpleWallTile.jpg'
+import BuildingTileBack from '../images/tiles/BuildingTileBack.jpg'
 
 class BuildingTileDescription extends CardDescription {
   width = 4
   height = 4
   borderRadius = 0.5
+  backImage = BuildingTileBack
   images = {
     [Building.BlueGarden]: BlueGardenTile,
     [Building.BlueMarket]: BlueMarketTile,
