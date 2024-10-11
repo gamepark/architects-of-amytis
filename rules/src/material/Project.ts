@@ -27,143 +27,146 @@ export enum Project {
 export const projectsProperties = {
   [Project.Project1]: {
     pattern: [
-      [BuildingColor.Purple, BuildingColor.Purple, BuildingColor.Purple]
+      [BuildingColor.Green, null, null],
+      [null, BuildingColor.Blue, null],
+      [null, null, BuildingColor.Orange]
     ],
     points: 8
   },
   [Project.Project2]: {
     pattern: [
-      [BuildingColor.Green, null, null],
-      [null, BuildingColor.Blue, null],
-      [null, null, BuildingColor.Orange]
+      [BuildingColor.Blue, null, null],
+      [null, BuildingColor.Orange, null],
+      [null, null, BuildingColor.Green]
     ],
     points: 8
   },
   [Project.Project3]: {
     pattern: [
-      [BuildingColor.Purple, null, BuildingColor.Purple],
-      [BuildingColor.Blue, BuildingColor.Green, BuildingColor.Orange]
-    ],
-    points: 12
+      [BuildingColor.Blue, BuildingColor.Blue, BuildingColor.Blue]    ],
+    points: 8
   },
   [Project.Project4]: {
     pattern: [
-      [BuildingColor.Green, BuildingColor.Purple],
-      [BuildingColor.Purple, BuildingColor.Purple]
+      [BuildingColor.Purple, BuildingColor.Purple, BuildingColor.Purple]
     ],
-    points: 10
+    points: 8
   },
   [Project.Project5]: {
     pattern: [
-      [BuildingColor.Orange, BuildingColor.Blue],
-      [BuildingColor.Orange, BuildingColor.Blue]
+      [BuildingColor.Orange, null],
+      [BuildingColor.Orange, BuildingColor.Orange]
     ],
-    points: 10
+    points: 8
   },
   [Project.Project6]: {
     pattern: [
-      [BuildingColor.Purple, BuildingColor.Purple, BuildingColor.Purple]
+      [BuildingColor.Green, null],
+      [BuildingColor.Green, BuildingColor.Green]
     ],
     points: 8
   },
   [Project.Project7]: {
     pattern: [
-      [BuildingColor.Green, null, null],
-      [null, BuildingColor.Blue, null],
-      [null, null, BuildingColor.Orange]
+      [BuildingColor.Green, BuildingColor.Purple],
+      [BuildingColor.Purple, BuildingColor.Purple]
     ],
-    points: 8
+    points: 10
   },
   [Project.Project8]: {
     pattern: [
-      [BuildingColor.Purple, null, BuildingColor.Purple],
-      [BuildingColor.Blue, BuildingColor.Green, BuildingColor.Orange]
+      [BuildingColor.Orange, null, BuildingColor.Blue],
+      [BuildingColor.Orange, BuildingColor.Blue]
     ],
-    points: 12
+    points: 10
   },
   [Project.Project9]: {
     pattern: [
-      [BuildingColor.Green, BuildingColor.Purple],
-      [BuildingColor.Purple, BuildingColor.Purple]
+      [BuildingColor.Orange, BuildingColor.Purple, BuildingColor.Purple],
+      [BuildingColor.Purple, null, null]
     ],
     points: 10
   },
   [Project.Project10]: {
     pattern: [
-      [BuildingColor.Orange, BuildingColor.Blue],
-      [BuildingColor.Orange, BuildingColor.Blue]
+      [BuildingColor.Orange, BuildingColor.Green, BuildingColor.Green],
+      [BuildingColor.Orange, null, null]
     ],
     points: 10
   },
   [Project.Project11]: {
     pattern: [
-      [BuildingColor.Purple, BuildingColor.Purple, BuildingColor.Purple]
+      [null, BuildingColor.Orange, BuildingColor.Orange],
+      [BuildingColor.Orange, BuildingColor.Blue, null]
     ],
-    points: 8
+    points: 10
   },
   [Project.Project12]: {
     pattern: [
-      [BuildingColor.Green, null, null],
-      [null, BuildingColor.Blue, null],
-      [null, null, BuildingColor.Orange]
+      [null, BuildingColor.Purple, BuildingColor.Purple],
+      [BuildingColor.Blue, BuildingColor.Blue, null]
     ],
-    points: 8
+    points: 10
   },
   [Project.Project13]: {
     pattern: [
-      [BuildingColor.Purple, null, BuildingColor.Purple],
-      [BuildingColor.Blue, BuildingColor.Green, BuildingColor.Orange]
+      [null, BuildingColor.Blue, null],
+      [BuildingColor.Blue, null, BuildingColor.Blue]
     ],
-    points: 12
+    points: 10
   },
   [Project.Project14]: {
     pattern: [
-      [BuildingColor.Green, BuildingColor.Purple],
-      [BuildingColor.Purple, BuildingColor.Purple]
+      [null, BuildingColor.Green, null],
+      [BuildingColor.Purple, BuildingColor.Green, BuildingColor.Purple]
     ],
     points: 10
   },
   [Project.Project15]: {
     pattern: [
-      [BuildingColor.Orange, BuildingColor.Blue],
-      [BuildingColor.Orange, BuildingColor.Blue]
+      [BuildingColor.Purple, BuildingColor.Blue, BuildingColor.Green],
+      [BuildingColor.Orange, null, null],
+      [BuildingColor.Orange, null, null]      
     ],
-    points: 10
+    points: 12
   },
   [Project.Project16]: {
     pattern: [
-      [BuildingColor.Purple, BuildingColor.Purple, BuildingColor.Purple]
+      [BuildingColor.Purple, BuildingColor.Purple, BuildingColor.Orange],
+      [BuildingColor.Green, BuildingColor.Green, null]
     ],
-    points: 8
+    points: 12
   },
   [Project.Project17]: {
     pattern: [
-      [BuildingColor.Green, null, null],
-      [null, BuildingColor.Blue, null],
-      [null, null, BuildingColor.Orange]
+      [BuildingColor.Blue, BuildingColor.Purple, BuildingColor.Blue],
+      [null, BuildingColor.Green, null],
+      [null, BuildingColor.Blue, null]
     ],
-    points: 8
+    points: 12
   },
   [Project.Project18]: {
     pattern: [
-      [BuildingColor.Purple, null, BuildingColor.Purple],
-      [BuildingColor.Blue, BuildingColor.Green, BuildingColor.Orange]
+      [BuildingColor.Blue, null, null],
+      [BuildingColor.Blue, BuildingColor.Green, null],
+      [null, BuildingColor.Green, BuildingColor.Orange]
     ],
     points: 12
   },
   [Project.Project19]: {
     pattern: [
-      [BuildingColor.Green, BuildingColor.Purple],
-      [BuildingColor.Purple, BuildingColor.Purple]
+      [null, BuildingColor.Purple, null],
+      [BuildingColor.Blue, BuildingColor.Green, BuildingColor.Orange],
+      [null, BuildingColor.Green, null]
     ],
-    points: 10
+    points: 12
   },
   [Project.Project20]: {
     pattern: [
-      [BuildingColor.Orange, BuildingColor.Blue],
-      [BuildingColor.Orange, BuildingColor.Blue]
+      [BuildingColor.Purple, null, BuildingColor.Purple],
+      [BuildingColor.Blue, BuildingColor.Green, BuildingColor.Orange]
     ],
-    points: 10
+    points: 12
   },
 }
 
