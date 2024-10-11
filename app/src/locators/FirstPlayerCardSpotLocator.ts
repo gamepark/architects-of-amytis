@@ -4,7 +4,7 @@ import { Location } from '@gamepark/rules-api'
 class FirstPlayerCardSpotLocator extends Locator {
   getCoordinates(location: Location, context: ItemContext) {
     const playerIndex = getRelativePlayerIndex(context, location.player)
-    return playerIndex === 0 ? { x: 12, y: 26 } : { x: 12, y: -26 }
+    return playerIndex === 0 ? { x: -32, y: 24 } : { x: -32, y: -24 }
   }
 }
 

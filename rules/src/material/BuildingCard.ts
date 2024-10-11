@@ -1,4 +1,4 @@
 export enum BuildingCardSide {
-  SideA = 1,
-  SideB
+  SideA = 10,
+  SideB = 20
 }

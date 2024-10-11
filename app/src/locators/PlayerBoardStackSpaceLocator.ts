@@ -11,7 +11,9 @@ class PlayerBoardStackSpaceLocator extends Locator {
   }
 
   getPositionOnParent(location: Location) {
-    return { x: 27 + location.x! * 26, y: 26 + location.y! * 25 }
+    return { x: 27 + location.x! * 25, y: 25.5 + location.y! * 25 }
+        // return { x: 19 + location.x! * 31.5, y: 22.5 + location.y! * 31 }
+
   }
 
   getItemCoordinates(item: MaterialItem, context: ItemContext) {

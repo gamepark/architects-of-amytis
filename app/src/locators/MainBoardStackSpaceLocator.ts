@@ -6,7 +6,7 @@ class MainBoardStackSpaceLocator extends Locator {
   parentItemType = MaterialType.MainBoard
 
   getPositionOnParent(location: Location) {
-    return { x: 20 + location.x! * 30, y: 20 + location.y! * 30 }
+    return { x: 19 + location.x! * 31.5, y: 22.5 + location.y! * 31 }
   }
 
   getItemCoordinates(item: MaterialItem, context: ItemContext) {

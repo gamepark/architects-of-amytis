@@ -4,7 +4,7 @@ import { Location } from '@gamepark/rules-api'
 class PlayerBoardSpotLocator extends Locator {
   getCoordinates(location: Location, context: ItemContext) {
     const playerIndex = getRelativePlayerIndex(context, location.player)
-    return playerIndex === 0 ? { y: 22 } : { y: -22 }
+    return playerIndex === 0 ? { y: 24 } : { y: -20 }
   }
 }
 

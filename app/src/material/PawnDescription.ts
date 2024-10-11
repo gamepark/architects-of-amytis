@@ -5,8 +5,8 @@ import WhitePawn from '../images/resources/WhitePawn.png'
 
 class PawnDescription extends TokenDescription {
   borderRadius = 0.5
-  width = 2.3
-  height = 2.3
+  width = 1.6
+  height = 1.6
 
   images = {
     [PlayerColor.Black]: BlackPawn,

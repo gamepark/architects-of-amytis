@@ -6,8 +6,8 @@ import { mainBoardSpotLocator } from './MainBoardSpotLocator'
 class ProjectCardsDeckLocator extends Locator {
   getCoordinates() {
     return { 
-      x: mainBoardSpotLocator.getCoordinates().x,
-      y: mainBoardSpotLocator.getCoordinates().y + mainBoardDescription.height / 2 + 5
+      x: mainBoardSpotLocator.getCoordinates().x - 39,
+      y: mainBoardSpotLocator.getCoordinates().y + mainBoardDescription.height / 2 - 3.5
     }
   }
 

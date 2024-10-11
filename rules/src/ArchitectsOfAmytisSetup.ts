@@ -107,8 +107,16 @@ export class ArchitectsOfAmytisSetup extends MaterialGameSetup<PlayerColor, Mate
 
     buildingTypes.forEach(buildingType => {
       cardsSides[buildingType] = Math.random() < 0.5 ? BuildingCardSide.SideA : BuildingCardSide.SideB
+      this.material(MaterialType.BuildingCard).createItem({
+        id: buildingType + cardsSides[buildingType],
+        location: {
+          type: LocationType.BuildingCardSpot,
+          x: buildingType < 4 ? buildingType - 1 : buildingType - 4,
+          y: buildingType < 4 ? 0 : 1
+        }
+      })
     })
-    console.log(cardsSides)
+
     this.memorize(Memory.BuildingCardsSides, cardsSides)
   }
 

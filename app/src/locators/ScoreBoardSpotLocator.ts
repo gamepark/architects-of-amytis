@@ -6,7 +6,7 @@ import { scoreBoardDescription } from '../material/ScoreBoardDescription'
 class ScoreBoardSpotLocator extends Locator {
   getCoordinates() {
     return { 
-      x: mainBoardSpotLocator.getCoordinates().x + mainBoardDescription.width + 1,
+      x: mainBoardSpotLocator.getCoordinates().x + mainBoardDescription.width + 1.5,
       y: mainBoardSpotLocator.getCoordinates().y - mainBoardDescription.height / 2 + scoreBoardDescription.height / 2
     }
   }

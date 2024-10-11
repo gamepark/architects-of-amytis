@@ -9,6 +9,7 @@ import { playerBoardDescription } from './PlayerBoardDescription'
 import { pawnDescription } from './PawnDescription'
 import { architectDescription } from './ArchitectDescription'
 import { firstPlayerCardDescription } from './FirstPlayerCardDescription'
+import { buildingCardDescription } from './BuildingCardDescription'
 
 export const Material: Partial<Record<MaterialType, MaterialDescription>> = {
   [MaterialType.MainBoard]: mainBoardDescription,
@@ -19,5 +20,6 @@ export const Material: Partial<Record<MaterialType, MaterialDescription>> = {
   [MaterialType.PlayerBoard]: playerBoardDescription,
   [MaterialType.Pawn]: pawnDescription,
   [MaterialType.Architect]: architectDescription,
-  [MaterialType.FirstPlayerCard]: firstPlayerCardDescription
+  [MaterialType.FirstPlayerCard]: firstPlayerCardDescription,
+  [MaterialType.BuildingCard]: buildingCardDescription
 }

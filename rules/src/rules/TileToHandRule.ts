@@ -14,7 +14,7 @@ export class TileToHandRule extends PlayerTurnRule {
     const topTiles = this.availableTiles
     const availableSpaces: Location[] = []
     availableSpaces.push({
-      type: LocationType.InHandSpotLocator
+      type: LocationType.InHandSpot
     })
 
     moves.push(

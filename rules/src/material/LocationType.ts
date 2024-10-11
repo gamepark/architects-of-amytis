@@ -16,5 +16,6 @@ export enum LocationType {
   PlayerBuildingCardsSpot,
   PlayerProjectCardsSpot,
   PlayerValidatedProjectCardsPile,
-  InHandSpotLocator
+  InHandSpot,
+  BuildingCardSpot
 }

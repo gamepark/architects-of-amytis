@@ -11,7 +11,7 @@ class ScoreRangeAreaSpaceLocator extends Locator {
   }
 
   getPositionOnParent() {
-    return { x: 8, y: 44 }
+    return { x: 7, y: 33 }
   }
 }
 

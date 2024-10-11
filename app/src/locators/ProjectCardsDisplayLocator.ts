@@ -6,7 +6,7 @@ class ProjectCardsDisplayLocator extends ListLocator {
     return { x: 8 + projectCardsDeckLocator.getCoordinates().x, y: projectCardsDeckLocator.getCoordinates().y }
   }
 
-  gap = { x: 7 }
+  gap = { x: 8 }
 
   getHoverTransform = () => ['translateZ(10em)', 'scale(2)']
 }

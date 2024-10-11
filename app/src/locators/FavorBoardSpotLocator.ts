@@ -7,8 +7,8 @@ import { scoreBoardSpotLocator } from './ScoreBoardSpotLocator'
 class FavorBoardSpotLocator extends Locator {
   getCoordinates() {
     return { 
-      x: mainBoardSpotLocator.getCoordinates().x + mainBoardDescription.width + 1,
-      y: scoreBoardSpotLocator.getCoordinates().y + scoreBoardDescription.height + 1
+      x: mainBoardSpotLocator.getCoordinates().x + mainBoardDescription.width + 1.5,
+      y: scoreBoardSpotLocator.getCoordinates().y + scoreBoardDescription.height + 2
     }
   }
 }
