@@ -18,7 +18,7 @@ import { firstPlayerCardSpotLocator } from './FirstPlayerCardSpotLocator'
 import { playerBoardStackSpaceLocator } from './PlayerBoardStackSpaceLocator'
 import { favorBoardSpaceLocator } from './FavorBoardSpaceLocator'
 import { playerValidatedProjectCardsPileLocator } from './PlayerValidatedProjectCardsPileLocator'
-import { inHandSpotLocator } from './InHandSpotLocator'
+import { playerInHandSpotLocator } from './PlayerInHandSpotLocator'
 import { buildingCardSpotLocator } from './BuildingCardSpotLocator'
 
 export const Locators: Partial<Record<LocationType, Locator<PlayerColor, MaterialType, LocationType>>> = {
@@ -38,6 +38,6 @@ export const Locators: Partial<Record<LocationType, Locator<PlayerColor, Materia
   [LocationType.PlayerPawnsSupply]: playerPawnsSupplyLocator,
   [LocationType.PlayerArchitectsSupply]: playerArchitectsSupplyLocator,
   [LocationType.FirstPlayerCardSpot]: firstPlayerCardSpotLocator,
-  [LocationType.InHandSpot]: inHandSpotLocator,
+  [LocationType.PlayerInHandSpot]: playerInHandSpotLocator,
   [LocationType.BuildingCardSpot]: buildingCardSpotLocator,
 }

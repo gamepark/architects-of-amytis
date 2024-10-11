@@ -57,6 +57,11 @@ class BuildingTileDescription extends CardDescription {
     [Building.PurpleTheater]: PurpleTheaterTile,
     [Building.PurpleWall]: PurpleWallTile
   }
+
+  // TODO: Include condition to return false when it's the TileToHandRule
+  // canDrag(move: MaterialMove<number, number, number>, context: ItemContext<number, number, number>): boolean {
+  //   return false    
+  // }
 }
 
 export const buildingTileDescription = new BuildingTileDescription()

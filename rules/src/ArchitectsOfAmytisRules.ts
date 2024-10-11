@@ -4,7 +4,7 @@ import { MaterialType } from './material/MaterialType'
 import { PlayerColor } from './PlayerColor'
 import { RuleId } from './rules/RuleId'
 import { RetrieveArchitectsRule } from './rules/RetrieveArchitectsRule'
-import { ChooseBuildingTileRule } from './rules/ChooseBuildingTileRule'
+import { PlaceBuildingTileRule } from './rules/PlaceBuildingTileRule'
 import { SelectProjectCardRule } from './rules/SelectProjectCardRule'
 import { ClaimKingsFavorRule } from './rules/ClaimKingsFavorRule'
 import { CheckProjectsRule } from './rules/CheckProjectsRule'
@@ -20,7 +20,7 @@ export class ArchitectsOfAmytisRules extends HiddenMaterialRules<PlayerColor, Ma
   implements TimeLimit<MaterialGame<PlayerColor, MaterialType, LocationType>, MaterialMove<PlayerColor, MaterialType, LocationType>, PlayerColor> {
   rules = {
     [RuleId.RetrieveArchitects]: RetrieveArchitectsRule,
-    [RuleId.ChooseBuildingTile]: ChooseBuildingTileRule,
+    [RuleId.PlaceBuildingTile]: PlaceBuildingTileRule,
     [RuleId.TileToHand]: TileToHandRule,
     [RuleId.SelectProjectCard]: SelectProjectCardRule,
     [RuleId.CheckProjects]: CheckProjectsRule,
