@@ -3,8 +3,8 @@ import { BoardDescription } from '@gamepark/react-game'
 import ScoreBoard from '../images/boards/ScoreBoard.jpg'
 
 class ScoreBoardDescription extends BoardDescription {
-  width = 15
-  height = 7
+  width = 20
+  height = 9
   image = ScoreBoard
 
   staticItem = { location: { type: LocationType.ScoreBoardSpot } }
