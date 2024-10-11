@@ -1,5 +1,5 @@
 import { CardDescription } from '@gamepark/react-game'
-import FirsPlayerCard from '../images/cards/FirstPlayerCard.jpg'
+import FirsPlayerCard from '../images/cards/en/FirstPlayerCard.jpg'
 
 class FirstPlayerCardDescription extends CardDescription {
   width = 7
