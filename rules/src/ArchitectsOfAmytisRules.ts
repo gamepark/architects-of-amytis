@@ -10,6 +10,7 @@ import { ClaimKingsFavorRule } from './rules/ClaimKingsFavorRule'
 import { CheckProjectsRule } from './rules/CheckProjectsRule'
 import { CheckEndGameRule } from './rules/CheckEndGameRule'
 import { EndGameScoreRule } from './rules/EndGameScoreRule'
+import { TileToHandRule } from './rules/TileToHandRule'
 
 /**
  * This class implements the rules of the board game.
@@ -20,6 +21,7 @@ export class ArchitectsOfAmytisRules extends HiddenMaterialRules<PlayerColor, Ma
   rules = {
     [RuleId.RetrieveArchitects]: RetrieveArchitectsRule,
     [RuleId.ChooseBuildingTile]: ChooseBuildingTileRule,
+    [RuleId.TileToHand]: TileToHandRule,
     [RuleId.SelectProjectCard]: SelectProjectCardRule,
     [RuleId.CheckProjects]: CheckProjectsRule,
     [RuleId.ClaimKingsFavor]: ClaimKingsFavorRule,
