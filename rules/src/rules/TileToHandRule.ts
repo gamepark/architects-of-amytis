@@ -5,6 +5,7 @@ import { Memory } from './Memory'
 import { RuleId } from './RuleId'
 
 export class TileToHandRule extends PlayerTurnRule {
+  
   getPlayerMoves() {
     console.log("retrieving player moves in tile to hand")
     const moves: MaterialMove[] = []
@@ -42,7 +43,7 @@ export class TileToHandRule extends PlayerTurnRule {
     }
     return tiles.index(index => tileIndexes.includes(index))
   }
-
+  
   beforeItemMove(move: ItemMove) {
     if (isMoveItemType(MaterialType.BuildingTile)(move)) {
       const movedTile = this.material(MaterialType.BuildingTile).getItem(move.itemIndex)

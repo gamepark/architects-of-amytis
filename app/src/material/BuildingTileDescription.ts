@@ -1,5 +1,5 @@
 import { Building } from '@gamepark/architects-of-amytis/material/Building'
-import { CardDescription } from '@gamepark/react-game'
+import { CardDescription, ItemContext } from '@gamepark/react-game'
 import BlueGardenTile from '../images/tiles/BlueGardenTile.jpg'
 import BlueMarketTile from '../images/tiles/BlueMarketTile.jpg'
 import BluePalaceTile from '../images/tiles/BluePalaceTile.jpg'
@@ -25,6 +25,8 @@ import PurpleResidenceTile from '../images/tiles/PurpleResidenceTile.jpg'
 import PurpleTheaterTile from '../images/tiles/PurpleTheaterTile.jpg'
 import PurpleWallTile from '../images/tiles/PurpleWallTile.jpg'
 import BuildingTileBack from '../images/tiles/BuildingTileBack.jpg'
+import { MaterialMove } from '@gamepark/rules-api'
+import { RuleId } from '@gamepark/architects-of-amytis/rules/RuleId'
 
 class BuildingTileDescription extends CardDescription {
   width = 4
@@ -59,9 +61,13 @@ class BuildingTileDescription extends CardDescription {
   }
 
   // TODO: Include condition to return false when it's the TileToHandRule
-  // canDrag(move: MaterialMove<number, number, number>, context: ItemContext<number, number, number>): boolean {
-  //   return false    
-  // }
+  canDrag(_move: MaterialMove<number, number, number>, context: ItemContext<number, number, number>): boolean {
+    if (context.rules.game.rule?.id !== RuleId.TileToHand) {
+      return true
+    } else {
+      return false
+    }
+  }
 }
 
 export const buildingTileDescription = new BuildingTileDescription()
