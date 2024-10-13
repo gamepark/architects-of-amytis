@@ -7,7 +7,8 @@ import { Memory } from "./Memory";
 import { BoardHelper, Corners } from "./helpers/BoardHelper";
 
 interface BuildingAction {
-  getEffectMoves(side: number, move?: ItemMove): MaterialMove[];
+  getEffectMoves(side: number, move?: ItemMove): MaterialMove[]
+  addSideBPoints?(): MaterialMove[]
 }
 
 export class BuildingEffect {
@@ -139,11 +140,22 @@ class PalaceAction extends PlayerTurnRule implements BuildingAction {
       score[this.player] += newScore
       this.memorize(Memory.Score, score)
 
-      console.log("Player got " + newScore + " points for Palace")
+      console.log("Player got " + newScore + " points for Palace side A")
       console.log(score)
-    } else {
-
     }
+
+    return []
+  }
+
+  addSideBPoints() {
+    const newScore = this.material(MaterialType.ProjectCard).location(LocationType.PlayerValidatedProjectCardsPile).getQuantity()
+    const score = this.remind(Memory.Score)
+    score[this.player] += newScore
+    this.memorize(Memory.Score, score)
+
+    console.log("Player got " + newScore + " points for Palace side B")
+    console.log(score)
+
     return []
   }
 }

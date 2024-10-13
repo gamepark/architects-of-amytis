@@ -5,6 +5,7 @@ import { RuleId } from "./RuleId"
 import { BuildingEffect } from "./BuildingEffect"
 import { BuildingType } from "../material/Building"
 import { Memory } from "./Memory"
+import { BuildingCardSide } from "../material/BuildingCard"
 
 export class SelectProjectCardRule extends PlayerTurnRule {
   getPlayerMoves() {
@@ -19,8 +20,9 @@ export class SelectProjectCardRule extends PlayerTurnRule {
   }
 
   afterItemMove() {
-    const buildingCardSide = this.remind(Memory.BuildingCardsSides)[BuildingType.Palace]
-    BuildingEffect.createBuildingAction(this.game, BuildingType.Palace)?.getEffectMoves(buildingCardSide)
+    if (this.palaceCardSide === BuildingCardSide.SideA) {
+      BuildingEffect.createBuildingAction(this.game, BuildingType.Palace)?.getEffectMoves(this.palaceCardSide)
+    }
   
     return [this.startRule(RuleId.CheckProjects)]
   }  
@@ -32,5 +34,9 @@ export class SelectProjectCardRule extends PlayerTurnRule {
       moves.push(...projectCardsDeck.deal({ type: LocationType.ProjectCardsDisplay }, 1))
     }
     return moves    
+  }
+
+  get palaceCardSide() {
+    return this.remind(Memory.BuildingCardsSides)[BuildingType.Palace]
   }
 }
