@@ -1,13 +1,10 @@
 import { ListLocator } from '@gamepark/react-game'
+import { buildingCardDescription } from '../material/BuildingCardDescription'
 import { projectCardsDeckLocator } from './ProjectCardsDeckLocator'
 
 class ProjectCardsDisplayLocator extends ListLocator {
-  getCoordinates() {
-    return { x: 8 + projectCardsDeckLocator.getCoordinates().x, y: projectCardsDeckLocator.getCoordinates().y }
-  }
-
-  gap = { x: 8 }
-
+  gap = { x: buildingCardDescription.width + 1 }
+  coordinates = { x: projectCardsDeckLocator.coordinates.x + this.gap.x }
   getHoverTransform = () => ['translateZ(10em)', 'scale(2)']
 }
 

@@ -1,17 +1,13 @@
-import { getRelativePlayerIndex, ItemContext, Locator } from '@gamepark/react-game'
+import { DeckLocator, ItemContext } from '@gamepark/react-game'
 import { Location } from '@gamepark/rules-api'
-import { playerBoardSpotLocator } from './PlayerBoardSpotLocator'
-import { playerBoardDescription } from '../material/PlayerBoardDescription'
-import { projectCardDescription } from '../material/ProjectCardDescription'
 
-class PlayerValidatedProjectCardsPileLocator extends Locator {
-
-  getCoordinates(location: Location, context: ItemContext) {
-    const playerIndex = getRelativePlayerIndex(context, location.player)
-    const y = playerBoardSpotLocator.getCoordinates(location, context).y - playerBoardDescription.height / 2 + projectCardDescription.height / 2
-    return playerIndex === 0 ? { x: playerBoardSpotLocator.coordinates.x! - 15, y: y } : { x: playerBoardSpotLocator.coordinates.x! - 15, y: y } 
+class PlayerValidatedProjectCardsPileLocator extends DeckLocator {
+  getCoordinates(location: Location, { rules, player = rules.players[0] }: ItemContext) {
+    return {
+      x: 2.5,
+      y: player === location.player ? 16 : -16
+    }
   }
-
 }
 
 export const playerValidatedProjectCardsPileLocator = new PlayerValidatedProjectCardsPileLocator()

@@ -16,18 +16,27 @@ export const PlayerPanels: FC<any> = () => {
   return createPortal(
     <>
       {players.map((player, index) =>
-        <ArchitectsOfAmytisPlayerPanel key={player.id} player={player} color={playerColorCode[player.id as PlayerColor]} css={panelPosition(index)} index={0}/>
+        <ArchitectsOfAmytisPlayerPanel key={player.id} player={player} color={playerColorCode[player.id as PlayerColor]}
+                                       css={[panelCss, index === 0 ? bottom : top]} index={0}/>
       )}
     </>,
     root
   )
-  
 }
-const panelPosition = (index: number) => css`
+
+const panelCss = css`
   position: absolute;
-  right: 1em;
-  top: ${8.5 + index * 16}em;
+  left: 50%;
+  transform: translateX(-50%) translateX(18em);
   width: 28em;
+`
+
+const top = css`
+  top: 10em
+`
+
+const bottom = css`
+  bottom: 2em
 `
 
 export const playerColorCode: Record<PlayerColor, string> = {

@@ -1,12 +1,15 @@
-import { getRelativePlayerIndex, ItemContext, PileLocator } from '@gamepark/react-game'
+import { ItemContext, ListLocator } from '@gamepark/react-game'
 import { Location } from '@gamepark/rules-api'
 
-class PlayerPawnsSupplyLocator extends PileLocator {
-  radius = 1.5
+class PlayerPawnsSupplyLocator extends ListLocator {
+  gap = { x: 1.8 }
 
-  getCoordinates(location: Location, context: ItemContext) {
-    const playerIndex = getRelativePlayerIndex(context, location.player)
-    return playerIndex === 0 ? { x: -13, y: 24 } : { x: -13, y: -20 }
+  getCoordinates(location: Location, { rules, player = rules.players[0] }: ItemContext) {
+    return {
+      x: -1,
+      y: player === location.player ? 11.6 : -11.6,
+      z: 1
+    }
   }
 }
 

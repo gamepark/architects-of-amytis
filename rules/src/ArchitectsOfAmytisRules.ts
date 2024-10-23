@@ -2,14 +2,14 @@ import { FillGapStrategy, HiddenMaterialRules, hideItemId, MaterialGame, Materia
 import { LocationType } from './material/LocationType'
 import { MaterialType } from './material/MaterialType'
 import { PlayerColor } from './PlayerColor'
-import { RuleId } from './rules/RuleId'
-import { RetrieveArchitectsRule } from './rules/RetrieveArchitectsRule'
-import { PlaceBuildingTileRule } from './rules/PlaceBuildingTileRule'
-import { SelectProjectCardRule } from './rules/SelectProjectCardRule'
-import { ClaimKingsFavorRule } from './rules/ClaimKingsFavorRule'
-import { CheckProjectsRule } from './rules/CheckProjectsRule'
 import { CheckEndGameRule } from './rules/CheckEndGameRule'
+import { CheckProjectsRule } from './rules/CheckProjectsRule'
+import { ClaimKingsFavorRule } from './rules/ClaimKingsFavorRule'
 import { EndGameScoreRule } from './rules/EndGameScoreRule'
+import { PlaceBuildingTileRule } from './rules/PlaceBuildingTileRule'
+import { RetrieveArchitectsRule } from './rules/RetrieveArchitectsRule'
+import { RuleId } from './rules/RuleId'
+import { SelectProjectCardRule } from './rules/SelectProjectCardRule'
 import { TileToHandRule } from './rules/TileToHandRule'
 
 /**
@@ -34,13 +34,14 @@ export class ArchitectsOfAmytisRules extends HiddenMaterialRules<PlayerColor, Ma
       [LocationType.ProjectCardsDeck]: new PositiveSequenceStrategy(),
       [LocationType.ProjectCardsDisplay]: new FillGapStrategy(),
       [LocationType.PlayerProjectCardsSpot]: new PositiveSequenceStrategy(),
+      [LocationType.PlayerValidatedProjectCardsPile]: new PositiveSequenceStrategy()
     }
   }
 
   hidingStrategies = {
     [MaterialType.ProjectCard]: {
       [LocationType.ProjectCardsDeck]: hideItemId,
-      [LocationType.PlayerValidatedProjectCardsPile]: hideItemId,
+      [LocationType.PlayerValidatedProjectCardsPile]: hideItemId
     }
   }
 

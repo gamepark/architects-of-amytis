@@ -1,15 +1,20 @@
-import { MaterialType } from '@gamepark/architects-of-amytis/material/MaterialType'
-import { Locator } from '@gamepark/react-game'
-import { Location } from '@gamepark/rules-api'
+import { FlexLocator, ItemContext } from '@gamepark/react-game'
+import { Location } from '../../../../rules-api/src'
+import { buildingCardDescription } from '../material/BuildingCardDescription'
 
-class BuildingCardSpotLocator extends Locator {
-  parentItemType = MaterialType.MainBoard
+class BuildingCardSpotLocator extends FlexLocator {
+  gap = { x: buildingCardDescription.width + 1.5 }
+  lineSize = 3
+  lineGap = { y: buildingCardDescription.height + 1.5 }
 
-  getPositionOnParent(location: Location) {
-    return { x: -25 - location.x! * 40, y: -5 + location.y! * 40 }
+  getCoordinates(location: Location, { rules, player = rules.players[0] }: ItemContext) {
+    return {
+      x: -54,
+      y: player === location.player ? 9 : -22
+    }
   }
 
-  // getHoverTransform = () => ['translateZ(10em)', 'scale(2)']
+  getHoverTransform = () => ['translateX(3em)', 'translateZ(10em)', 'scale(2)']
 }
 
 export const buildingCardSpotLocator = new BuildingCardSpotLocator()

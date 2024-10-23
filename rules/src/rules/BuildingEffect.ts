@@ -91,7 +91,7 @@ class WallAction extends PlayerTurnRule implements BuildingAction {
       const topTiles = new BoardHelper(this.game).getVisibleTilesInStack(playerTilesInStack)
       const score = this.remind(Memory.Score)
       let points = 0
-      if (side === BuildingCardSide.SideA) {              
+      if (side === BuildingCardSide.SideA) {
         points = topTiles.filter(tile => getBuildingType(tile.id) === BuildingType.Wall &&
                                         (tile.location.x !== 1 || tile.location.y !== 1)).length
       } else {
@@ -167,7 +167,7 @@ class ResidenceAction extends PlayerTurnRule implements BuildingAction {
       const score = this.remind(Memory.Score)
       let points = 0
   
-      if (side === BuildingCardSide.SideA) {      
+      if (side === BuildingCardSide.SideA) {
         points = new Set(topTiles.getItems().map(tile => getBuildingType(tile?.id))).size
       } else {
         points = topTiles.filter(tile => getBuildingType(tile.id) === BuildingType.Residence || getBuildingType(tile.id) === BuildingType.Market).length * 2
