@@ -1,6 +1,6 @@
 export enum Memory {
-  MovedTile = 1,
+  BuildingCardsSides = 1,
+  MovedTile,
   Score,
-  LastTurn,
-  BuildingCardsSides
+  LastTurn
 }

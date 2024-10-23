@@ -3,9 +3,8 @@ import { MaterialType } from "../material/MaterialType"
 import { LocationType } from "../material/LocationType"
 import { RuleId } from "./RuleId"
 import { BuildingEffect } from "./BuildingEffect"
-import { BuildingType } from "../material/Building"
+import { BuildingCardSide, BuildingType } from "../material/Building"
 import { Memory } from "./Memory"
-import { BuildingCardSide } from "../material/BuildingCard"
 
 export class SelectProjectCardRule extends PlayerTurnRule {
   getPlayerMoves() {

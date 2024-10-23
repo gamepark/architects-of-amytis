@@ -1,8 +1,7 @@
 import { isMoveItemType, ItemMove, MaterialGame, MaterialMove, PlayerTurnRule } from "@gamepark/rules-api";
-import { BuildingType, getBuildingColor, getBuildingType } from "../material/Building";
+import { BuildingCardSide, BuildingType, getBuildingColor, getBuildingType } from "../material/Building"
 import { MaterialType } from "../material/MaterialType";
 import { LocationType } from "../material/LocationType";
-import { BuildingCardSide } from "../material/BuildingCard";
 import { Memory } from "./Memory";
 import { BoardHelper, Corners } from "./helpers/BoardHelper";
 

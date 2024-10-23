@@ -1,14 +1,14 @@
 import { MaterialGameSetup } from '@gamepark/rules-api'
+import { keyBy, mapValues } from 'lodash'
 import { ArchitectsOfAmytisOptions } from './ArchitectsOfAmytisOptions'
 import { ArchitectsOfAmytisRules } from './ArchitectsOfAmytisRules'
-import { buildings, buildingTypes } from './material/Building'
+import { BuildingCardSide, buildings, BuildingType, buildingTypes } from './material/Building'
 import { LocationType } from './material/LocationType'
 import { MaterialType } from './material/MaterialType'
-import { PlayerColor, playerColors } from './PlayerColor'
-import { RuleId } from './rules/RuleId'
 import { projects } from './material/Project'
+import { PlayerColor, playerColors } from './PlayerColor'
 import { Memory } from './rules/Memory'
-import { BuildingCardSide } from './material/BuildingCard'
+import { RuleId } from './rules/RuleId'
 
 /**
  * This class creates a new Game based on the game options
@@ -16,11 +16,11 @@ import { BuildingCardSide } from './material/BuildingCard'
 export class ArchitectsOfAmytisSetup extends MaterialGameSetup<PlayerColor, MaterialType, LocationType, ArchitectsOfAmytisOptions> {
   Rules = ArchitectsOfAmytisRules
 
-  setupMaterial(_options: ArchitectsOfAmytisOptions) {
+  setupMaterial(options: ArchitectsOfAmytisOptions) {
     this.setupBuildingTiles()
     this.setupProjectCards()
     this.setupPlayers()
-    this.setupBuildingCards()
+    this.setupBuildingCards(options)
 
     this.memorize(Memory.LastTurn, false)
   }
@@ -43,7 +43,7 @@ export class ArchitectsOfAmytisSetup extends MaterialGameSetup<PlayerColor, Mate
 
   setupProjectCards() {
     this.material(MaterialType.ProjectCard).createItems(projects.map((project) => ({
-        id: project, location: { type: LocationType.ProjectCardsDeck }
+      id: project, location: { type: LocationType.ProjectCardsDeck }
     })))
     this.material(MaterialType.ProjectCard).shuffle()
     const projectCardsDeck = this.material(MaterialType.ProjectCard).deck()
@@ -85,7 +85,7 @@ export class ArchitectsOfAmytisSetup extends MaterialGameSetup<PlayerColor, Mate
     })
 
     const projectCardsDeck = this.material(MaterialType.ProjectCard).deck()
-    projectCardsDeck.deal({ 
+    projectCardsDeck.deal({
       type: LocationType.PlayerProjectCardsSpot,
       player: player
     }, 2)
@@ -99,25 +99,32 @@ export class ArchitectsOfAmytisSetup extends MaterialGameSetup<PlayerColor, Mate
       })
     }
 
-    this.memorize(Memory.Score, { [this.game.players[0]]: 0, [this.game.players[1]]: 0})
+    this.memorize(Memory.Score, { [this.game.players[0]]: 0, [this.game.players[1]]: 0 })
   }
 
-  setupBuildingCards() {
-    const cardsSides: { [key: number]: number } = {};
+  getBuildingSide(options: ArchitectsOfAmytisOptions, buildingType: BuildingType) {
+    switch (buildingType) {
+      case BuildingType.Garden:
+        return options.gardenSide
+      case BuildingType.Market:
+        return options.marketSide
+      case BuildingType.Wall:
+        return options.wallSide
+      case BuildingType.Palace:
+        return options.palaceSide
+      case BuildingType.Residence:
+        return options.residenceSide
+      case BuildingType.Theater:
+        return options.theaterSide
+    }
+  }
 
-    buildingTypes.forEach(buildingType => {
-      cardsSides[buildingType] = Math.random() < 0.5 ? BuildingCardSide.SideA : BuildingCardSide.SideB
-      this.material(MaterialType.BuildingCard).createItem({
-        id: buildingType + cardsSides[buildingType],
-        location: {
-          type: LocationType.BuildingCardSpot,
-          x: buildingType < 4 ? buildingType - 1 : buildingType - 4,
-          y: buildingType < 4 ? 0 : 1
-        }
-      })
-    })
-
-    this.memorize(Memory.BuildingCardsSides, cardsSides)
+  setupBuildingCards(options: ArchitectsOfAmytisOptions) {
+    this.memorize(Memory.BuildingCardsSides,
+      mapValues(keyBy(buildingTypes), buildingType =>
+        this.getBuildingSide(options, buildingType) ?? (Math.random() < 0.5 ? BuildingCardSide.SideA : BuildingCardSide.SideB)
+      )
+    )
   }
 
   start() {

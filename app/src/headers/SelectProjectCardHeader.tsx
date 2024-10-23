@@ -1,7 +1,6 @@
 /** @jsxImportSource @emotion/react */
-
 import { ArchitectsOfAmytisRules } from "@gamepark/architects-of-amytis/ArchitectsOfAmytisRules"
-import { BuildingCardSide } from "@gamepark/architects-of-amytis/material/BuildingCard"
+import { BuildingCardSide } from "@gamepark/architects-of-amytis/material/Building"
 import { SelectProjectCardRule } from "@gamepark/architects-of-amytis/rules/SelectProjectCardRule"
 import { usePlayerId, useRules } from "@gamepark/react-game"
 import { Trans } from "react-i18next"

@@ -1,5 +1,6 @@
-import { OptionsSpec } from '@gamepark/rules-api'
+import { EnumOption, OptionsSpec } from '@gamepark/rules-api'
 import { TFunction } from 'i18next'
+import { BuildingCardSide, buildingCardSides, BuildingType } from './material/Building'
 import { PlayerColor, playerColors } from './PlayerColor'
 
 /**
@@ -12,8 +13,24 @@ type PlayerOptions = { id: PlayerColor }
  * The first generic parameter, "{}", can be changed to include game options like variants or expansions.
  */
 export type ArchitectsOfAmytisOptions = {
-  players: PlayerOptions[]
+  players: PlayerOptions[],
+  gardenSide: BuildingCardSide,
+  marketSide: BuildingCardSide,
+  wallSide: BuildingCardSide,
+  palaceSide: BuildingCardSide,
+  residenceSide: BuildingCardSide,
+  theaterSide: BuildingCardSide,
 }
+
+const buildingOption = (buildingType: BuildingType): EnumOption<BuildingCardSide> => ({
+  label: t => t('building.side', { building: t(`building.${buildingType}`) }),
+  values: buildingCardSides,
+  valueSpec: (side: BuildingCardSide) => ({
+    label: t => side === BuildingCardSide.SideA ? t('Side A') : t('Side B'),
+    help: t => t(`building.${buildingType}.${side === BuildingCardSide.SideA ? 'A' : 'B'}`),
+    competitiveDisabled: true
+  })
+})
 
 /**
  * This object describes all the options a game can have, and will be used by GamePark website to create automatically forms for you game
@@ -26,7 +43,13 @@ export const ArchitectsOfAmytisOptionsSpec: OptionsSpec<ArchitectsOfAmytisOption
       values: playerColors,
       valueSpec: color => ({ label: t => getPlayerName(color, t) })
     }
-  }
+  },
+  gardenSide: buildingOption(BuildingType.Garden),
+  marketSide: buildingOption(BuildingType.Market),
+  wallSide: buildingOption(BuildingType.Wall),
+  palaceSide: buildingOption(BuildingType.Palace),
+  residenceSide: buildingOption(BuildingType.Residence),
+  theaterSide: buildingOption(BuildingType.Theater)
 }
 
 export function getPlayerName(playerId: PlayerColor, t: TFunction) {
