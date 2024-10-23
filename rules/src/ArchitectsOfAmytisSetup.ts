@@ -88,7 +88,7 @@ export class ArchitectsOfAmytisSetup extends MaterialGameSetup<PlayerColor, Mate
     projectCardsDeck.deal({
       type: LocationType.PlayerProjectCardsSpot,
       player: player
-    }, 2)
+    }, player === this.players[0] ? 2 : 3)
 
     if (player === this.game.players[0]) {
       this.material(MaterialType.FirstPlayerCard).createItem({
