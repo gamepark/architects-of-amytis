@@ -2,27 +2,25 @@ import { LocationType } from '@gamepark/architects-of-amytis/material/LocationTy
 import { MaterialType } from '@gamepark/architects-of-amytis/material/MaterialType'
 import { PlayerColor } from '@gamepark/architects-of-amytis/PlayerColor'
 import { Locator } from '@gamepark/react-game'
-import { mainBoardStackSpaceLocator } from './MainBoardStackSpaceLocator'
-import { projectCardsDeckLocator } from './ProjectCardsDeckLocator'
-import { playerBoardSpotLocator } from './PlayerBoardSpotLocator'
-import { playerPawnsSupplyLocator } from './PlayerPawnsSupplyLocator'
-import { playerArchitectsSupplyLocator } from './PlayerAchitectsSupplyLocator'
-import { scoreRangeAreaSpaceLocator } from './ScoreRangeAreaSpaceLocator'
-import { projectCardsDisplayLocator } from './ProjectCardsDisplayLocator'
-import { mainBoardSpotLocator } from './MainBoardSpotLocator'
-import { scoreBoardSpotLocator } from './ScoreBoardSpotLocator'
-import { favorBoardSpotLocator } from './FavorBoardSpotLocator'
-import { scoreBoardSpaceLocator } from './ScoreBoardSpaceLocator'
-import { playerProjectCardsSpotLocator } from './PlayerProjectCardsSpotLocator'
-import { firstPlayerCardSpotLocator } from './FirstPlayerCardSpotLocator'
-import { playerBoardStackSpaceLocator } from './PlayerBoardStackSpaceLocator'
-import { favorBoardSpaceLocator } from './FavorBoardSpaceLocator'
-import { playerValidatedProjectCardsPileLocator } from './PlayerValidatedProjectCardsPileLocator'
-import { playerInHandSpotLocator } from './PlayerInHandSpotLocator'
 import { buildingCardSpotLocator } from './BuildingCardSpotLocator'
+import { favorBoardSpaceLocator } from './FavorBoardSpaceLocator'
+import { favorBoardSpotLocator } from './FavorBoardSpotLocator'
+import { firstPlayerCardSpotLocator } from './FirstPlayerCardSpotLocator'
+import { mainBoardStackSpaceLocator } from './MainBoardStackSpaceLocator'
+import { playerArchitectsSupplyLocator } from './PlayerAchitectsSupplyLocator'
+import { playerBoardSpotLocator } from './PlayerBoardSpotLocator'
+import { playerBoardStackSpaceLocator } from './PlayerBoardStackSpaceLocator'
+import { playerInHandSpotLocator } from './PlayerInHandSpotLocator'
+import { playerPawnsSupplyLocator } from './PlayerPawnsSupplyLocator'
+import { playerProjectCardsSpotLocator } from './PlayerProjectCardsSpotLocator'
+import { playerValidatedProjectCardsPileLocator } from './PlayerValidatedProjectCardsPileLocator'
+import { projectCardsDeckLocator } from './ProjectCardsDeckLocator'
+import { projectCardsDisplayLocator } from './ProjectCardsDisplayLocator'
+import { scoreBoardSpaceLocator } from './ScoreBoardSpaceLocator'
+import { scoreBoardSpotLocator } from './ScoreBoardSpotLocator'
+import { scoreRangeAreaSpaceLocator } from './ScoreRangeAreaSpaceLocator'
 
 export const Locators: Partial<Record<LocationType, Locator<PlayerColor, MaterialType, LocationType>>> = {
-  [LocationType.MainBoardSpot]: mainBoardSpotLocator,
   [LocationType.ScoreBoardSpot]: scoreBoardSpotLocator,
   [LocationType.ScoreBoardSpace]: scoreBoardSpaceLocator,
   [LocationType.FavorBoardSpot]: favorBoardSpotLocator,
@@ -39,5 +37,5 @@ export const Locators: Partial<Record<LocationType, Locator<PlayerColor, Materia
   [LocationType.PlayerArchitectsSupply]: playerArchitectsSupplyLocator,
   [LocationType.FirstPlayerCardSpot]: firstPlayerCardSpotLocator,
   [LocationType.PlayerInHandSpot]: playerInHandSpotLocator,
-  [LocationType.BuildingCardSpot]: buildingCardSpotLocator,
+  [LocationType.BuildingCardSpot]: buildingCardSpotLocator
 }

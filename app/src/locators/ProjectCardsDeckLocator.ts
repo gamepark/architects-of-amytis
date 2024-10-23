@@ -1,13 +1,12 @@
 import { ItemContext, Locator } from '@gamepark/react-game'
-import { mainBoardDescription } from '../material/MainBoardDescription'
 import { MaterialItem } from '@gamepark/rules-api'
-import { mainBoardSpotLocator } from './MainBoardSpotLocator'
+import { mainBoardDescription } from '../material/MainBoardDescription'
 
 class ProjectCardsDeckLocator extends Locator {
   getCoordinates() {
     return { 
-      x: mainBoardSpotLocator.getCoordinates().x - 39,
-      y: mainBoardSpotLocator.getCoordinates().y + mainBoardDescription.height / 2 - 3.5
+      x: -39,
+      y: mainBoardDescription.height / 2 - 3.5
     }
   }
 
