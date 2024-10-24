@@ -60,7 +60,6 @@ class BuildingTileDescription extends CardDescription {
     [Building.PurpleWall]: PurpleWallTile
   }
 
-  // TODO: Include condition to return false when it's the TileToHandRule
   canDrag(_move: MaterialMove<number, number, number>, context: ItemContext<number, number, number>): boolean {
     if (context.rules.game.rule?.id !== RuleId.TileToHand) {
       return true

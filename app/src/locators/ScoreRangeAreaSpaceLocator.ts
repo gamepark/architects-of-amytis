@@ -10,9 +10,16 @@ class ScoreRangeAreaSpaceLocator extends Locator {
     return playerBoardDescription.staticItems.find(item => item.location.player === location.player)
   }
 
-  getPositionOnParent() {
-    return { x: 7, y: 33 }
+  getPositionOnParent(location: Location) {
+    return this.positions[location.x!] ?? this.positionOnParent
   }
+
+  positions = [
+    { x: 7.5, y: 33 },
+    { x: 7.5, y: 44 },
+    { x: 7.5, y: 55 },
+    { x: 7.5, y: 66 }
+  ]
 }
 
 export const scoreRangeAreaSpaceLocator = new ScoreRangeAreaSpaceLocator()

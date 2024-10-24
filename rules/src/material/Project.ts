@@ -75,7 +75,7 @@ export const projectsProperties = {
   },
   [Project.Project8]: {
     pattern: [
-      [BuildingColor.Orange, null, BuildingColor.Blue],
+      [BuildingColor.Orange, BuildingColor.Blue],
       [BuildingColor.Orange, BuildingColor.Blue]
     ],
     points: 10
@@ -111,7 +111,7 @@ export const projectsProperties = {
   [Project.Project13]: {
     pattern: [
       [null, BuildingColor.Blue, null],
-      [BuildingColor.Blue, null, BuildingColor.Blue]
+      [BuildingColor.Blue, BuildingColor.Green, BuildingColor.Blue]
     ],
     points: 10
   },

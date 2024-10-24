@@ -53,14 +53,6 @@ export class PlaceBuildingTileRule extends PlayerTurnRule {
     return tiles.index(index => tileIndexes.includes(index))
   }
 
-  // beforeItemMove(move: ItemMove) {
-  //   if (isMoveItemType(MaterialType.BuildingTile)(move)) {
-  //     const movedTile = this.material(MaterialType.BuildingTile).getItem(move.itemIndex)
-  //     this.memorize(Memory.MovedTile, movedTile)
-  //   }
-  //   return []
-  // }
-
   afterItemMove(move: ItemMove) {
     const moves: MaterialMove[] = []
     if (isMoveItemType(MaterialType.BuildingTile)(move)) {
@@ -78,7 +70,8 @@ export class PlaceBuildingTileRule extends PlayerTurnRule {
       if (getBuildingType(movedTile.id) !== BuildingType.Palace) {
         const buildingType = getBuildingType(movedTile.id)
         const buildingCardSide = this.remind(Memory.BuildingCardsSides)[buildingType]
-        BuildingEffect.createBuildingAction(this.game, buildingType)?.getEffectMoves(buildingCardSide, move)
+        const pointsMove = BuildingEffect.createBuildingAction(this.game, buildingType)?.getEffectMoves(buildingCardSide, move)
+        moves.push(...pointsMove ?? [])
         moves.push(this.startRule(RuleId.CheckProjects))
       } else {
         moves.push(this.startRule(RuleId.SelectProjectCard))

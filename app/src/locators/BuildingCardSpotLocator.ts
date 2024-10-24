@@ -1,5 +1,5 @@
 import { FlexLocator, ItemContext } from '@gamepark/react-game'
-import { Location } from '../../../../rules-api/src'
+import { Location } from '@gamepark/rules-api'
 import { buildingCardDescription } from '../material/BuildingCardDescription'
 
 class BuildingCardSpotLocator extends FlexLocator {

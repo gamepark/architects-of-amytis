@@ -13,6 +13,7 @@ export class EndGameScoreRule extends PlayerTurnRule {
     console.log("End game")
 
     let score = this.remind(Memory.Score)
+    const moves = []
     
     // Compute projects score
     for (const player of playerColors) {
@@ -40,8 +41,26 @@ export class EndGameScoreRule extends PlayerTurnRule {
     }
 
     console.log(score)
+    
+    // Moving pawns in the score board
+    for (const player of playerColors) {
+      moves.push(this.material(MaterialType.Pawn).location(LocationType.ScoreBoardSpace).player(player).moveItem({
+        player: player,
+        type: LocationType.ScoreBoardSpace,
+        x: score[player] % 50
+      }))
 
-    return [this.endGame()]
+      const posX = Math.floor(score[player] / 50) % 4
+      moves.push(this.material(MaterialType.Pawn).location(LocationType.ScoreRangeAreaSpace).player(player).moveItem({
+        player: player,
+        type: LocationType.ScoreRangeAreaSpace,
+        x: posX < 4 ? posX : 4
+      }))
+    }
+
+    moves.push(this.endGame())
+    
+    return moves
   }
 
   getFavorScore(player: PlayerColor, space: number | undefined) {
