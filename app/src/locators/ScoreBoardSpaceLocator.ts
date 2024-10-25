@@ -1,6 +1,7 @@
+import { LocationType } from '@gamepark/architects-of-amytis/material/LocationType'
 import { MaterialType } from '@gamepark/architects-of-amytis/material/MaterialType'
-import { Locator } from '@gamepark/react-game'
-import { Location } from '@gamepark/rules-api'
+import { ItemContext, Locator } from '@gamepark/react-game'
+import { Location, MaterialItem } from '@gamepark/rules-api'
 
 class ScoreBoardSpaceLocator extends Locator {
   parentItemType = MaterialType.ScoreBoard
@@ -9,6 +10,18 @@ class ScoreBoardSpaceLocator extends Locator {
     return this.positions[location.x!] ?? this.positionOnParent
   }
 
+  getItemCoordinates(item: MaterialItem, context: ItemContext) {
+    const { x, y, z } = super.getItemCoordinates(item, context)
+    const pawnsSameLocation = context.rules.material(MaterialType.Pawn).location(LocationType.ScoreBoardSpace).filter(pawn => {
+      return pawn.id !== item.location.player && pawn.location.x === item.location.x  
+    })
+
+    return { x: x, 
+              y: pawnsSameLocation.length > 0 && item.location.player === context.rules.players[0] ? y! - 0.5 : y,
+              z: pawnsSameLocation.length > 0 && item.location.player === context.rules.players[0] ? 1 : z
+    }
+  }
+    
   // TODO: Update. Just for testing
   positions = [
     { x: 7, y: 11 },
