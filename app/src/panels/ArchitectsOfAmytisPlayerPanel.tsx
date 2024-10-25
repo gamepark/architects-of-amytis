@@ -1,10 +1,13 @@
 /** @jsxImportSource @emotion/react */
 import { css } from '@emotion/react'
 import { ArchitectsOfAmytisRules } from '@gamepark/architects-of-amytis/ArchitectsOfAmytisRules'
+import { PlayerColor } from '@gamepark/architects-of-amytis/PlayerColor'
 import { Memory } from '@gamepark/architects-of-amytis/rules/Memory'
 import { Player } from '@gamepark/react-client'
 import { CounterProps, StyledPlayerPanel, useRules } from '@gamepark/react-game'
 import { FC, HTMLAttributes } from 'react'
+import BlackBackground from '../images/cards/BlackBackground.jpg'
+import WhiteBackground from '../images/cards/WhiteBackground.jpg'
 import { pawnDescription } from '../material/PawnDescription'
 
 type ArchitectsOfAmytisPlayerPanelProps = {
@@ -28,7 +31,7 @@ export const ArchitectsOfAmytisPlayerPanel: FC<ArchitectsOfAmytisPlayerPanelProp
       // onClick={focusPlayer}
       player={player}
       counters={counters}
-      // backgroundImage={panelBackgrounds[player.id]}
+      backgroundImage={player.id === PlayerColor.Black ? BlackBackground : WhiteBackground}
       countersPerLine={2}
       css={canClick}
       {...rest}
