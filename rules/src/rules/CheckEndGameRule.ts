@@ -29,7 +29,7 @@ export class CheckEndGameRule extends PlayerTurnRule {
         }
       }
     }
-        
+
     return[this.startPlayerTurn(RuleId.RetrieveArchitects, this.nextPlayer)]
   }
 

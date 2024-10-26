@@ -26,8 +26,6 @@ export class BuildingEffect {
         return new ResidenceAction(game);
       case BuildingType.Theater:
         return new TheaterAction(game);
-      default:
-        return null
     }
   }
 
@@ -152,22 +150,20 @@ class WallAction extends TileAction implements BuildingAction {
 
 class PalaceAction extends TileAction implements BuildingAction {
   getEffectMoves(side: number, _move?: ItemMove): MaterialMove[] {
-    if (side === BuildingCardSide.SideA) {
-      const playerTilesInStack = this.material(MaterialType.BuildingTile).location(LocationType.PlayerBoardStackSpace).player(this.player)
-      const topTiles = new BoardHelper(this.game).getVisibleTilesInStack(playerTilesInStack)
-      
-      const points = topTiles.filter(tile => getBuildingType(tile.id) === BuildingType.Palace).length
-
-      return this.incrementScore(points);
-    }
-
-    return []
-  }
-
-  addSideBPoints() {
-    const points = this.material(MaterialType.ProjectCard).location(LocationType.PlayerValidatedProjectCardsPile).getQuantity()
+    const points = side === BuildingCardSide.SideA ? this.sideAPoints : this.sideBPoints
     return this.incrementScore(points);
   }
+
+  get sideAPoints() {
+    const playerTilesInStack = this.material(MaterialType.BuildingTile).location(LocationType.PlayerBoardStackSpace).player(this.player)
+    const topTiles = new BoardHelper(this.game).getVisibleTilesInStack(playerTilesInStack)
+    return topTiles.filter(tile => getBuildingType(tile.id) === BuildingType.Palace).length
+  }
+
+  get sideBPoints() {
+    return this.material(MaterialType.ProjectCard).location(LocationType.PlayerValidatedProjectCardsPile).getQuantity()
+  }
+
 }
 
 class ResidenceAction extends TileAction implements BuildingAction {

@@ -10,8 +10,6 @@ import { Corners } from './helpers/BoardHelper';
 export class EndGameScoreRule extends PlayerTurnRule {
 
   onRuleStart() {
-    console.log("End game")
-
     let score = this.remind(Memory.Score)
     const moves = []
     
@@ -40,8 +38,6 @@ export class EndGameScoreRule extends PlayerTurnRule {
       }
     }
 
-    console.log(score)
-    
     // Moving pawns in the score board
     for (const player of playerColors) {
       moves.push(this.material(MaterialType.Pawn).location(LocationType.ScoreBoardSpace).player(player).moveItem({

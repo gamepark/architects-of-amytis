@@ -1,6 +1,7 @@
+import { css } from '@emotion/react'
 import { LocationType } from '@gamepark/architects-of-amytis/material/LocationType'
 import { MaterialType } from '@gamepark/architects-of-amytis/material/MaterialType'
-import { ItemContext, Locator } from '@gamepark/react-game'
+import { ItemContext, LocationDescription, Locator } from '@gamepark/react-game'
 import { Location, MaterialItem } from '@gamepark/rules-api'
 
 class ScoreBoardSpaceLocator extends Locator {
@@ -21,7 +22,9 @@ class ScoreBoardSpaceLocator extends Locator {
               z: pawnsSameLocation.length > 0 && item.location.player === context.rules.players[0] ? 1 : z
     }
   }
-    
+
+  locationDescription = new LocationDescription({width: 1, height: 1, borderRadius: 0.5, extraCss: css`border: 1px solid white`})
+
   // TODO: Update. Just for testing
   positions = [
     { x: 7, y: 11 },

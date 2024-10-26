@@ -1,10 +1,11 @@
-import { MaterialMove, PlayerTurnRule } from "@gamepark/rules-api"
+import { CustomMove, isMoveItemType, ItemMove, MaterialMove, PlayerTurnRule, PlayMoveContext } from "@gamepark/rules-api"
 import { MaterialType } from "../material/MaterialType"
 import { LocationType } from "../material/LocationType"
 import { RuleId } from "./RuleId"
 import { BuildingEffect } from "./BuildingEffect"
 import { BuildingCardSide, BuildingType } from "../material/Building"
 import { Memory } from "./Memory"
+import { CustomMoveType } from "./CustomMoveType"
 
 export class SelectProjectCardRule extends PlayerTurnRule {
   getPlayerMoves() {
@@ -14,25 +15,40 @@ export class SelectProjectCardRule extends PlayerTurnRule {
     moves.push(...availableCards.moveItems({ type: LocationType.PlayerProjectCardsSpot, player: this.player }))
     const projectCardsDeck = this.material(MaterialType.ProjectCard).deck()
     moves.push(...projectCardsDeck.deal({ type: LocationType.PlayerProjectCardsSpot, player: this.player }, 1))
+    if (this.palaceCardSide == BuildingCardSide.SideB) {
+      moves.push(this.customMove(CustomMoveType.Score))
+    }
 
     return moves
   }
 
-  afterItemMove() {
-    if (this.palaceCardSide === BuildingCardSide.SideA) {
-      BuildingEffect.createBuildingAction(this.game, BuildingType.Palace)?.getEffectMoves(this.palaceCardSide)
+  afterItemMove(move: ItemMove<number, number, number>, _context?: PlayMoveContext): MaterialMove<number, number, number>[] {
+    const moves = []
+    if (isMoveItemType(MaterialType.ProjectCard)(move) && move.location.type !== LocationType.ProjectCardsDisplay) {
+      if (this.palaceCardSide === BuildingCardSide.SideA) {
+        moves.push(...BuildingEffect.createBuildingAction(this.game, BuildingType.Palace).getEffectMoves(this.palaceCardSide))
+      }
+
+      if (this.material(MaterialType.ProjectCard).location(LocationType.ProjectCardsDisplay).getQuantity() < 3) {
+        const projectCardsDeck = this.material(MaterialType.ProjectCard).deck()
+        moves.push(...projectCardsDeck.deal({ type: LocationType.ProjectCardsDisplay }, 1))
+      }
+
+      moves.push(this.startRule(RuleId.CheckProjects))
     }
-  
-    return [this.startRule(RuleId.CheckProjects)]
+
+    return moves
   }  
 
-  onRuleEnd() {
-    const moves: MaterialMove[] = []
-    if (this.material(MaterialType.ProjectCard).location(LocationType.ProjectCardsDisplay).getQuantity() < 3) {
-      const projectCardsDeck = this.material(MaterialType.ProjectCard).deck()
-      moves.push(...projectCardsDeck.deal({ type: LocationType.ProjectCardsDisplay }, 1))
+  onCustomMove(move: CustomMove, _context?: PlayMoveContext): MaterialMove<number, number, number>[] {
+    if (move.type === CustomMoveType.Score) {
+      return [
+              ...BuildingEffect.createBuildingAction(this.game, BuildingType.Palace).getEffectMoves(this.palaceCardSide),
+              this.startRule(RuleId.CheckProjects)
+            ]
+    } else {
+      return []
     }
-    return moves    
   }
 
   get palaceCardSide() {
