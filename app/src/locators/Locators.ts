@@ -35,6 +35,6 @@ export const Locators: Partial<Record<LocationType, Locator<PlayerColor, Materia
   [LocationType.PlayerPawnsSupply]: playerPawnsSupplyLocator,
   [LocationType.PlayerArchitectsSupply]: playerArchitectsSupplyLocator,
   [LocationType.FirstPlayerCardSpot]: firstPlayerCardSpotLocator,
-  [LocationType.PlayerInHandSpot]: firstPlayerCardSpotLocator,
+  [LocationType.PlayerHand]: firstPlayerCardSpotLocator,
   [LocationType.BuildingCardSpot]: buildingCardSpotLocator
 }

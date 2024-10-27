@@ -10,7 +10,7 @@ import { TileToHandHeader } from './TileToHandHeader'
 
 export const Headers: Partial<Record<RuleId, ComponentType>> = {
   [RuleId.RetrieveArchitects]: RetrieveArchitectsHeader,
-  [RuleId.TileToHand]: TileToHandHeader,
+  [RuleId.ChooseBuildingTile]: TileToHandHeader,
   [RuleId.PlaceBuildingTile]: PlaceBuildingTileHeader,
   [RuleId.SelectProjectCard]: SelectProjectCardHeader,
   [RuleId.CheckProjects]: CheckProjectsHeader,

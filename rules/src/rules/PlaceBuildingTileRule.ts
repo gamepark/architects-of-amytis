@@ -12,7 +12,7 @@ export class PlaceBuildingTileRule extends PlayerTurnRule {
     const moves: MaterialMove[] = []
 
     // const topTiles = this.availableTiles
-    const moveTile = this.material(MaterialType.BuildingTile).location(LocationType.PlayerInHandSpot).player(this.player)
+    const moveTile = this.material(MaterialType.BuildingTile).location(LocationType.PlayerHand).player(this.player)
     const availableSpaces: Location[] = []
     for (let x = 0; x < 3; x++) {
       for (let y = 0; y < 3; y++) {
@@ -34,23 +34,6 @@ export class PlaceBuildingTileRule extends PlayerTurnRule {
       })
     )
     return moves
-  }
-
-  get availableTiles() {
-    const tileIndexes: number[] = []
-    const architects = this.material(MaterialType.Architect).location(LocationType.MainBoardStackSpace).getItems()
-    const tiles = this.material(MaterialType.BuildingTile).location(LocationType.MainBoardStackSpace)
-    for (let x = 0; x < 3; x++) {
-      for (let y = 0; y < 3; y++) {
-        if (!architects.some(item => item.location.x === x && item.location.y === y)) {
-          const stack = tiles.location(location => location.x === x && location.y === y)
-          if (stack.length) {
-            tileIndexes.push(stack.sort(item => -item.location.z!).getIndex())
-          }
-        }
-      }
-    }
-    return tiles.index(index => tileIndexes.includes(index))
   }
 
   afterItemMove(move: ItemMove) {
