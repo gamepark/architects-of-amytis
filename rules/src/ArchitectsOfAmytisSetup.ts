@@ -34,7 +34,7 @@ export class ArchitectsOfAmytisSetup extends MaterialGameSetup<PlayerColor, Mate
     for (let x = 0; x < 3; x++) {
       for (let y = 0; y < 3; y++) {
         for (let z = 0; z < 5; z++) {
-          buildingsDeck.dealOne({ type: LocationType.MainBoardStackSpace, x, y, z })
+          buildingsDeck.dealOne({ type: LocationType.MainBoardStackSpace, x, y, z, rotation: z !== 4 })
         }
       }
     }

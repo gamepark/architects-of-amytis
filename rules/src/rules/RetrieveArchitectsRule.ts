@@ -19,7 +19,7 @@ export class RetrieveArchitectsRule extends PlayerTurnRule {
       ))
     }
     // moves.push(this.startRule(RuleId.ChooseBuildingTile))
-    moves.push(this.startRule(RuleId.TileToHand))
+    moves.push(this.startRule(RuleId.ChooseBuildingTile))
 
     return moves
   }

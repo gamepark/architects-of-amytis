@@ -1,19 +1,17 @@
 import { isMoveItemType, ItemMove, Location, MaterialMove, PlayerTurnRule } from '@gamepark/rules-api'
-import { MaterialType } from '../material/MaterialType'
 import { LocationType } from '../material/LocationType'
-import { Memory } from './Memory'
+import { MaterialType } from '../material/MaterialType'
 import { RuleId } from './RuleId'
 
-export class TileToHandRule extends PlayerTurnRule {
-  
+export class ChooseBuildingTileRule extends PlayerTurnRule {
+
   getPlayerMoves() {
-    console.log("retrieving player moves in tile to hand")
     const moves: MaterialMove[] = []
 
     const topTiles = this.availableTiles
     const availableSpaces: Location[] = []
     availableSpaces.push({
-      type: LocationType.PlayerInHandSpot,
+      type: LocationType.PlayerHand,
       player: this.player
     })
 
@@ -43,24 +41,20 @@ export class TileToHandRule extends PlayerTurnRule {
     }
     return tiles.index(index => tileIndexes.includes(index))
   }
-  
+
   beforeItemMove(move: ItemMove) {
-    if (isMoveItemType(MaterialType.BuildingTile)(move)) {
-      const movedTile = this.material(MaterialType.BuildingTile).getItem(move.itemIndex)
-      this.memorize(Memory.MovedTile, movedTile)
-    }
-    return []
-  }
-
-  afterItemMove(move: ItemMove) {
     const moves: MaterialMove[] = []
-    if (isMoveItemType(MaterialType.BuildingTile)(move)) {
+    if (isMoveItemType(MaterialType.BuildingTile)(move) && move.location.type === LocationType.PlayerHand) {
+      const location = this.material(MaterialType.BuildingTile).getItem(move.itemIndex).location
+      const deckUnderTile = this.material(MaterialType.BuildingTile)
+        .location(LocationType.MainBoardStackSpace)
+        .location(l => l.type === location.type && l.x === location.x && l.y === location.y && l.z !== location.z).deck()
+      if (deckUnderTile.length) {
+        moves.push(deckUnderTile.rotateItem(false))
+      }
+      moves.push(this.material(MaterialType.Architect).location(LocationType.PlayerArchitectsSupply).player(this.player).moveItem(location))
       moves.push(this.startRule(RuleId.PlaceBuildingTile))
-      const previousLocation = this.remind(Memory.MovedTile).location
-      previousLocation.player = this.player
-      moves.push(this.material(MaterialType.Architect).location(LocationType.PlayerArchitectsSupply).player(this.player).moveItem(previousLocation))
     }
-
     return moves
   }
 }
