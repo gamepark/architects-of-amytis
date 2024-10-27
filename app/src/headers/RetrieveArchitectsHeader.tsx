@@ -1,5 +1,8 @@
 /** @jsxImportSource @emotion/react */
 
+import { useTranslation } from "react-i18next"
+
 export const RetrieveArchitectsHeader = () => {
-  return <>Retrieving architects...</>
+  const { t } = useTranslation()
+  return <span>{t('header.retrieve-architects')}</span>
 }

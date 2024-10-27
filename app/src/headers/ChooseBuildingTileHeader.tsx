@@ -4,13 +4,13 @@ import { ArchitectsOfAmytisRules } from "@gamepark/architects-of-amytis/Architec
 import { usePlayerId, usePlayerName, useRules } from "@gamepark/react-game"
 import { Trans } from "react-i18next"
 
-export const PlaceBuildingTileHeader = () => {
+export const ChooseBuildingTileHeader = () => {
   const rules = useRules<ArchitectsOfAmytisRules>()!
   const player = usePlayerId()
   const itsMe = rules.getActivePlayer() === player
   const playerName = usePlayerName(player)
   return (
-    <Trans defaults={itsMe ? "header.place-building.you" : "header.place-building.player"} values={{ player: playerName }}>
+    <Trans defaults={itsMe ? "header.choose-building.you" : "header.choose-building.player"} values={{ player: playerName }}>
       <strong/>
     </Trans>
   )

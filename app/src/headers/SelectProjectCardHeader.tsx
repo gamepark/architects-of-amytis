@@ -16,8 +16,8 @@ export const SelectProjectCardHeader = () => {
   const selectProjectCardRule = new SelectProjectCardRule(rules.game)
   const itsMe = activePlayer === me
   const palaceCardSide = selectProjectCardRule.palaceCardSide
-  const headerYouLabel = palaceCardSide === BuildingCardSide.SideA ? "get-project-card-and-points.you" : "get-project-card-or-points.you"
-  const headerPlayerLabel = palaceCardSide === BuildingCardSide.SideA ? "get-project-card-and-points.player" : "get-project-card-or-points.player"
+  const headerYouLabel = palaceCardSide === BuildingCardSide.SideA ? "header.get-project-and-points.you" : "header.get-project-or-points.you"
+  const headerPlayerLabel = palaceCardSide === BuildingCardSide.SideA ? "header.get-project-and-points.player" : "header.get-project-or-points.player"
 
   const palaceAction = useLegalMove(isCustomMoveType(CustomMoveType.Score))
   if (palaceCardSide == BuildingCardSide.SideA) {

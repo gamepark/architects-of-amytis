@@ -1,5 +1,8 @@
 /** @jsxImportSource @emotion/react */
 
+import { useTranslation } from "react-i18next"
+
 export const CheckProjectsHeader = () => {
-  return <>Checking projects...</>
+  const { t } = useTranslation()
+  return <span>{t('header.check-projects')}</span>
 }
