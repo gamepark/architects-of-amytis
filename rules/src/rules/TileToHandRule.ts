@@ -59,22 +59,6 @@ export class TileToHandRule extends PlayerTurnRule {
       const previousLocation = this.remind(Memory.MovedTile).location
       previousLocation.player = this.player
       moves.push(this.material(MaterialType.Architect).location(LocationType.PlayerArchitectsSupply).player(this.player).moveItem(previousLocation))
-
-      // const movedTile = this.material(MaterialType.BuildingTile).getItem(move.itemIndex)
-      // const tilesInStack = this.material(MaterialType.BuildingTile)
-      //                           .location(LocationType.PlayerBoardStackSpace)
-      //                           .location(location => location.x === movedTile.location.x && location.y === movedTile.location.y)
-      //                           .player(this.player)
-      //                           .getQuantity()
-      // movedTile.location.z = tilesInStack + 1
-      // if (getBuildingType(movedTile.id) !== BuildingType.Palace) {
-      //   const buildingType = getBuildingType(movedTile.id)
-      //   const buildingCardSide = this.remind(Memory.BuildingCardsSides)[buildingType]
-      //   BuildingEffect.createBuildingAction(this.game, buildingType)?.getEffectMoves(buildingCardSide, move)
-      //   moves.push(this.startRule(RuleId.CheckProjects))
-      // } else {
-      //   moves.push(this.startRule(RuleId.SelectProjectCard))
-      // }
     }
 
     return moves

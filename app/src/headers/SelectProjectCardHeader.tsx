@@ -1,6 +1,7 @@
 /** @jsxImportSource @emotion/react */
 import { ArchitectsOfAmytisRules } from "@gamepark/architects-of-amytis/ArchitectsOfAmytisRules"
-import { BuildingCardSide } from "@gamepark/architects-of-amytis/material/Building"
+import { BuildingCardSide, BuildingType } from "@gamepark/architects-of-amytis/material/Building"
+import { BuildingEffect } from "@gamepark/architects-of-amytis/rules/BuildingEffect"
 import { CustomMoveType } from "@gamepark/architects-of-amytis/rules/CustomMoveType"
 import { SelectProjectCardRule } from "@gamepark/architects-of-amytis/rules/SelectProjectCardRule"
 import { PlayMoveButton, useLegalMove, usePlayerId, usePlayerName, useRules } from "@gamepark/react-game"
@@ -22,8 +23,9 @@ export const SelectProjectCardHeader = () => {
   if (palaceCardSide == BuildingCardSide.SideA) {
     return <Trans defaults={itsMe ? headerYouLabel : headerPlayerLabel } values={{ player: playerName }}/>
     
-  } else {    
-    return <Trans defaults={itsMe ? headerYouLabel : headerPlayerLabel } values={{ player: playerName }} components={{
+  } else {
+    const points = BuildingEffect.createBuildingAction(rules.game, BuildingType.Palace)?.getBuildingPoints(palaceCardSide)
+    return <Trans defaults={itsMe ? headerYouLabel : headerPlayerLabel } values={{ player: playerName, nbr: points }} components={{
       points: <PlayMoveButton move={palaceAction}/>
     }}/>
   }

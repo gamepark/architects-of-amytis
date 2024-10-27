@@ -6,8 +6,7 @@ import { Memory } from "./Memory";
 import { BoardHelper, Corners } from "./helpers/BoardHelper";
 
 interface BuildingAction {
-  getEffectMoves(side: number, move?: ItemMove): MaterialMove[]
-  addSideBPoints?(): MaterialMove[]
+  getBuildingPoints(side: number, move?: ItemMove): number
 }
 
 export class BuildingEffect {
@@ -57,14 +56,22 @@ abstract class TileAction extends PlayerTurnRule {
 
     return moves;
   }
+
+  getEffectMoves(side: number, move?: ItemMove): MaterialMove[] {
+    const points = this.getBuildingPoints(side, move)
+    return this.incrementScore(points)
+  }
+
+  abstract getBuildingPoints(side: number, move?: ItemMove): number
+
 }
 
 class GardenAction extends TileAction implements BuildingAction {
-  getEffectMoves(side: number, move?: ItemMove): MaterialMove[] {
+  getBuildingPoints(side: number, move?: ItemMove): number {
+    let points = 0
     if (move && isMoveItemType(MaterialType.BuildingTile)(move)) {
       const playerTilesInStack = this.material(MaterialType.BuildingTile).location(LocationType.PlayerBoardStackSpace).player(this.player)
       const destinationStackSize = playerTilesInStack.location(location => location.x === move.location.x && location.y === move.location?.y).getQuantity()
-      let points = 0
 
       if (side === BuildingCardSide.SideA) {
         for (let x = 0; x < 3; x++) {
@@ -77,41 +84,37 @@ class GardenAction extends TileAction implements BuildingAction {
       } else {
         points = destinationStackSize * 2
       }
-
-      return this.incrementScore(points);
     }
     
-    return []
+    return points
   }
 }
 
 class MarketAction extends TileAction implements BuildingAction {
-  getEffectMoves(side: number, move?: ItemMove): MaterialMove[] {
+  getBuildingPoints(side: number, move?: ItemMove): number {
+    let points = 0
     if (move && isMoveItemType(MaterialType.BuildingTile)(move)) {
       const playerTilesInStack = this.material(MaterialType.BuildingTile).location(LocationType.PlayerBoardStackSpace).player(this.player)
       const topTiles = new BoardHelper(this.game).getVisibleTilesInStack(playerTilesInStack)
       const movedTileColor = getBuildingColor(playerTilesInStack.index(move.itemIndex).getItem()?.id)
-      let points = 0
 
       if (side === BuildingCardSide.SideA) {
         points = topTiles.filter(tile => getBuildingColor(tile.id) === movedTileColor).length * 2
       } else {
         points = topTiles.filter(tile => getBuildingColor(tile.id) !== movedTileColor).length
       }
-
-      return this.incrementScore(points);
     }
 
-    return []
+    return points
   }
 }
 
 class WallAction extends TileAction implements BuildingAction {
-  getEffectMoves(side: number, move?: ItemMove): MaterialMove[] {
+  getBuildingPoints(side: number, move?: ItemMove): number {
+    let points = 0
     if (move && isMoveItemType(MaterialType.BuildingTile)(move)) {
       const playerTilesInStack = this.material(MaterialType.BuildingTile).location(LocationType.PlayerBoardStackSpace).player(this.player)
       const topTiles = new BoardHelper(this.game).getVisibleTilesInStack(playerTilesInStack)
-      let points = 0
       if (side === BuildingCardSide.SideA) {
         points = topTiles.filter(tile => getBuildingType(tile.id) === BuildingType.Wall &&
                                         (tile.location.x !== 1 || tile.location.y !== 1)).length
@@ -140,18 +143,15 @@ class WallAction extends TileAction implements BuildingAction {
             break
         }
       }
-
-      return this.incrementScore(points);
     }
 
-    return []
+    return points
   }
 }
 
 class PalaceAction extends TileAction implements BuildingAction {
-  getEffectMoves(side: number, _move?: ItemMove): MaterialMove[] {
-    const points = side === BuildingCardSide.SideA ? this.sideAPoints : this.sideBPoints
-    return this.incrementScore(points);
+  getBuildingPoints(side: number, _move?: ItemMove): number {
+    return side === BuildingCardSide.SideA ? this.sideAPoints : this.sideBPoints
   }
 
   get sideAPoints() {
@@ -167,27 +167,25 @@ class PalaceAction extends TileAction implements BuildingAction {
 }
 
 class ResidenceAction extends TileAction implements BuildingAction {
-  getEffectMoves(side: number, move?: ItemMove): MaterialMove[] {
+  getBuildingPoints(side: number, move?: ItemMove): number {
+    let points = 0
     if (move && isMoveItemType(MaterialType.BuildingTile)(move)) {
       const playerTilesInStack = this.material(MaterialType.BuildingTile).location(LocationType.PlayerBoardStackSpace).player(this.player)
       const topTiles = new BoardHelper(this.game).getVisibleTilesInStack(playerTilesInStack)      
-      let points = 0
   
       if (side === BuildingCardSide.SideA) {
         points = new Set(topTiles.getItems().map(tile => getBuildingType(tile?.id))).size
       } else {
         points = topTiles.filter(tile => getBuildingType(tile.id) === BuildingType.Residence || getBuildingType(tile.id) === BuildingType.Market).length * 2
       }
-
-      return this.incrementScore(points);
     }
 
-    return []
+    return points
   }
 }
 
 class TheaterAction extends TileAction implements BuildingAction {
-  getEffectMoves(side: number, _move?: ItemMove): MaterialMove[] {
+  getBuildingPoints(side: number, _move?: ItemMove): number {
     let points = 0
     if (side === BuildingCardSide.SideA) {
       points = this.material(MaterialType.Architect).location(LocationType.MainBoardStackSpace).getQuantity()
@@ -195,6 +193,6 @@ class TheaterAction extends TileAction implements BuildingAction {
       points = this.material(MaterialType.Architect).location(LocationType.MainBoardStackSpace).player(this.player).getQuantity() * 2
     }
 
-    return this.incrementScore(points);
+    return points
   }
 }

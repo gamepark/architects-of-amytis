@@ -24,7 +24,7 @@
       "building.6.B": "Gain 2 points per architect of your color on the Main board at the moment in which you place this tile.",
       "get-project-card-and-points.you": "You can get a Project card and get points",
       "get-project-card-and-points.player": "{player} can get a Project card and get points",
-      "get-project-card-or-points.you": "You can get a Project card or <points>Get the points</points>",
+      "get-project-card-or-points.you": "You can get a Project card or <points>Score {nbr} points</points>",
       "get-project-card-or-points.player": "{player} can spend a Key or buy a card",
       "Menu": "Menu",
       "OK": "OK",
