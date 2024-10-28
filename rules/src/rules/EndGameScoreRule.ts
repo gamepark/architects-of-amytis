@@ -1,57 +1,47 @@
 import { PlayerTurnRule } from '@gamepark/rules-api';
-import { Memory } from './Memory';
 import { PlayerColor, playerColors } from '../PlayerColor';
 import { MaterialType } from '../material/MaterialType';
 import { LocationType } from '../material/LocationType';
 import { Project, projectsProperties } from "../material/Project";
 import { FavorType } from '../material/FavorType';
-import { Corners } from './helpers/BoardHelper';
+import { BoardHelper, Corners } from './helpers/BoardHelper';
 
 export class EndGameScoreRule extends PlayerTurnRule {
 
   onRuleStart() {
-    let score = this.remind(Memory.Score)
     const moves = []
-    
+    let points = 0
+
     // Compute projects score
     for (const player of playerColors) {
-      const validatedProjects = this.material(MaterialType.ProjectCard).location(LocationType.PlayerValidatedProjectCardsPile).player(player)
+      points = 0
+      const validatedProjects = this.material(MaterialType.ProjectCard).location(LocationType.PlayerValidatedProjectCardsPile).player(player) 
       validatedProjects.getItems().forEach(projectCard => {
         // This control shouldn't be necessary. I don't know why it enters here again and the objects don't have an id
         if (projectCard.id !== undefined) {
-          score[player] += projectsProperties[projectCard?.id as Project].points
+          points += projectsProperties[projectCard?.id as Project].points
         }
       })
+
+      moves.push(...new BoardHelper(this.game).incrementScoreForPlayer(player, points))
     }
 
     // Compute favors score
     for (const player of playerColors) {
-      const playerFavors = this.material(MaterialType.Pawn).location(LocationType.FavorBoardSpace).player(player).getItems()
+      points = 0
+      const playerFavors = this.material(MaterialType.Pawn).location(LocationType.FavorBoardSpace).id(player).getItems()
+
       playerFavors.forEach(pawn => {
-        if (pawn.location.x ?? Infinity < FavorType.PawnsInBottomRow) {
-          score[player] += this.getFavorScore(player, pawn.location.x)
+        if (pawn.location.x! < FavorType.PawnsInBottomRow) {
+          points += this.getFavorScore(player, pawn.location.x)
         }
       })
       
-      if (playerFavors.some(favor => favor.location.x ?? 0 >= FavorType.PawnsInBottomRow)) {
-        score[player] += this.getFavorScore(player, FavorType.PawnsInBottomRow)
+      if (playerFavors.some(favor => favor.location.x ?? -1 >= FavorType.PawnsInBottomRow)) {
+        points += this.getFavorScore(player, FavorType.PawnsInBottomRow)
       }
-    }
 
-    // Moving pawns in the score board
-    for (const player of playerColors) {
-      moves.push(this.material(MaterialType.Pawn).location(LocationType.ScoreBoardSpace).player(player).moveItem({
-        player: player,
-        type: LocationType.ScoreBoardSpace,
-        x: score[player] % 50
-      }))
-
-      const posX = Math.floor(score[player] / 50) % 4
-      moves.push(this.material(MaterialType.Pawn).location(LocationType.ScoreRangeAreaSpace).player(player).moveItem({
-        player: player,
-        type: LocationType.ScoreRangeAreaSpace,
-        x: posX < 4 ? posX : 4
-      }))
+      moves.push(...new BoardHelper(this.game).incrementScoreForPlayer(player, points))
     }
 
     moves.push(this.endGame())
@@ -161,7 +151,7 @@ export class EndGameScoreRule extends PlayerTurnRule {
     let points = 0
     const favorsInBottomRow = this.material(MaterialType.Pawn)
                                   .location(LocationType.FavorBoardSpace)
-                                  .player(player)
+                                  .id(player)
                                   .location(location => location.x !== undefined && location.x >= FavorType.PawnsInBottomRow)
                                   .getQuantity()
 

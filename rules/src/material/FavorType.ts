@@ -1,5 +1,5 @@
 export enum FavorType {
-  OneInStack = 1,
+  OneInStack,
   TwoInStack,
   ThreeInStack,
   FourInStack,

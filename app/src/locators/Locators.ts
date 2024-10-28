@@ -18,6 +18,7 @@ import { projectCardsDisplayLocator } from './ProjectCardsDisplayLocator'
 import { scoreBoardSpaceLocator } from './ScoreBoardSpaceLocator'
 import { scoreBoardSpotLocator } from './ScoreBoardSpotLocator'
 import { scoreRangeAreaSpaceLocator } from './ScoreRangeAreaSpaceLocator'
+import { cardRotateButtonLocator } from './CardRotateButtonLocator'
 
 export const Locators: Partial<Record<LocationType, Locator<PlayerColor, MaterialType, LocationType>>> = {
   [LocationType.ScoreBoardSpot]: scoreBoardSpotLocator,
@@ -36,5 +37,6 @@ export const Locators: Partial<Record<LocationType, Locator<PlayerColor, Materia
   [LocationType.PlayerArchitectsSupply]: playerArchitectsSupplyLocator,
   [LocationType.FirstPlayerCardSpot]: firstPlayerCardSpotLocator,
   [LocationType.PlayerHand]: firstPlayerCardSpotLocator,
-  [LocationType.BuildingCardSpot]: buildingCardSpotLocator
+  [LocationType.BuildingCardSpot]: buildingCardSpotLocator,
+  [LocationType.CardRotate]: cardRotateButtonLocator
 }

@@ -2,7 +2,6 @@ import { isMoveItemType, ItemMove, MaterialGame, MaterialMove, PlayerTurnRule } 
 import { BuildingCardSide, BuildingType, getBuildingColor, getBuildingType } from "../material/Building"
 import { MaterialType } from "../material/MaterialType";
 import { LocationType } from "../material/LocationType";
-import { Memory } from "./Memory";
 import { BoardHelper, Corners } from "./helpers/BoardHelper";
 
 interface BuildingAction {
@@ -32,29 +31,7 @@ export class BuildingEffect {
 
 abstract class TileAction extends PlayerTurnRule {
   incrementScore(points: number) {
-    const score = this.remind(Memory.Score)
-    const moves = []
-
-    score[this.player] += points
-    this.memorize(Memory.Score, score)
-
-    moves.push(this.material(MaterialType.Pawn).location(LocationType.ScoreBoardSpace).player(this.player).moveItem({
-        player: this.player,
-        type: LocationType.ScoreBoardSpace,
-        x: score[this.player] % 50
-    }))
-
-    // If the new score passed a 50 range, move the range pawn
-    if (score[this.player] % 50 < (score[this.player] - points) % 50) {
-      const posX = Math.floor(score[this.player] / 50) % 4
-      moves.push(this.material(MaterialType.Pawn).location(LocationType.ScoreRangeAreaSpace).player(this.player).moveItem({
-        player: this.player,
-        type: LocationType.ScoreRangeAreaSpace,
-        x: posX < 4 ? posX : 4
-      }))
-    }
-
-    return moves;
+    return new BoardHelper(this.game).incrementScoreForPlayer(this.player, points)
   }
 
   getEffectMoves(side: number, move?: ItemMove): MaterialMove[] {

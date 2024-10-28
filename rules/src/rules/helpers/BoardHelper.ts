@@ -1,6 +1,7 @@
 import { Material, MaterialGame, MaterialRulesPart } from "@gamepark/rules-api";
 import { MaterialType } from "../../material/MaterialType";
 import { LocationType } from "../../material/LocationType";
+import { Memory } from "../Memory";
 
 export class BoardHelper extends MaterialRulesPart {
   constructor(game: MaterialGame, readonly player?: number) {
@@ -65,6 +66,32 @@ export class BoardHelper extends MaterialRulesPart {
     }
 
     return tilesInBoard.index(index => topTiles.includes(index))
+  }
+
+  incrementScoreForPlayer(player: number, points: number) {
+    const score = this.remind(Memory.Score)
+    const moves = []
+
+    score[player] += points
+    this.memorize(Memory.Score, score)
+
+    moves.push(this.material(MaterialType.Pawn).location(LocationType.ScoreBoardSpace).player(player).moveItem({
+        player: player,
+        type: LocationType.ScoreBoardSpace,
+        x: score[player] % 50
+    }))
+
+    // If the new score passed a 50 range, move the range pawn
+    if (score[player] % 50 < (score[player] - points) % 50) {
+      const posX = Math.floor(score[player] / 50) % 4
+      moves.push(this.material(MaterialType.Pawn).location(LocationType.ScoreRangeAreaSpace).player(player).moveItem({
+        player: player,
+        type: LocationType.ScoreRangeAreaSpace,
+        x: posX < 4 ? posX : 4
+      }))
+    }
+
+    return moves;
   }
 
 }
