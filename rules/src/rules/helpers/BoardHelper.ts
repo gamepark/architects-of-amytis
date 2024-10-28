@@ -8,7 +8,7 @@ export class BoardHelper extends MaterialRulesPart {
   }
 
   areArchitectsAligned() {
-    const architects = this.material(MaterialType.Architect).location(LocationType.MainBoardStackSpace).player(this.player).getItems()
+    const architects = this.material(MaterialType.Architect).location(LocationType.MainBoardStackSpace).id(this.player).getItems()
     if (architects.length < 3) {
       return false; // Not enough for a line
     }
