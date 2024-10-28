@@ -12,10 +12,10 @@ export const CardRotateButton: FC<{ location: Location }> = ({ location }) => {
   const play = usePlay()
   const rules = useRules<ArchitectsOfAmytisRules>()!
   const card = rules.material(MaterialType.ProjectCard).index(location.parent!)
-  const rotation = card.getItem()!.location.rotation
+  const rotation = card.getItem()!.location.rotation + 90
   const flip = useCallback((event) => {
     event.preventDefault()
-    play(card.rotateItem(true), { local: true })
+    play(card.rotateItem(rotation), { local: true })
   }, [rotation])
   // const canRotate = useLegalMove((move) => isMoveItemType(MaterialType.ProjectCard)(move) && move.location.rotation)
   const canRotate = true

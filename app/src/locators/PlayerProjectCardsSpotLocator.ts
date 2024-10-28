@@ -1,4 +1,4 @@
-import { FlexLocator, ItemContext } from '@gamepark/react-game'
+import { FlexLocator, ItemContext, MaterialContext } from '@gamepark/react-game'
 import { Location } from '@gamepark/rules-api'
 import { mainBoardDescription } from '../material/MainBoardDescription'
 import { projectCardDescription } from '../material/ProjectCardDescription'
@@ -17,6 +17,9 @@ class PlayerProjectCardsSpotLocator extends FlexLocator {
     }
   }
 
+  getRotateZ(location: Location<number, number>, _context: MaterialContext<number, number, number>): number {
+    return location.rotation + 90
+  }
 }
 
 export const playerProjectCardsSpotLocator = new PlayerProjectCardsSpotLocator()
