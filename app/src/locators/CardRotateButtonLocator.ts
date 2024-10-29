@@ -15,7 +15,9 @@ class CardRotateButtonLocator extends Locator {
 
   getLocations(context: MaterialContext) {
     const { rules } = context
-    const visibleCards = rules.material(MaterialType.ProjectCard).location((location) => location.type == LocationType.ProjectCardsDisplay || location.type == LocationType.PlayerProjectCardsSpot)
+    const visibleCards = rules.material(MaterialType.ProjectCard)
+                              .location((location) => location.type == LocationType.ProjectCardsDisplay || 
+                                                      (location.type == LocationType.PlayerProjectCardsSpot && location.player == rules.players[0]))
     return visibleCards.getIndexes()
       .map((index) => ({
         type: LocationType.CardRotate,
