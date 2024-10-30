@@ -47,7 +47,7 @@ export class ArchitectsOfAmytisSetup extends MaterialGameSetup<PlayerColor, Mate
     })))
     this.material(MaterialType.ProjectCard).shuffle()
     const projectCardsDeck = this.material(MaterialType.ProjectCard).deck()
-    projectCardsDeck.deal({ type: LocationType.ProjectCardsDisplay, rotation: -90 }, 3)
+    projectCardsDeck.deal({ type: LocationType.ProjectCardsDisplay, rotation: 0 }, 3)
   }
 
   setupPlayers() {
@@ -89,7 +89,7 @@ export class ArchitectsOfAmytisSetup extends MaterialGameSetup<PlayerColor, Mate
     projectCardsDeck.deal({
       type: LocationType.PlayerProjectCardsSpot,
       player: player,
-      rotation: -90
+      rotation: 0
     }, player === this.players[0] ? 2 : 3)
 
     if (player === this.game.players[0]) {

@@ -3,7 +3,7 @@ import { css } from '@emotion/react'
 import { LocationType } from '@gamepark/architects-of-amytis/material/LocationType'
 import { MaterialType } from '@gamepark/architects-of-amytis/material/MaterialType'
 import { LocationContext, LocationDescription, Locator, MaterialContext } from '@gamepark/react-game'
-import { Location } from '@gamepark/rules-api'
+import { Coordinates, Location } from '@gamepark/rules-api'
 import { CardRotateButton } from './component/CardRotateButton'
 import { projectCardsDisplayLocator } from './ProjectCardsDisplayLocator'
 import { playerProjectCardsSpotLocator } from './PlayerProjectCardsSpotLocator'
@@ -11,8 +11,23 @@ import { playerProjectCardsSpotLocator } from './PlayerProjectCardsSpotLocator'
 class CardRotateButtonLocator extends Locator {
   locationDescription = new CardRotateButtonDescription()
 
-  coordinates = { x: 3, y: -3, z: 5 }
-
+  getCoordinates(location: Location<number, number>, context: MaterialContext<number, number, number>): Partial<Coordinates> {
+    const card = context.rules.material(MaterialType.ProjectCard).getItem(location.parent!)
+    const rotation = card.location.rotation % 360
+    switch (rotation) {
+      case 0:
+        return { x: 3, y: -3, z: 5 }
+      case 90:
+        return { x: -3, y: -3, z: 5 }
+      case 180:
+        return { x: -3, y: 3, z: 5 }
+      case 270:
+        return { x: 3, y: 3, z: 5 }
+      default:
+        return { x: 3, y: -3, z: 5 }
+    }
+  }
+  
   getLocations(context: MaterialContext) {
     const { rules } = context
     const visibleCards = rules.material(MaterialType.ProjectCard)

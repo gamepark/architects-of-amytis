@@ -18,7 +18,7 @@ class PlayerProjectCardsSpotLocator extends FlexLocator {
   }
 
   getRotateZ(location: Location<number, number>, _context: MaterialContext<number, number, number>): number {
-    return location.rotation + 90
+    return location.rotation
   }
 }
 

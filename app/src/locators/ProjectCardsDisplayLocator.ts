@@ -10,7 +10,7 @@ class ProjectCardsDisplayLocator extends ListLocator {
   getHoverTransform = () => ['translateZ(10em)', 'scale(2)']
 
   getRotateZ(location: Location<number, number>, _context: MaterialContext<number, number, number>): number {
-    return location.rotation + 90
+    return location.rotation
   }
 }
 

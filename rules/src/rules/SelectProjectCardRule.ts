@@ -12,9 +12,9 @@ export class SelectProjectCardRule extends PlayerTurnRule {
     console.log("retrieving player moves in select project card")
     const moves: MaterialMove[] = []
     const availableCards = this.material(MaterialType.ProjectCard).location(LocationType.ProjectCardsDisplay)
-    moves.push(...availableCards.moveItems({ type: LocationType.PlayerProjectCardsSpot, player: this.player }))
+    moves.push(...availableCards.moveItems({ type: LocationType.PlayerProjectCardsSpot, player: this.player, rotation: 0 }))
     const projectCardsDeck = this.material(MaterialType.ProjectCard).deck()
-    moves.push(...projectCardsDeck.deal({ type: LocationType.PlayerProjectCardsSpot, player: this.player }, 1))
+    moves.push(...projectCardsDeck.deal({ type: LocationType.PlayerProjectCardsSpot, player: this.player, rotation: 0 }, 1))
     if (this.palaceCardSide == BuildingCardSide.SideB) {
       moves.push(this.customMove(CustomMoveType.Score))
     }
@@ -31,7 +31,7 @@ export class SelectProjectCardRule extends PlayerTurnRule {
 
       if (this.material(MaterialType.ProjectCard).location(LocationType.ProjectCardsDisplay).getQuantity() < 3) {
         const projectCardsDeck = this.material(MaterialType.ProjectCard).deck()
-        moves.push(...projectCardsDeck.deal({ type: LocationType.ProjectCardsDisplay }, 1))
+        moves.push(...projectCardsDeck.deal({ type: LocationType.ProjectCardsDisplay, rotation: 0 }, 1))
       }
 
       moves.push(this.startRule(RuleId.CheckProjects))
