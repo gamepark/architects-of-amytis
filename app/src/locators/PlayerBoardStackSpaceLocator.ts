@@ -4,7 +4,7 @@ import { DropAreaDescription, isItemContext, Locator, MaterialContext } from '@g
 import { Location } from '@gamepark/rules-api'
 import { buildingTileDescription } from '../material/BuildingTileDescription'
 import { playerBoardDescription } from '../material/PlayerBoardDescription'
-import { PlayerBoardSpotCounter } from './component/PlayerBoardSpotCounter'
+import { StackSpotCounter } from './component/StackSpotCounter'
 
 class PlayerBoardStackSpaceLocator extends Locator {
   parentItemType = MaterialType.PlayerBoard
@@ -30,7 +30,7 @@ class PlayerBoardStackSpaceLocator extends Locator {
 }
 
 class PlayerBoardSpotLocationDescription extends DropAreaDescription {
-  content = PlayerBoardSpotCounter
+  content = StackSpotCounter
 
   extraCss = css`
     display: flex;
@@ -38,7 +38,7 @@ class PlayerBoardSpotLocationDescription extends DropAreaDescription {
     justify-content: flex-end;
 
     > span {
-      font-size: 2em;
+      font-size: 1.75em;
       font-weight: bolder;
       color: white;
       opacity: 0.7;
