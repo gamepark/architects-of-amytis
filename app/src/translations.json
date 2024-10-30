@@ -42,6 +42,8 @@
       "favor-board.space-6.help": "Gain 5 points for each corner of your Player board that has at least 3 tiles in its stack.",
       "favor-board.space-7.help": "Gain 2 additional points for each Project card you have validated.",
       "favor-board.bottom-row.help": "Gain 4, 10, 18, or 30 points if you have placed 1, 2, 3, or 4 pawns on this part of the Favor board.",
+      "favor-board.upper-row.label.help": "Upper row",
+      "favor-board.bottom-row.label.help": "Bottom row",
       "Menu": "Menu",
       "OK": "OK",
       "Validate": "Validate",
