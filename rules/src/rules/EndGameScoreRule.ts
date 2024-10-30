@@ -15,12 +15,9 @@ export class EndGameScoreRule extends PlayerTurnRule {
     // Compute projects score
     for (const player of playerColors) {
       points = 0
-      const validatedProjects = this.material(MaterialType.ProjectCard).location(LocationType.PlayerValidatedProjectCardsPile).player(player) 
+      const validatedProjects = this.material(MaterialType.ProjectCard).location(LocationType.PlayerValidatedProjectCardsPile).player(player)
       validatedProjects.getItems().forEach(projectCard => {
-        // This control shouldn't be necessary. I don't know why it enters here again and the objects don't have an id
-        if (projectCard.id !== undefined) {
-          points += projectsProperties[projectCard?.id as Project].points
-        }
+        points += projectsProperties[projectCard?.id as Project].points
       })
 
       moves.push(...new BoardHelper(this.game).incrementScoreForPlayer(player, points))
@@ -36,7 +33,7 @@ export class EndGameScoreRule extends PlayerTurnRule {
           points += this.getFavorScore(player, pawn.location.x)
         }
       })
-      
+
       if (playerFavors.some(favor => favor.location.x ?? -1 >= FavorType.PawnsInBottomRow)) {
         points += this.getFavorScore(player, FavorType.PawnsInBottomRow)
       }
@@ -45,7 +42,7 @@ export class EndGameScoreRule extends PlayerTurnRule {
     }
 
     moves.push(this.endGame())
-    
+
     return moves
   }
 
@@ -111,7 +108,7 @@ export class EndGameScoreRule extends PlayerTurnRule {
         count++
       }
     }
-  
+
     // Stairs in columns
     for (let y = 0; y < 3; y++) {
       const cellTiles = []
@@ -122,10 +119,10 @@ export class EndGameScoreRule extends PlayerTurnRule {
         count++
       }
     }
-  
+
     return count
   }
-  
+
   private isStair(a: number, b: number, c: number): boolean {
     return (a === 1 && b === 2 && c === 3) || (a === 3 && b === 2 && c === 1)
   }
@@ -173,5 +170,5 @@ export class EndGameScoreRule extends PlayerTurnRule {
 
     return points
   }
-  
+
 }

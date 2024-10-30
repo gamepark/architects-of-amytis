@@ -20,15 +20,13 @@ export const ArchitectsOfAmytisPlayerPanel: FC<ArchitectsOfAmytisPlayerPanelProp
   const rules = useRules<ArchitectsOfAmytisRules>()!
 
   const counters: CounterProps[] = [{
-    image: pawnDescription.getImage(player.id) ?? '',
+    image: pawnDescription.images[player.id as PlayerColor],
     value: rules.remind(Memory.Score)[player.id]
-    // value: rules.isOver() ? rules.getScore(player.id) : state.keyQuantity
   }]
 
   return (
     <StyledPlayerPanel
       activeRing
-      // onClick={focusPlayer}
       player={player}
       counters={counters}
       backgroundImage={player.id === PlayerColor.Black ? BlackBackground : WhiteBackground}
@@ -42,11 +40,3 @@ export const ArchitectsOfAmytisPlayerPanel: FC<ArchitectsOfAmytisPlayerPanelProp
 const canClick = css`
   cursor: pointer;
 `
-
-// const panelBackgrounds = {
-//   [1]: Panel1,
-//   [2]: Panel2,
-//   [3]: Panel3,
-//   [4]: Panel4,
-//   [5]: Panel5,
-// }

@@ -52,8 +52,7 @@ export class ArchitectsOfAmytisRules extends HiddenMaterialRules<PlayerColor, Ma
       [LocationType.MainBoardStackSpace]: (item: MaterialItem) => item.location.rotation ? ['id'] : []
     },
     [MaterialType.ProjectCard]: {
-      [LocationType.ProjectCardsDeck]: hideItemId,
-      [LocationType.PlayerValidatedProjectCardsPile]: hideItemId
+      [LocationType.ProjectCardsDeck]: hideItemId
     }
   }
 

@@ -1,5 +1,7 @@
+import { LocationType } from '@gamepark/architects-of-amytis/material/LocationType'
 import { Project } from '@gamepark/architects-of-amytis/material/Project'
-import { CardDescription } from '@gamepark/react-game'
+import { CardDescription, MaterialContext } from '@gamepark/react-game'
+import { MaterialItem } from '@gamepark/rules-api'
 import Back from '../images/cards/ProjectCardBack.jpg'
 import Project1 from '../images/cards/ProjectCard1.jpg'
 import Project2 from '../images/cards/ProjectCard2.jpg'
@@ -49,6 +51,10 @@ class ProjectCardDescription extends CardDescription {
     [Project.Project18]: Project18,
     [Project.Project19]: Project19,
     [Project.Project20]: Project20
+  }
+
+  isFlipped(item: Partial<MaterialItem>, context: MaterialContext) {
+    return item.location?.type === LocationType.PlayerValidatedProjectCardsPile || super.isFlipped(item, context)
   }
 }
 
