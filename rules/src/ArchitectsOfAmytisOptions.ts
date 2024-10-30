@@ -27,9 +27,9 @@ const buildingOption = (buildingType: BuildingType): EnumOption<BuildingCardSide
   values: buildingCardSides,
   valueSpec: (side: BuildingCardSide) => ({
     label: t => side === BuildingCardSide.SideA ? t('Side A') : t('Side B'),
-    help: t => t(`building.${buildingType}.${side === BuildingCardSide.SideA ? 'A' : 'B'}`),
-    competitiveDisabled: true
-  })
+    help: t => t(`building.${buildingType}.${side === BuildingCardSide.SideA ? 'A' : 'B'}`)
+  }),
+  competitiveDisabled: true
 })
 
 /**
