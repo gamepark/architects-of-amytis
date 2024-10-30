@@ -2,16 +2,7 @@ import { LocationType } from '@gamepark/architects-of-amytis/material/LocationTy
 import { Project } from '@gamepark/architects-of-amytis/material/Project'
 import { CardDescription, MaterialContext } from '@gamepark/react-game'
 import { MaterialItem } from '@gamepark/rules-api'
-import Back from '../images/cards/ProjectCardBack.jpg'
 import Project1 from '../images/cards/ProjectCard1.jpg'
-import Project2 from '../images/cards/ProjectCard2.jpg'
-import Project3 from '../images/cards/ProjectCard3.jpg'
-import Project4 from '../images/cards/ProjectCard4.jpg'
-import Project5 from '../images/cards/ProjectCard5.jpg'
-import Project6 from '../images/cards/ProjectCard6.jpg'
-import Project7 from '../images/cards/ProjectCard7.jpg'
-import Project8 from '../images/cards/ProjectCard8.jpg'
-import Project9 from '../images/cards/ProjectCard9.jpg'
 import Project10 from '../images/cards/ProjectCard10.jpg'
 import Project11 from '../images/cards/ProjectCard11.jpg'
 import Project12 from '../images/cards/ProjectCard12.jpg'
@@ -22,7 +13,16 @@ import Project16 from '../images/cards/ProjectCard16.jpg'
 import Project17 from '../images/cards/ProjectCard17.jpg'
 import Project18 from '../images/cards/ProjectCard18.jpg'
 import Project19 from '../images/cards/ProjectCard19.jpg'
+import Project2 from '../images/cards/ProjectCard2.jpg'
 import Project20 from '../images/cards/ProjectCard20.jpg'
+import Project3 from '../images/cards/ProjectCard3.jpg'
+import Project4 from '../images/cards/ProjectCard4.jpg'
+import Project5 from '../images/cards/ProjectCard5.jpg'
+import Project6 from '../images/cards/ProjectCard6.jpg'
+import Project7 from '../images/cards/ProjectCard7.jpg'
+import Project8 from '../images/cards/ProjectCard8.jpg'
+import Project9 from '../images/cards/ProjectCard9.jpg'
+import Back from '../images/cards/ProjectCardBack.jpg'
 
 
 class ProjectCardDescription extends CardDescription {
@@ -54,7 +54,8 @@ class ProjectCardDescription extends CardDescription {
   }
 
   isFlipped(item: Partial<MaterialItem>, context: MaterialContext) {
-    return item.location?.type === LocationType.PlayerValidatedProjectCardsPile || super.isFlipped(item, context)
+    if (item.location?.type === LocationType.PlayerValidatedProjectCardsPile && !context.rules.isOver()) return true
+    return super.isFlipped(item, context)
   }
 
   isFlippedOnTable(item: Partial<MaterialItem>, context: MaterialContext) {
