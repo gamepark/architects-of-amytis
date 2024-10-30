@@ -56,6 +56,10 @@ class ProjectCardDescription extends CardDescription {
   isFlipped(item: Partial<MaterialItem>, context: MaterialContext) {
     return item.location?.type === LocationType.PlayerValidatedProjectCardsPile || super.isFlipped(item, context)
   }
+
+  isFlippedOnTable(item: Partial<MaterialItem>, context: MaterialContext) {
+    return item.location?.type === LocationType.ProjectCardsDeck || super.isFlippedOnTable(item, context)
+  }
 }
 
 export const projectCardDescription = new ProjectCardDescription()
