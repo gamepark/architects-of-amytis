@@ -1,7 +1,10 @@
+import { css } from '@emotion/react'
 import { MaterialType } from '@gamepark/architects-of-amytis/material/MaterialType'
-import { ItemContext, Locator } from '@gamepark/react-game'
-import { Location, MaterialItem } from '@gamepark/rules-api'
+import { DropAreaDescription, isItemContext, Locator, MaterialContext } from '@gamepark/react-game'
+import { Location } from '@gamepark/rules-api'
+import { buildingTileDescription } from '../material/BuildingTileDescription'
 import { playerBoardDescription } from '../material/PlayerBoardDescription'
+import { PlayerBoardSpotCounter } from './component/PlayerBoardSpotCounter'
 
 class PlayerBoardStackSpaceLocator extends Locator {
   parentItemType = MaterialType.PlayerBoard
@@ -12,16 +15,37 @@ class PlayerBoardStackSpaceLocator extends Locator {
 
   getPositionOnParent(location: Location) {
     return { x: 26.5 + location.x! * 25, y: 25.5 + location.y! * 25 }
-        // return { x: 19 + location.x! * 31.5, y: 22.5 + location.y! * 31 }
-
   }
 
-  getItemCoordinates(item: MaterialItem, context: ItemContext) {
-    const { x, y, z } = super.getItemCoordinates(item, context)
-    return { x: x! - item.location.z! * 0.05, y: y! - item.location.z! * 0.05, z: z! + item.location.z! * 0.05 }
+  getCoordinates(location: Location, context: MaterialContext) {
+    const { x, y, z } = super.getCoordinates(location, context)
+    if (isItemContext(context)) {
+      return { x: x! - location.z! * 0.05, y: y! - location.z! * 0.05, z: z! + location.z! * 0.05 }
+    } else {
+      return { x, y, z: 5 }
+    }
   }
 
-  // getHoverTransform = () => ['translateZ(10em)', 'scale(2)']
+  locationDescription = new PlayerBoardSpotLocationDescription(buildingTileDescription)
+}
+
+class PlayerBoardSpotLocationDescription extends DropAreaDescription {
+  content = PlayerBoardSpotCounter
+
+  extraCss = css`
+    display: flex;
+    align-items: flex-end;
+    justify-content: flex-end;
+
+    > span {
+      font-size: 2em;
+      font-weight: bolder;
+      color: white;
+      opacity: 0.7;
+      text-shadow: 3px 3px 0 #000, -3px 3px 0 #000, -3px -3px 0 #000, 3px -3px 0 #000;
+      margin-right: 0.2em;
+    }
+  `
 }
 
 export const playerBoardStackSpaceLocator = new PlayerBoardStackSpaceLocator()
