@@ -1,6 +1,10 @@
+import { faRotateLeft } from '@fortawesome/free-solid-svg-icons/faRotateLeft'
+import { faRotateRight } from '@fortawesome/free-solid-svg-icons/faRotateRight'
+import { FontAwesomeIcon } from '@fortawesome/react-fontawesome'
 import { LocationType } from '@gamepark/architects-of-amytis/material/LocationType'
+import { MaterialType } from '@gamepark/architects-of-amytis/material/MaterialType'
 import { Project } from '@gamepark/architects-of-amytis/material/Project'
-import { CardDescription, MaterialContext } from '@gamepark/react-game'
+import { CardDescription, ItemContext, ItemMenuButton, MaterialContext } from '@gamepark/react-game'
 import { MaterialItem } from '@gamepark/rules-api'
 import Project1 from '../images/cards/ProjectCard1.jpg'
 import Project10 from '../images/cards/ProjectCard10.jpg'
@@ -24,7 +28,6 @@ import Project8 from '../images/cards/ProjectCard8.jpg'
 import Project9 from '../images/cards/ProjectCard9.jpg'
 import Back from '../images/cards/ProjectCardBack.jpg'
 import { ProjectCardHelp } from './help/ProjectCardHelp'
-
 
 class ProjectCardDescription extends CardDescription {
   width = 7
@@ -54,8 +57,29 @@ class ProjectCardDescription extends CardDescription {
     [Project.Project20]: Project20
   }
 
+  menuAlwaysVisible = true
+
+  getItemMenu(item: MaterialItem, context: ItemContext) {
+    if (item.location.type === LocationType.ProjectCardsDisplay
+      || (item.location.type === LocationType.PlayerProjectCardsSpot && item.location.player === context.player)) {
+      const card = context.rules.material(MaterialType.ProjectCard).index(context.index)
+      const rotation = item.location.rotation ?? 0
+      return <>
+        <ItemMenuButton label="" angle={45} radius={4}
+                        move={card.rotateItem((rotation + 1) % 4)} options={{ transient: true }}>
+          <FontAwesomeIcon icon={faRotateRight}/>
+        </ItemMenuButton>
+        <ItemMenuButton label="" angle={-45} radius={4}
+                        move={card.rotateItem((rotation + 3) % 4)} options={{ transient: true }}>
+          <FontAwesomeIcon icon={faRotateLeft}/>
+        </ItemMenuButton>
+      </>
+    }
+    return
+  }
+
   help = ProjectCardHelp
-  
+
   isFlipped(item: Partial<MaterialItem>, context: MaterialContext) {
     if (item.location?.type === LocationType.PlayerValidatedProjectCardsPile && !context.rules.isOver()) return true
     return super.isFlipped(item, context)

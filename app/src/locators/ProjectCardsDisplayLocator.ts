@@ -1,7 +1,7 @@
-import { ListLocator, MaterialContext } from '@gamepark/react-game'
+import { ListLocator } from '@gamepark/react-game'
+import { Location } from '@gamepark/rules-api'
 import { buildingCardDescription } from '../material/BuildingCardDescription'
 import { projectCardsDeckLocator } from './ProjectCardsDeckLocator'
-import { Location } from '@gamepark/rules-api'
 
 
 class ProjectCardsDisplayLocator extends ListLocator {
@@ -9,8 +9,8 @@ class ProjectCardsDisplayLocator extends ListLocator {
   coordinates = { x: projectCardsDeckLocator.coordinates.x + this.gap.x }
   getHoverTransform = () => ['translateZ(10em)', 'scale(2)']
 
-  getRotateZ(location: Location<number, number>, _context: MaterialContext<number, number, number>): number {
-    return location.rotation
+  getRotateZ(location: Location) {
+    return (location.rotation ?? 0) * 90
   }
 }
 
