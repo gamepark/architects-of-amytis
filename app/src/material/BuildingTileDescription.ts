@@ -25,6 +25,7 @@ import PurplePalaceTile from '../images/tiles/PurplePalaceTile.jpg'
 import PurpleResidenceTile from '../images/tiles/PurpleResidenceTile.jpg'
 import PurpleTheaterTile from '../images/tiles/PurpleTheaterTile.jpg'
 import PurpleWallTile from '../images/tiles/PurpleWallTile.jpg'
+import { BuildingTileHelp } from './help/BuildingTileHelp'
 
 class BuildingTileDescription extends CardDescription {
   width = 4
@@ -57,6 +58,8 @@ class BuildingTileDescription extends CardDescription {
     [Building.PurpleTheater]: PurpleTheaterTile,
     [Building.PurpleWall]: PurpleWallTile
   }
+
+  help = BuildingTileHelp
 }
 
 export const buildingTileDescription = new BuildingTileDescription()

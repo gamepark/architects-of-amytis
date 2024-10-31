@@ -16,7 +16,6 @@ export class ClaimKingsFavorRule extends PlayerTurnRule {
   }
 
   getPlayerMoves() {
-    console.log("retrieving player moves in claim kings favor")
     const moves: MaterialMove[] = []
     const pawnsSupply = this.material(MaterialType.Pawn).location(LocationType.PlayerPawnsSupply).player(this.player)
 

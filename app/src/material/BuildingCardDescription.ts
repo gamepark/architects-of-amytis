@@ -27,6 +27,7 @@ import WhiteTheaterA from '../images/cards/en/WhiteTheaterA.jpg'
 import WhiteTheaterB from '../images/cards/en/WhiteTheaterB.jpg'
 import WhiteWallA from '../images/cards/en/WhiteWallA.jpg'
 import WhiteWallB from '../images/cards/en/WhiteWallB.jpg'
+import { BuildingCardHelp } from './help/BuildingCardHelp'
 
 class BuildingCardDescription extends CardDescription {
   width = 7
@@ -59,6 +60,8 @@ class BuildingCardDescription extends CardDescription {
     [BuildingType.Theater + BuildingCardSide.SideB * 10 + PlayerColor.White * 100]: WhiteTheaterB
   }
 
+  help = BuildingCardHelp
+  
   getStaticItems({ rules }: MaterialContext) {
     return playerColors.flatMap(player => buildingTypes.map(buildingType => {
       const side = rules.remind<Record<BuildingType, BuildingCardSide>>(Memory.BuildingCardsSides)[buildingType]

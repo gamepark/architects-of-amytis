@@ -23,6 +23,7 @@ import Project7 from '../images/cards/ProjectCard7.jpg'
 import Project8 from '../images/cards/ProjectCard8.jpg'
 import Project9 from '../images/cards/ProjectCard9.jpg'
 import Back from '../images/cards/ProjectCardBack.jpg'
+import { ProjectCardHelp } from './help/ProjectCardHelp'
 
 
 class ProjectCardDescription extends CardDescription {
@@ -53,6 +54,8 @@ class ProjectCardDescription extends CardDescription {
     [Project.Project20]: Project20
   }
 
+  help = ProjectCardHelp
+  
   isFlipped(item: Partial<MaterialItem>, context: MaterialContext) {
     if (item.location?.type === LocationType.PlayerValidatedProjectCardsPile && !context.rules.isOver()) return true
     return super.isFlipped(item, context)

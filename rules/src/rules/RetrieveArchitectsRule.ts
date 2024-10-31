@@ -6,10 +6,9 @@ import { BoardHelper } from './helpers/BoardHelper';
 
 export class RetrieveArchitectsRule extends PlayerTurnRule {
   onRuleStart() {
-    console.log("Entering retrieve architects start")
-
     const moves: MaterialMove [] = []
     const architectsAligned = new BoardHelper(this.game, this.player).areArchitectsAligned()
+
     if (architectsAligned || this.material(MaterialType.Architect).location(LocationType.PlayerArchitectsSupply).id(this.player).getQuantity() == 0) {
       moves.push(...this.material(MaterialType.Architect).location(LocationType.MainBoardStackSpace).id(this.player).moveItems(
         {
@@ -18,7 +17,6 @@ export class RetrieveArchitectsRule extends PlayerTurnRule {
         },
       ))
     }
-    // moves.push(this.startRule(RuleId.ChooseBuildingTile))
     moves.push(this.startRule(RuleId.ChooseBuildingTile))
 
     return moves

@@ -9,7 +9,6 @@ import { CustomMoveType } from "./CustomMoveType"
 
 export class SelectProjectCardRule extends PlayerTurnRule {
   getPlayerMoves() {
-    console.log("retrieving player moves in select project card")
     const moves: MaterialMove[] = []
     const availableCards = this.material(MaterialType.ProjectCard).location(LocationType.ProjectCardsDisplay)
     moves.push(...availableCards.moveItems({ type: LocationType.PlayerProjectCardsSpot, player: this.player, rotation: 0 }))

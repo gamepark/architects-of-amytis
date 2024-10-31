@@ -4,11 +4,14 @@ import { BoardDescription } from '@gamepark/react-game'
 import { MaterialItem } from '@gamepark/rules-api'
 import { range } from 'lodash'
 import PlayerBoard from '../images/boards/PlayerBoard.jpg'
+import { PlayerBoardHelp } from './help/PlayerBoardHelp'
 
 class PlayerBoardDescription extends BoardDescription {
   width = 20
   height = 20
   image = PlayerBoard
+
+  help = PlayerBoardHelp
 
   staticItems = playerColors.map(player => ({
     location: {

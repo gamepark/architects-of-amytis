@@ -3,11 +3,14 @@ import { BoardDescription, ItemContext } from '@gamepark/react-game'
 import ScoreBoard from '../images/boards/ScoreBoard.jpg'
 import { MaterialItem, Location } from '@gamepark/rules-api'
 import { range } from 'lodash'
+import { ScoreBoardHelp } from './help/ScoreBoardHelp'
 
 class ScoreBoardDescription extends BoardDescription {
   width = 20
   height = 9
   image = ScoreBoard
+
+  help = ScoreBoardHelp
 
   staticItem = { location: { type: LocationType.ScoreBoardSpot } }
 

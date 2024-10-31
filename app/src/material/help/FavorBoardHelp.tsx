@@ -1,14 +1,27 @@
 /** @jsxImportSource @emotion/react */
 
 import { css } from "@emotion/react"
-import { MaterialHelpProps } from "@gamepark/react-game"
+import { linkButtonCss, MaterialHelpProps, PlayMoveButton } from "@gamepark/react-game"
 import { FC } from "react"
-import { useTranslation } from "react-i18next"
+import { Trans, useTranslation } from "react-i18next"
+import { MaterialMoveBuilder } from "@gamepark/rules-api"
+import { MaterialType } from "@gamepark/architects-of-amytis/material/MaterialType"
+import displayMaterialHelp = MaterialMoveBuilder.displayMaterialHelp
 
 export const FavorBoardHelp: FC<MaterialHelpProps> = () => {
   const { t } = useTranslation()
   return (
     <>
+      <h2>{t('favor-board')}</h2>
+      <p>
+        <Trans 
+          defaults="favor-board.help"
+          components={{
+            bold: <strong/>,
+            main: <PlayMoveButton css={linkButtonCss} move={displayMaterialHelp(MaterialType.MainBoard)} local/>
+          }}
+        ></Trans>
+      </p>
       <p css={titleCss}>{ t('favor-board.upper-row.label.help') }</p>
       <ul>
         <li>{ t('favor-board.space-1.help') }</li>

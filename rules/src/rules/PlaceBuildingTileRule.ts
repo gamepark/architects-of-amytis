@@ -8,10 +8,8 @@ import { BuildingType, getBuildingType } from '../material/Building'
 
 export class PlaceBuildingTileRule extends PlayerTurnRule {
   getPlayerMoves() {
-    console.log("retrieving player moves in choose building tile")
     const moves: MaterialMove[] = []
 
-    // const topTiles = this.availableTiles
     const moveTile = this.material(MaterialType.BuildingTile).location(LocationType.PlayerHand).player(this.player)
     const availableSpaces: Location[] = []
     for (let x = 0; x < 3; x++) {
@@ -28,7 +26,6 @@ export class PlaceBuildingTileRule extends PlayerTurnRule {
     moves.push(
       ...availableSpaces.flatMap((space) => {
         return [
-          // ...topTiles.moveItems(space)
           ...moveTile.moveItems(space)
         ]
       })
@@ -39,10 +36,6 @@ export class PlaceBuildingTileRule extends PlayerTurnRule {
   afterItemMove(move: ItemMove) {
     const moves: MaterialMove[] = []
     if (isMoveItemType(MaterialType.BuildingTile)(move)) {
-      // const previousLocation = this.remind(Memory.MovedTile).location
-      // previousLocation.player = this.player
-      // moves.push(this.material(MaterialType.Architect).location(LocationType.PlayerArchitectsSupply).player(this.player).moveItem(previousLocation))
-
       const movedTile = this.material(MaterialType.BuildingTile).getItem(move.itemIndex)
       const tilesInStack = this.material(MaterialType.BuildingTile)
                                 .location(LocationType.PlayerBoardStackSpace)
