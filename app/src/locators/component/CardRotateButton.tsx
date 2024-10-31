@@ -6,7 +6,7 @@ import { ArchitectsOfAmytisRules } from '@gamepark/architects-of-amytis/Architec
 import { MaterialType } from '@gamepark/architects-of-amytis/material/MaterialType'
 import { pointerCursorCss, useAnimation, usePlay, useRules } from '@gamepark/react-game'
 import { isMoveItemType, Location } from '@gamepark/rules-api'
-import { FC, useCallback } from 'react'
+import { FC } from 'react'
 
 export const CardRotateButton: FC<{ location: Location }> = ({ location }) => {
   const play = usePlay()
@@ -14,18 +14,13 @@ export const CardRotateButton: FC<{ location: Location }> = ({ location }) => {
   const card = rules.material(MaterialType.ProjectCard).index(location.parent!)
   const rotation = card.getItem()!.location.rotation == 270 ? 0 : card.getItem()!.location.rotation + 90
 
-  const flip = useCallback((event) => {
-    event.preventDefault()
-    play(card.rotateItem(rotation), { local: true })
-  }, [rotation])
-  // const canRotate = useLegalMove((move) => isMoveItemType(MaterialType.ProjectCard)(move) && move.location.rotation)
-  const canRotate = true
   const animation = useAnimation((animation) =>
     isMoveItemType(MaterialType.ProjectCard)(animation.move) && animation.move.itemIndex === location.parent)
-  if (animation || !canRotate) return null
+  if (animation) return null
+
   return (
     <>
-      <div css={[button]} onClick={flip}>
+      <div css={[button]} onClick={() => play(card.rotateItem(rotation), { local: true })}>
         <FontAwesomeIcon icon={faRotateRight} css={[pointerCursorCss, css`font-size: 1.2em`]}/>
       </div>
     </>
