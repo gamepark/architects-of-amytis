@@ -20,7 +20,7 @@ export const SelectProjectCardHeader = () => {
   const headerPlayerLabel = palaceCardSide === BuildingCardSide.SideA ? "header.get-project-and-points.player" : "header.get-project-or-points.player"
 
   const palaceAction = useLegalMove(isCustomMoveType(CustomMoveType.Score))
-  if (palaceCardSide == BuildingCardSide.SideA) {
+  if (palaceCardSide === BuildingCardSide.SideA) {
     return <Trans defaults={itsMe ? headerYouLabel : headerPlayerLabel } values={{ player: playerName }}/>
     
   } else {
