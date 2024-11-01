@@ -1,5 +1,11 @@
+import { faHandBackFist } from '@fortawesome/free-solid-svg-icons/faHandBackFist'
+import { FontAwesomeIcon } from '@fortawesome/react-fontawesome'
 import { Building } from '@gamepark/architects-of-amytis/material/Building'
-import { CardDescription } from '@gamepark/react-game'
+import { LocationType } from '@gamepark/architects-of-amytis/material/LocationType'
+import { MaterialType } from '@gamepark/architects-of-amytis/material/MaterialType'
+import { CardDescription, ItemContext, ItemMenuButton } from '@gamepark/react-game'
+import { isMoveItemType, MaterialItem, MaterialMove } from '@gamepark/rules-api'
+import { Trans } from 'react-i18next'
 import BlueGardenTile from '../images/tiles/BlueGardenTile.jpg'
 import BlueMarketTile from '../images/tiles/BlueMarketTile.jpg'
 import BluePalaceTile from '../images/tiles/BluePalaceTile.jpg'
@@ -57,6 +63,19 @@ class BuildingTileDescription extends CardDescription {
     [Building.PurpleResidence]: PurpleResidenceTile,
     [Building.PurpleTheater]: PurpleTheaterTile,
     [Building.PurpleWall]: PurpleWallTile
+  }
+
+  getItemMenu(item: MaterialItem, context: ItemContext, legalMoves: MaterialMove[]) {
+    const takeInHand = legalMoves.find(move =>
+      isMoveItemType(MaterialType.BuildingTile)(move) && move.itemIndex === context.index && move.location.type === LocationType.PlayerHand
+    )
+    if (!takeInHand) return
+    return <>
+      {this.getHelpButton(item, context)}
+      <ItemMenuButton label={<Trans defaults="Take"/>} angle={-30} move={takeInHand}>
+        <FontAwesomeIcon icon={faHandBackFist}/>
+      </ItemMenuButton>
+    </>
   }
 
   help = BuildingTileHelp
