@@ -1,7 +1,16 @@
 /** @jsxImportSource @emotion/react */
+import { ArchitectsOfAmytisRules } from '@gamepark/architects-of-amytis/ArchitectsOfAmytisRules'
+import { usePlayerId, usePlayerName, useRules } from '@gamepark/react-game'
 import { useTranslation } from "react-i18next"
 
 export const CheckProjectsHeader = () => {
   const { t } = useTranslation()
-  return <span>{t('header.check-projects')}</span>
+  const rules = useRules<ArchitectsOfAmytisRules>()!
+  const me = usePlayerId()
+  const player = usePlayerName(me)
+  if (rules.getActivePlayer() === me) {
+    return <span>{t('header.check-projects.you')}</span>
+  } else {
+    return <span>{t('header.check-projects.player', { player })}</span>
+  }
 }
