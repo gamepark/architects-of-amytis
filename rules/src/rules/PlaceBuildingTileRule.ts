@@ -8,9 +8,7 @@ import { BuildingType, getBuildingType } from '../material/Building'
 
 export class PlaceBuildingTileRule extends PlayerTurnRule {
   getPlayerMoves() {
-    const moves: MaterialMove[] = []
-
-    const moveTile = this.material(MaterialType.BuildingTile).location(LocationType.PlayerHand).player(this.player)
+    const tile = this.material(MaterialType.BuildingTile).location(LocationType.PlayerHand).player(this.player)
     const availableSpaces: Location[] = []
     for (let x = 0; x < 3; x++) {
       for (let y = 0; y < 3; y++) {
@@ -22,15 +20,7 @@ export class PlaceBuildingTileRule extends PlayerTurnRule {
         })
       }
     }
-
-    moves.push(
-      ...availableSpaces.flatMap((space) => {
-        return [
-          ...moveTile.moveItems(space)
-        ]
-      })
-    )
-    return moves
+    return availableSpaces.map(space => tile.moveItem(space))
   }
 
   afterItemMove(move: ItemMove) {
