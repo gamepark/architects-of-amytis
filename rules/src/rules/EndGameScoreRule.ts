@@ -28,13 +28,13 @@ export class EndGameScoreRule extends PlayerTurnRule {
       points = 0
       const playerFavors = this.material(MaterialType.Pawn).location(LocationType.FavorBoardSpace).id(player).getItems()
 
-      playerFavors.forEach(pawn => {
-        if (pawn.location.x! < FavorType.PawnsInBottomRow) {
-          points += this.getFavorScore(player, pawn.location.x)
+      for (const pawn of playerFavors) {
+        if (pawn.location.id !== FavorType.PawnsInBottomRow) {
+          points += this.getFavorScore(player, pawn.location.id)
         }
-      })
+      }
 
-      if (playerFavors.some(favor => favor.location.x ?? -1 >= FavorType.PawnsInBottomRow)) {
+      if (playerFavors.some(favor => favor.location.id === FavorType.PawnsInBottomRow)) {
         points += this.getFavorScore(player, FavorType.PawnsInBottomRow)
       }
 
@@ -46,7 +46,7 @@ export class EndGameScoreRule extends PlayerTurnRule {
     return moves
   }
 
-  getFavorScore(player: PlayerColor, space: number | undefined) {
+  getFavorScore(player: PlayerColor, space: FavorType) {
     let score = 0
 
     switch (space) {
@@ -149,7 +149,7 @@ export class EndGameScoreRule extends PlayerTurnRule {
     const favorsInBottomRow = this.material(MaterialType.Pawn)
                                   .location(LocationType.FavorBoardSpace)
                                   .id(player)
-                                  .location(location => location.x !== undefined && location.x >= FavorType.PawnsInBottomRow)
+                                  .locationId(FavorType.PawnsInBottomRow)
                                   .getQuantity()
 
     switch (favorsInBottomRow) {

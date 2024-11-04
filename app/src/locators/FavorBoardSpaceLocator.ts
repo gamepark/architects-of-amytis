@@ -1,29 +1,20 @@
+import { FavorType } from '@gamepark/architects-of-amytis/material/FavorType'
 import { MaterialType } from '@gamepark/architects-of-amytis/material/MaterialType'
-import { Locator } from '@gamepark/react-game'
+import { DropAreaDescription, Locator } from '@gamepark/react-game'
 import { Location } from '@gamepark/rules-api'
 
 class FavorBoardSpaceLocator extends Locator {
   parentItemType = MaterialType.FavorBoard
 
   getPositionOnParent(location: Location) {
-    return this.positions[location.x!] ?? this.positionOnParent
+    if (location.id === FavorType.PawnsInBottomRow) {
+      return { x: 45 + location.x! * 9.4, y: 82.5 }
+    } else {
+      return { x: 8 + location.id * 14, y: 49 }
+    }
   }
 
-  positions = [
-    { x: 8, y: 49 },
-    { x: 22, y: 49 },
-    { x: 36, y: 49 },
-    { x: 50, y: 49 },
-    { x: 64, y: 49 },
-    { x: 78, y: 49 },
-    { x: 92, y: 49 },
-    { x: 45, y: 82.5 },
-    { x: 54.5, y: 82.5 },
-    { x: 64, y: 82.5 },
-    { x: 73, y: 82.5 },
-    { x: 82.5, y: 82.5 },
-    { x: 92, y: 82.5 },
-  ]
+  locationDescription = new DropAreaDescription({ width: 1.7, height: 1.7, borderRadius: 1 })
 }
 
 export const favorBoardSpaceLocator = new FavorBoardSpaceLocator()

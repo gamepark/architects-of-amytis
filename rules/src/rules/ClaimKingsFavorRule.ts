@@ -1,8 +1,9 @@
-import { Location, MaterialMove, PlayerTurnRule } from '@gamepark/rules-api';
-import { MaterialType } from '../material/MaterialType';
-import { LocationType } from '../material/LocationType';
-import { BoardHelper } from './helpers/BoardHelper';
-import { RuleId } from './RuleId';
+import { MaterialMove, PlayerTurnRule } from '@gamepark/rules-api'
+import { FavorType, favorTypes } from '../material/FavorType'
+import { LocationType } from '../material/LocationType'
+import { MaterialType } from '../material/MaterialType'
+import { BoardHelper } from './helpers/BoardHelper'
+import { RuleId } from './RuleId'
 
 export class ClaimKingsFavorRule extends PlayerTurnRule {
   onRuleStart() {
@@ -19,24 +20,26 @@ export class ClaimKingsFavorRule extends PlayerTurnRule {
     const moves: MaterialMove[] = []
     const pawnsSupply = this.material(MaterialType.Pawn).location(LocationType.PlayerPawnsSupply).player(this.player)
 
-    const availableSpaces: Location[] = []
-    const occupiedSpaces = this.material(MaterialType.Pawn).location(LocationType.FavorBoardSpace).getItems().map(pawn => pawn.location.x)
-    for (let x = 0; x < 13; x++) {
-      if (!occupiedSpaces.includes(x)) {
-        availableSpaces.push({
-          type: LocationType.FavorBoardSpace,
-          x: x
-        })
+    for (const favorType of favorTypes) {
+      const pawnsInFavor = this.material(MaterialType.Pawn).location(LocationType.FavorBoardSpace).locationId(favorType).length
+      if (favorType === FavorType.PawnsInBottomRow) {
+        if (pawnsInFavor < 6) {
+          moves.push(pawnsSupply.moveItem({
+            type: LocationType.FavorBoardSpace,
+            id: favorType,
+            x: pawnsInFavor
+          }))
+        }
+      } else {
+        if (!pawnsInFavor) {
+          moves.push(pawnsSupply.moveItem({
+            type: LocationType.FavorBoardSpace,
+            id: favorType
+          }))
+        }
       }
     }
 
-    moves.push(
-      ...availableSpaces.flatMap((space) => {
-        return [
-          ...pawnsSupply.moveItems(space)
-        ]
-      })
-    )
     return moves
   }
 

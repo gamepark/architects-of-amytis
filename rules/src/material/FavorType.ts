@@ -1,3 +1,5 @@
+import { getEnumValues } from '@gamepark/rules-api'
+
 export enum FavorType {
   OneInStack,
   TwoInStack,
@@ -8,3 +10,5 @@ export enum FavorType {
   ProjectsValidated,
   PawnsInBottomRow
 }
+
+export const favorTypes = getEnumValues(FavorType)
