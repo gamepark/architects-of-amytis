@@ -37,7 +37,7 @@ export class PlaceBuildingTileRule extends PlayerTurnRule {
         const buildingType = getBuildingType(movedTile.id)
         const buildingCardSide = this.remind(Memory.BuildingCardsSides)[buildingType]
         const pointsMove = BuildingEffect.createBuildingAction(this.game, buildingType)?.getEffectMoves(buildingCardSide, move)
-        moves.push(...pointsMove ?? [])
+        moves.push(...pointsMove)
         moves.push(this.startRule(RuleId.CheckProjects))
       } else {
         moves.push(this.startRule(RuleId.SelectProjectCard))

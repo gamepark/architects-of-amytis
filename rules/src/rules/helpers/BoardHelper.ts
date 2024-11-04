@@ -40,6 +40,7 @@ export class BoardHelper extends MaterialRulesPart {
   }
 
   incrementScoreForPlayer(player: number, points: number) {
+    if (points === 0) return []
     const score = this.remind(Memory.Score)
     const moves = []
 
