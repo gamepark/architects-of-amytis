@@ -9,7 +9,7 @@ export class RetrieveArchitectsRule extends PlayerTurnRule {
     const moves: MaterialMove [] = []
     const architectsAligned = new BoardHelper(this.game, this.player).areArchitectsAligned()
 
-    if (architectsAligned || this.material(MaterialType.Architect).location(LocationType.PlayerArchitectsSupply).id(this.player).getQuantity() == 0) {
+    if (architectsAligned || this.material(MaterialType.Architect).location(LocationType.PlayerArchitectsSupply).id(this.player).getQuantity() === 0) {
       moves.push(...this.material(MaterialType.Architect).location(LocationType.MainBoardStackSpace).id(this.player).moveItems(
         {
           type: LocationType.PlayerArchitectsSupply,

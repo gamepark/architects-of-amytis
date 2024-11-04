@@ -14,7 +14,7 @@ export class SelectProjectCardRule extends PlayerTurnRule {
     moves.push(...availableCards.moveItems({ type: LocationType.PlayerProjectCardsSpot, player: this.player, rotation: 0 }))
     const projectCardsDeck = this.material(MaterialType.ProjectCard).deck()
     moves.push(...projectCardsDeck.deal({ type: LocationType.PlayerProjectCardsSpot, player: this.player, rotation: 0 }, 1))
-    if (this.palaceCardSide == BuildingCardSide.SideB) {
+    if (this.palaceCardSide === BuildingCardSide.SideB) {
       moves.push(this.customMove(CustomMoveType.Score))
     }
 

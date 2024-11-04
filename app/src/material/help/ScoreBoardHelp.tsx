@@ -11,7 +11,7 @@ export const ScoreBoardHelp: FC<MaterialHelpProps> = () => {
   const rules = useRules<ArchitectsOfAmytisRules>()!
   const playerScore = rules.remind(Memory.Score)
   const player = usePlayerId()
-  const otherPlayer = rules.players[0] == player ? rules.players[1] : rules.players[0]
+  const otherPlayer = rules.players[0] === player ? rules.players[1] : rules.players[0]
   
   return (
     <>
