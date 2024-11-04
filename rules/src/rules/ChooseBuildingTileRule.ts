@@ -1,4 +1,4 @@
-import { isMoveItemType, ItemMove, Location, MaterialMove, PlayerTurnRule } from '@gamepark/rules-api'
+import { isMoveItemType, ItemMove, MaterialMove, PlayerTurnRule } from '@gamepark/rules-api'
 import { LocationType } from '../material/LocationType'
 import { MaterialType } from '../material/MaterialType'
 import { RuleId } from './RuleId'
@@ -6,23 +6,10 @@ import { RuleId } from './RuleId'
 export class ChooseBuildingTileRule extends PlayerTurnRule {
 
   getPlayerMoves() {
-    const moves: MaterialMove[] = []
-
-    const topTiles = this.availableTiles
-    const availableSpaces: Location[] = []
-    availableSpaces.push({
+    return this.availableTiles.moveItems({
       type: LocationType.PlayerHand,
       player: this.player
     })
-
-    moves.push(
-      ...availableSpaces.flatMap((space) => {
-        return [
-          ...topTiles.moveItems(space)
-        ]
-      })
-    )
-    return moves
   }
 
   get availableTiles() {
