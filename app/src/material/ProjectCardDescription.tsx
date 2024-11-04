@@ -1,4 +1,3 @@
-import { faRotateLeft } from '@fortawesome/free-solid-svg-icons/faRotateLeft'
 import { faRotateRight } from '@fortawesome/free-solid-svg-icons/faRotateRight'
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome'
 import { LocationType } from '@gamepark/architects-of-amytis/material/LocationType'
@@ -65,13 +64,9 @@ class ProjectCardDescription extends CardDescription {
       const card = context.rules.material(MaterialType.ProjectCard).index(context.index)
       const rotation = item.location.rotation ?? 0
       return <>
-        <ItemMenuButton label="" angle={45} radius={4}
+        <ItemMenuButton label="" angle={90} radius={3}
                         move={card.rotateItem((rotation + 1) % 4)} options={{ transient: true }}>
           <FontAwesomeIcon icon={faRotateRight}/>
-        </ItemMenuButton>
-        <ItemMenuButton label="" angle={-45} radius={4}
-                        move={card.rotateItem((rotation + 3) % 4)} options={{ transient: true }}>
-          <FontAwesomeIcon icon={faRotateLeft}/>
         </ItemMenuButton>
       </>
     }
