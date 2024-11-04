@@ -9,8 +9,8 @@ export const RetrieveArchitectsHeader = () => {
   const me = usePlayerId()
   const player = usePlayerName(me)
   if (rules.getActivePlayer() === me) {
-    return <span>{t('header.retrieve-architects.you')}</span>
+    return <>{t('header.retrieve-architects.you')}</>
   } else {
-    return <span>{t('header.retrieve-architects.player', { player })}</span>
+    return <>{t('header.retrieve-architects.player', { player })}</>
   }
 }

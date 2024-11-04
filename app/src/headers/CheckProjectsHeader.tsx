@@ -9,8 +9,8 @@ export const CheckProjectsHeader = () => {
   const me = usePlayerId()
   const player = usePlayerName(me)
   if (rules.getActivePlayer() === me) {
-    return <span>{t('header.check-projects.you')}</span>
+    return <>{t('header.check-projects.you')}</>
   } else {
-    return <span>{t('header.check-projects.player', { player })}</span>
+    return <>{t('header.check-projects.player', { player })}</>
   }
 }
