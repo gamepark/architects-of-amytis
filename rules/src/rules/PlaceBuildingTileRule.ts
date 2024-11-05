@@ -27,6 +27,7 @@ export class PlaceBuildingTileRule extends PlayerTurnRule {
   afterItemMove(move: ItemMove) {
     const moves: MaterialMove[] = []
     if (isMoveItemType(MaterialType.BuildingTile)(move)) {
+      this.memorize(Memory.PlacedTile, move.itemIndex)
       const movedTile = this.material(MaterialType.BuildingTile).getItem(move.itemIndex)
       const tilesInStack = this.material(MaterialType.BuildingTile)
                                 .location(LocationType.PlayerBoardStackSpace)
@@ -37,7 +38,7 @@ export class PlaceBuildingTileRule extends PlayerTurnRule {
       if (getBuildingType(movedTile.id) !== BuildingType.Palace) {
         const buildingType = getBuildingType(movedTile.id)
         const buildingCardSide = this.remind(Memory.BuildingCardsSides)[buildingType] as BuildingCardSide
-        const buildingRule = new BuildingRules[buildingType][buildingCardSide](this.game, move.itemIndex)
+        const buildingRule = new BuildingRules[buildingType][buildingCardSide](this.game)
         const pointsMove = new BoardHelper(this.game).incrementScoreForPlayer(this.player, buildingRule.score)
         moves.push(...pointsMove)
         moves.push(this.startRule(RuleId.CheckProjects))

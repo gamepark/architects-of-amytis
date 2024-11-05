@@ -4,6 +4,7 @@ import { LocationType } from "../material/LocationType";
 import { Project, projectsProperties } from "../material/Project";
 import { BoardHelper } from "./helpers/BoardHelper";
 import { BuildingColor, getBuildingColor } from "../material/Building";
+import { Memory } from './Memory'
 import { RuleId } from "./RuleId";
 
 export class CheckProjectsRule extends PlayerTurnRule {
@@ -91,5 +92,9 @@ export class CheckProjectsRule extends PlayerTurnRule {
   
     return false;
   }
- 
+
+  onRuleEnd() {
+    this.forget(Memory.PlacedTile)
+    return []
+  }
 }

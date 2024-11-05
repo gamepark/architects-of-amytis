@@ -4,16 +4,12 @@ import { BuildingCardSide, BuildingType, getBuildingColor, getBuildingType } fro
 import { LocationType } from '../material/LocationType'
 import { MaterialType } from '../material/MaterialType'
 import { BoardHelper } from './helpers/BoardHelper'
+import { Memory } from './Memory'
 
 
 abstract class BuildingRule extends MaterialRulesPart {
-  constructor(game: MaterialGame, protected buildingIndex?: number) {
-    super(game)
-  }
-
   get tile() {
-    if (this.buildingIndex === undefined) throw new Error('Missing building index to get the tile')
-    return this.material(MaterialType.BuildingTile).getItem(this.buildingIndex)
+    return this.material(MaterialType.BuildingTile).getItem(this.remind<number>(Memory.PlacedTile))
   }
 
   get playerTiles() {
@@ -143,7 +139,7 @@ class TheaterBRule extends BuildingRule {
 }
 
 interface BuildingRuleCreator {
-  new(game: MaterialGame, buildingIndex?: number): BuildingRule
+  new(game: MaterialGame): BuildingRule
 }
 
 export const BuildingRules: Record<BuildingType, Record<BuildingCardSide, BuildingRuleCreator>> = {
