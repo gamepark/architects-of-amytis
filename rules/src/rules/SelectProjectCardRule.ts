@@ -3,7 +3,7 @@ import { BuildingCardSide, BuildingType } from '../material/Building'
 import { LocationType } from '../material/LocationType'
 import { MaterialType } from '../material/MaterialType'
 import { PalaceARule, PalaceBRule } from './BuildingRule'
-import { CustomMoveType } from './CustomMoveType'
+import { CustomMoveType, ScoreData } from './CustomMoveType'
 import { BoardHelper } from './helpers/BoardHelper'
 import { Memory } from './Memory'
 import { RuleId } from './RuleId'
@@ -16,7 +16,11 @@ export class SelectProjectCardRule extends PlayerTurnRule {
     const projectCardsDeck = this.material(MaterialType.ProjectCard).deck()
     moves.push(projectCardsDeck.dealOne({ type: LocationType.PlayerProjectCardsSpot, player: this.player }))
     if (this.palaceCardSide === BuildingCardSide.SideB) {
-      moves.push(this.customMove(CustomMoveType.Score))
+      const scoreData: ScoreData = {
+        points: new PalaceBRule(this.game).score,
+        item: { type: MaterialType.BuildingTile, index: this.remind(Memory.PlacedTile) }
+      }
+      moves.push(this.customMove(CustomMoveType.Score, scoreData))
     }
 
     return moves
@@ -25,16 +29,21 @@ export class SelectProjectCardRule extends PlayerTurnRule {
   afterItemMove(move: ItemMove) {
     const moves = []
     if (isMoveItemType(MaterialType.ProjectCard)(move) && move.location.type !== LocationType.ProjectCardsDisplay) {
-      if (this.palaceCardSide === BuildingCardSide.SideA) {
-        moves.push(...new BoardHelper(this.game).incrementScoreForPlayer(this.player, new PalaceARule(this.game).score))
-      }
 
       if (this.material(MaterialType.ProjectCard).location(LocationType.ProjectCardsDisplay).getQuantity() < 3) {
         const projectCardsDeck = this.material(MaterialType.ProjectCard).deck()
         moves.push(projectCardsDeck.dealOne({ type: LocationType.ProjectCardsDisplay }))
       }
 
-      moves.push(this.startRule(RuleId.CheckProjects))
+      if (this.palaceCardSide === BuildingCardSide.SideA) {
+        const scoreData: ScoreData = {
+          points: new PalaceARule(this.game).score,
+          item: { type: MaterialType.BuildingTile, index: this.remind(Memory.PlacedTile) }
+        }
+        moves.push(this.customMove(CustomMoveType.Score, scoreData))
+      } else {
+        moves.push(this.startRule(RuleId.CheckProjects))
+      }
     }
 
     return moves
@@ -43,7 +52,7 @@ export class SelectProjectCardRule extends PlayerTurnRule {
   onCustomMove(move: CustomMove) {
     if (move.type === CustomMoveType.Score) {
       return [
-        ...new BoardHelper(this.game).incrementScoreForPlayer(this.player, new PalaceBRule(this.game).score),
+        ...new BoardHelper(this.game).incrementScoreForPlayer(this.player, move.data.points),
         this.startRule(RuleId.CheckProjects)
       ]
     } else {
