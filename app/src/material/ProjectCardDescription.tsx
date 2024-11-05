@@ -4,7 +4,7 @@ import { LocationType } from '@gamepark/architects-of-amytis/material/LocationTy
 import { MaterialType } from '@gamepark/architects-of-amytis/material/MaterialType'
 import { Project } from '@gamepark/architects-of-amytis/material/Project'
 import { CardDescription, ItemContext, ItemMenuButton, MaterialContext } from '@gamepark/react-game'
-import { MaterialItem } from '@gamepark/rules-api'
+import { MaterialItem, MaterialMoveBuilder } from '@gamepark/rules-api'
 import Project1 from '../images/cards/ProjectCard1.jpg'
 import Project10 from '../images/cards/ProjectCard10.jpg'
 import Project11 from '../images/cards/ProjectCard11.jpg'
@@ -27,6 +27,7 @@ import Project8 from '../images/cards/ProjectCard8.jpg'
 import Project9 from '../images/cards/ProjectCard9.jpg'
 import Back from '../images/cards/ProjectCardBack.jpg'
 import { ProjectCardHelp } from './help/ProjectCardHelp'
+import displayLocationHelp = MaterialMoveBuilder.displayLocationHelp
 
 class ProjectCardDescription extends CardDescription {
   width = 7
@@ -82,6 +83,13 @@ class ProjectCardDescription extends CardDescription {
 
   isFlippedOnTable(item: Partial<MaterialItem>, context: MaterialContext) {
     return item.location?.type === LocationType.ProjectCardsDeck || super.isFlippedOnTable(item, context)
+  }
+
+  displayHelp(item: MaterialItem, context: ItemContext) {
+    if (item.location.type === LocationType.PlayerValidatedProjectCardsPile) {
+      return displayLocationHelp(item.location)
+    }
+    return super.displayHelp(item, context)
   }
 }
 
