@@ -17,8 +17,9 @@ export class SelectProjectCardRule extends PlayerTurnRule {
     moves.push(projectCardsDeck.dealOne({ type: LocationType.PlayerProjectCardsSpot, player: this.player }))
     if (this.palaceCardSide === BuildingCardSide.SideB) {
       const scoreData: ScoreData = {
+        player: this.player,
         points: new PalaceBRule(this.game).score,
-        item: { type: MaterialType.BuildingTile, index: this.remind(Memory.PlacedTile) }
+        item: { type: MaterialType.BuildingTile, indexes: [this.remind(Memory.PlacedTile)] }
       }
       moves.push(this.customMove(CustomMoveType.Score, scoreData))
     }
@@ -37,8 +38,9 @@ export class SelectProjectCardRule extends PlayerTurnRule {
 
       if (this.palaceCardSide === BuildingCardSide.SideA) {
         const scoreData: ScoreData = {
+          player: this.player,
           points: new PalaceARule(this.game).score,
-          item: { type: MaterialType.BuildingTile, index: this.remind(Memory.PlacedTile) }
+          item: { type: MaterialType.BuildingTile, indexes: [this.remind(Memory.PlacedTile)] }
         }
         moves.push(this.customMove(CustomMoveType.Score, scoreData))
       } else {
@@ -52,7 +54,7 @@ export class SelectProjectCardRule extends PlayerTurnRule {
   onCustomMove(move: CustomMove) {
     if (move.type === CustomMoveType.Score) {
       return [
-        ...new BoardHelper(this.game).incrementScoreForPlayer(this.player, move.data.points),
+        ...new BoardHelper(this.game).incrementScoreForPlayer(move.data.player, move.data.points),
         this.startRule(RuleId.CheckProjects)
       ]
     } else {

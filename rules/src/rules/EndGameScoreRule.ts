@@ -1,44 +1,54 @@
-import { PlayerTurnRule } from '@gamepark/rules-api';
-import { PlayerColor, playerColors } from '../PlayerColor';
-import { MaterialType } from '../material/MaterialType';
-import { LocationType } from '../material/LocationType';
-import { Project, projectsProperties } from "../material/Project";
-import { FavorType } from '../material/FavorType';
-import { BoardHelper, Corners } from './helpers/BoardHelper';
+import { CustomMove, MaterialMove, PlayerTurnRule } from '@gamepark/rules-api'
+import { FavorType } from '../material/FavorType'
+import { LocationType } from '../material/LocationType'
+import { MaterialType } from '../material/MaterialType'
+import { Project, projectsProperties } from '../material/Project'
+import { PlayerColor, playerColors } from '../PlayerColor'
+import { CustomMoveType, ScoreData } from './CustomMoveType'
+import { BoardHelper, Corners } from './helpers/BoardHelper'
 
 export class EndGameScoreRule extends PlayerTurnRule {
 
   onRuleStart() {
-    const moves = []
-    let points = 0
+    const moves: MaterialMove[] = []
 
     // Compute projects score
     for (const player of playerColors) {
-      points = 0
       const validatedProjects = this.material(MaterialType.ProjectCard).location(LocationType.PlayerValidatedProjectCardsPile).player(player)
-      validatedProjects.getItems().forEach(projectCard => {
-        points += projectsProperties[projectCard?.id as Project].points
-      })
-
-      moves.push(...new BoardHelper(this.game).incrementScoreForPlayer(player, points))
+      for (const [index, projectCard] of validatedProjects.entries) {
+        const scoreData: ScoreData = {
+          player,
+          points: projectsProperties[projectCard.id as Project].points,
+          item: { type: MaterialType.ProjectCard, indexes: [index] }
+        }
+        moves.push(this.customMove(CustomMoveType.Score, scoreData))
+      }
     }
 
     // Compute favors score
     for (const player of playerColors) {
-      points = 0
-      const playerFavors = this.material(MaterialType.Pawn).location(LocationType.FavorBoardSpace).id(player).getItems()
+      const playerFavors = this.material(MaterialType.Pawn).location(LocationType.FavorBoardSpace).id(player)
 
-      for (const pawn of playerFavors) {
+      for (const [index, pawn] of playerFavors.entries) {
         if (pawn.location.id !== FavorType.PawnsInBottomRow) {
-          points += this.getFavorScore(player, pawn.location.id)
+          const scoreData: ScoreData = {
+            player,
+            points: this.getFavorScore(player, pawn.location.id),
+            item: { type: MaterialType.Pawn, indexes: [index] }
+          }
+          moves.push(this.customMove(CustomMoveType.Score, scoreData))
         }
       }
 
-      if (playerFavors.some(favor => favor.location.id === FavorType.PawnsInBottomRow)) {
-        points += this.getFavorScore(player, FavorType.PawnsInBottomRow)
+      const bottomLinePawns = playerFavors.locationId(FavorType.PawnsInBottomRow)
+      if (bottomLinePawns.length) {
+        const scoreData: ScoreData = {
+          player,
+          points: this.getFavorScore(player, FavorType.PawnsInBottomRow),
+          item: { type: MaterialType.Pawn, indexes: bottomLinePawns.getIndexes() }
+        }
+        moves.push(this.customMove(CustomMoveType.Score, scoreData))
       }
-
-      moves.push(...new BoardHelper(this.game).incrementScoreForPlayer(player, points))
     }
 
     moves.push(this.endGame())
@@ -147,10 +157,10 @@ export class EndGameScoreRule extends PlayerTurnRule {
   pawnsInBottomRowScore(player: PlayerColor): number {
     let points = 0
     const favorsInBottomRow = this.material(MaterialType.Pawn)
-                                  .location(LocationType.FavorBoardSpace)
-                                  .id(player)
-                                  .locationId(FavorType.PawnsInBottomRow)
-                                  .getQuantity()
+      .location(LocationType.FavorBoardSpace)
+      .id(player)
+      .locationId(FavorType.PawnsInBottomRow)
+      .getQuantity()
 
     switch (favorsInBottomRow) {
       case 1:
@@ -171,4 +181,10 @@ export class EndGameScoreRule extends PlayerTurnRule {
     return points
   }
 
+  onCustomMove(move: CustomMove) {
+    if (move.type === CustomMoveType.Score) {
+      return new BoardHelper(this.game).incrementScoreForPlayer(move.data.player, move.data.points)
+    }
+    return []
+  }
 }
