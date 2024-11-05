@@ -1,12 +1,12 @@
 /** @jsxImportSource @emotion/react */
-import { ArchitectsOfAmytisRules } from "@gamepark/architects-of-amytis/ArchitectsOfAmytisRules"
-import { BuildingCardSide, BuildingType } from "@gamepark/architects-of-amytis/material/Building"
-import { BuildingEffect } from "@gamepark/architects-of-amytis/rules/BuildingEffect"
-import { CustomMoveType } from "@gamepark/architects-of-amytis/rules/CustomMoveType"
-import { SelectProjectCardRule } from "@gamepark/architects-of-amytis/rules/SelectProjectCardRule"
-import { PlayMoveButton, useLegalMove, usePlayerId, usePlayerName, useRules } from "@gamepark/react-game"
-import { isCustomMoveType } from "@gamepark/rules-api"
-import { Trans } from "react-i18next"
+import { ArchitectsOfAmytisRules } from '@gamepark/architects-of-amytis/ArchitectsOfAmytisRules'
+import { BuildingCardSide } from '@gamepark/architects-of-amytis/material/Building'
+import { PalaceBRule } from '@gamepark/architects-of-amytis/rules/BuildingRule'
+import { CustomMoveType } from '@gamepark/architects-of-amytis/rules/CustomMoveType'
+import { SelectProjectCardRule } from '@gamepark/architects-of-amytis/rules/SelectProjectCardRule'
+import { PlayMoveButton, useLegalMove, usePlayerId, usePlayerName, useRules } from '@gamepark/react-game'
+import { isCustomMoveType } from '@gamepark/rules-api'
+import { Trans } from 'react-i18next'
 
 export const SelectProjectCardHeader = () => {
   const rules = useRules<ArchitectsOfAmytisRules>()!
@@ -24,7 +24,7 @@ export const SelectProjectCardHeader = () => {
     return <Trans defaults={itsMe ? headerYouLabel : headerPlayerLabel } values={{ player: playerName }}/>
     
   } else {
-    const points = BuildingEffect.createBuildingAction(rules.game, BuildingType.Palace)?.getBuildingPoints(palaceCardSide)
+    const points = new PalaceBRule(rules.game).score
     return <Trans defaults={itsMe ? headerYouLabel : headerPlayerLabel } values={{ player: playerName, nbr: points }} components={{
       points: <PlayMoveButton move={palaceAction}/>
     }}/>

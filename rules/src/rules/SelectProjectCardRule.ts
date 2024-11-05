@@ -2,8 +2,9 @@ import { CustomMove, isMoveItemType, ItemMove, MaterialMove, PlayerTurnRule } fr
 import { BuildingCardSide, BuildingType } from '../material/Building'
 import { LocationType } from '../material/LocationType'
 import { MaterialType } from '../material/MaterialType'
-import { BuildingEffect } from './BuildingEffect'
+import { PalaceARule, PalaceBRule } from './BuildingRule'
 import { CustomMoveType } from './CustomMoveType'
+import { BoardHelper } from './helpers/BoardHelper'
 import { Memory } from './Memory'
 import { RuleId } from './RuleId'
 
@@ -25,7 +26,7 @@ export class SelectProjectCardRule extends PlayerTurnRule {
     const moves = []
     if (isMoveItemType(MaterialType.ProjectCard)(move) && move.location.type !== LocationType.ProjectCardsDisplay) {
       if (this.palaceCardSide === BuildingCardSide.SideA) {
-        moves.push(...BuildingEffect.createBuildingAction(this.game, BuildingType.Palace).getEffectMoves(this.palaceCardSide))
+        moves.push(...new BoardHelper(this.game).incrementScoreForPlayer(this.player, new PalaceARule(this.game).score))
       }
 
       if (this.material(MaterialType.ProjectCard).location(LocationType.ProjectCardsDisplay).getQuantity() < 3) {
@@ -37,14 +38,14 @@ export class SelectProjectCardRule extends PlayerTurnRule {
     }
 
     return moves
-  }  
+  }
 
   onCustomMove(move: CustomMove) {
     if (move.type === CustomMoveType.Score) {
       return [
-              ...BuildingEffect.createBuildingAction(this.game, BuildingType.Palace).getEffectMoves(this.palaceCardSide),
-              this.startRule(RuleId.CheckProjects)
-            ]
+        ...new BoardHelper(this.game).incrementScoreForPlayer(this.player, new PalaceBRule(this.game).score),
+        this.startRule(RuleId.CheckProjects)
+      ]
     } else {
       return []
     }

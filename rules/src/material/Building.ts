@@ -43,7 +43,7 @@ export enum Building {
 export const buildings = getEnumValues(Building)
 export const buildingTypes = getEnumValues(BuildingType)
 
-export const getBuildingType = (building: Building) => building % 10
+export const getBuildingType = (building: Building): BuildingType => building % 10
 export const getBuildingColor = (building: Building) => Math.floor(building / 10)
 
 export enum BuildingCardSide {

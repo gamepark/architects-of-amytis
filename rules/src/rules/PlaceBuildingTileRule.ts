@@ -1,10 +1,11 @@
 import { isMoveItemType, ItemMove, Location, MaterialMove, PlayerTurnRule } from '@gamepark/rules-api'
-import { MaterialType } from '../material/MaterialType'
+import { BuildingCardSide, BuildingType, getBuildingType } from '../material/Building'
 import { LocationType } from '../material/LocationType'
+import { MaterialType } from '../material/MaterialType'
+import { BuildingRules } from './BuildingRule'
+import { BoardHelper } from './helpers/BoardHelper'
 import { Memory } from './Memory'
 import { RuleId } from './RuleId'
-import { BuildingEffect } from './BuildingEffect'
-import { BuildingType, getBuildingType } from '../material/Building'
 
 export class PlaceBuildingTileRule extends PlayerTurnRule {
   getPlayerMoves() {
@@ -35,8 +36,9 @@ export class PlaceBuildingTileRule extends PlayerTurnRule {
       movedTile.location.z = tilesInStack + 1
       if (getBuildingType(movedTile.id) !== BuildingType.Palace) {
         const buildingType = getBuildingType(movedTile.id)
-        const buildingCardSide = this.remind(Memory.BuildingCardsSides)[buildingType]
-        const pointsMove = BuildingEffect.createBuildingAction(this.game, buildingType)?.getEffectMoves(buildingCardSide, move)
+        const buildingCardSide = this.remind(Memory.BuildingCardsSides)[buildingType] as BuildingCardSide
+        const buildingRule = new BuildingRules[buildingType][buildingCardSide](this.game, move.itemIndex)
+        const pointsMove = new BoardHelper(this.game).incrementScoreForPlayer(this.player, buildingRule.score)
         moves.push(...pointsMove)
         moves.push(this.startRule(RuleId.CheckProjects))
       } else {
