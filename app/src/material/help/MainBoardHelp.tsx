@@ -1,9 +1,8 @@
 /** @jsxImportSource @emotion/react */
-// import { LocationType } from '@gamepark/architects-of-amytis/material/LocationType'
-import { linkButtonCss, PlayMoveButton } from '@gamepark/react-game'
-import { Trans, useTranslation } from 'react-i18next'
-import { MaterialMoveBuilder } from '@gamepark/rules-api'
 import { MaterialType } from '@gamepark/architects-of-amytis/material/MaterialType'
+import { linkButtonCss, PlayMoveButton } from '@gamepark/react-game'
+import { MaterialMoveBuilder } from '@gamepark/rules-api'
+import { Trans, useTranslation } from 'react-i18next'
 import displayMaterialHelp = MaterialMoveBuilder.displayMaterialHelp
 
 export const MainBoardHelp = () => {
@@ -12,11 +11,11 @@ export const MainBoardHelp = () => {
   return <>
     <h2>{t('main-board')}</h2>
     <p>
-      <Trans 
+      <Trans
         defaults="main-board.help"
         components={{
           bold: <strong/>,
-          favor: <PlayMoveButton css={linkButtonCss} move={displayMaterialHelp(MaterialType.FavorBoard)} local/>
+          favor: <PlayMoveButton css={linkButtonCss} move={displayMaterialHelp(MaterialType.FavorBoard)} transient/>
         }}
       ></Trans>
     </p>
