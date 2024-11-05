@@ -21,17 +21,17 @@ export class ClaimKingsFavorRule extends PlayerTurnRule {
     const pawnsSupply = this.material(MaterialType.Pawn).location(LocationType.PlayerPawnsSupply).player(this.player)
 
     for (const favorType of favorTypes) {
-      const pawnsInFavor = this.material(MaterialType.Pawn).location(LocationType.FavorBoardSpace).locationId(favorType).length
+      const pawnsInFavor = this.material(MaterialType.Pawn).location(LocationType.FavorBoardSpace).locationId(favorType)
       if (favorType === FavorType.PawnsInBottomRow) {
-        if (pawnsInFavor < 6) {
+        if (pawnsInFavor.length < 6 && pawnsInFavor.id(this.player).length < 4) {
           moves.push(pawnsSupply.moveItem({
             type: LocationType.FavorBoardSpace,
             id: favorType,
-            x: pawnsInFavor
+            x: pawnsInFavor.length
           }))
         }
       } else {
-        if (!pawnsInFavor) {
+        if (!pawnsInFavor.length) {
           moves.push(pawnsSupply.moveItem({
             type: LocationType.FavorBoardSpace,
             id: favorType
