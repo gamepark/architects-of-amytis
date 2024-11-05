@@ -12,6 +12,7 @@ export const BuildingCardHelp = ({ item }: MaterialHelpProps) => {
   const buildingEffect = 'building.' + buildingType + '.' + (rules.remind(Memory.BuildingCardsSides)[buildingType] === BuildingCardSide.SideA ? 'A' : 'B')
   return <>
     <h2>{t('building-card')}</h2>
+    <p>{t('building-card.help')}</p>
     <p>{t('building-tile.help', { buildingEffect: t(buildingEffect) })}</p>
   </>
 }

@@ -59,7 +59,7 @@
       "player-board.player": "{player}'s board",
       "player-board.help": "Each turn you place the tile you choose from the Main board on your player board.\n\nWhen you reproduce on your board the color pattern from one of your project cards, you validate the project card.",
       "building-card": "Building card",
-      "building-card.help": "Each type of building has 2 available effects: side A and side B. Players always play with the same building effects.\n\nHere is the effect of this building for the game:\n\n{buildingEffect}",
+      "building-card.help": "Each type of building has 2 available effects: side A and side B. Players always play with the same building effects.",
       "project-card": "Project card",
       "project-card.help": "The Project cards are goals for specific color arrangements on your Player board.\n\n<bold>When you successfully reproduce the configuration depicted on one of your Project cards</bold>, it is validated.",
       "project-card.score": "This Project card will earn you <bold>{score} points</bold> at the end of the game if you validate it.",
