@@ -17,7 +17,7 @@ export default function App() {
     <>
       { !!game && <GameDisplay players={game.players.length} /> }
       <LoadingScreen display={loading}
-                     author={['Jérémy Ducret', 'Romaric Galonnier']} artist="Agnès Ripoche" publisher="La Boite de Jeu" developer="Sergio Cabrera"/>
+                     author={['Jérémy Ducret', 'Romaric Galonnier']} artist="Agnès Ripoche" publisher="La Boite de Jeu" developer="Resac"/>
       <MaterialHeader rulesStepsHeaders={Headers} loading={loading}/>
       <MaterialImageLoader onImagesLoad={() => setImagesLoading(false)} />
       <Menu/>
