@@ -1,8 +1,6 @@
 import { LocationType } from '@gamepark/architects-of-amytis/material/LocationType'
-import { BoardDescription, ItemContext } from '@gamepark/react-game'
+import { BoardDescription } from '@gamepark/react-game'
 import ScoreBoard from '../images/boards/ScoreBoard.jpg'
-import { MaterialItem, Location } from '@gamepark/rules-api'
-import { range } from 'lodash'
 import { ScoreBoardHelp } from './help/ScoreBoardHelp'
 
 class ScoreBoardDescription extends BoardDescription {
@@ -13,10 +11,6 @@ class ScoreBoardDescription extends BoardDescription {
   help = ScoreBoardHelp
 
   staticItem = { location: { type: LocationType.ScoreBoardSpot } }
-
-  getLocations(_item: MaterialItem<number, number>, _context: ItemContext<number, number, number>): Location<number, number>[] {
-    return range(0,50).map(x => ({type: LocationType.ScoreBoardSpace, x: x}))  
-  }
 }
 
 export const scoreBoardDescription = new ScoreBoardDescription()

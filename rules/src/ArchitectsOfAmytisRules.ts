@@ -20,6 +20,7 @@ import { RetrieveArchitectsRule } from './rules/RetrieveArchitectsRule'
 import { RuleId } from './rules/RuleId'
 import { SelectProjectCardRule } from './rules/SelectProjectCardRule'
 import { ChooseBuildingTileRule } from './rules/ChooseBuildingTileRule'
+import { StakingStrategy } from './rules/util/StakingStrategy'
 
 /**
  * This class implements the rules of the board game.
@@ -44,6 +45,9 @@ export class ArchitectsOfAmytisRules extends HiddenMaterialRules<PlayerColor, Ma
       [LocationType.ProjectCardsDisplay]: new FillGapStrategy(),
       [LocationType.PlayerProjectCardsSpot]: new PositiveSequenceStrategy(),
       [LocationType.PlayerValidatedProjectCardsPile]: new PositiveSequenceStrategy()
+    },
+    [MaterialType.Pawn]: {
+      [LocationType.ScoreBoardSpace]: new StakingStrategy()
     }
   }
 
