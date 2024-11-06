@@ -37,31 +37,30 @@ export class BoardHelper extends MaterialRulesPart {
     score[player] += points
     this.memorize(Memory.Score, score)
 
-    moves.push(this.material(MaterialType.Pawn).location(LocationType.ScoreBoardSpace).player(player).moveItem({
-        player: player,
-        type: LocationType.ScoreBoardSpace,
-        x: score[player] % 50
+    moves.push(this.material(MaterialType.Pawn).location(LocationType.ScoreBoardSpace).id(player).moveItem({
+      type: LocationType.ScoreBoardSpace,
+      x: score[player] % 50
     }))
 
     // If the new score passed a 50 range, move the range pawn
     if (score[player] % 50 < (score[player] - points) % 50) {
       const posX = Math.floor(score[player] / 50) % 4
-      moves.push(this.material(MaterialType.Pawn).location(LocationType.ScoreRangeAreaSpace).player(player).moveItem({
+      moves.push(this.material(MaterialType.Pawn).location(LocationType.ScoreRangeAreaSpace).id(player).moveItem({
         player: player,
         type: LocationType.ScoreRangeAreaSpace,
         x: posX < 4 ? posX : 4
       }))
     }
 
-    return moves;
+    return moves
   }
 
 }
 
 export const Corners = [
-  {x: 0, y: 0},
-  {x: 0, y: 2},
-  {x: 2, y: 0},
-  {x: 2, y: 2}
+  { x: 0, y: 0 },
+  { x: 0, y: 2 },
+  { x: 2, y: 0 },
+  { x: 2, y: 2 }
 ]
 

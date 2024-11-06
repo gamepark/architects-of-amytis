@@ -72,7 +72,6 @@ export class ArchitectsOfAmytisSetup extends MaterialGameSetup<PlayerColor, Mate
     }, 1)
     this.material(MaterialType.Pawn).location(LocationType.PlayerPawnsSupply).player(player).moveItem({
       type: LocationType.ScoreBoardSpace,
-      player: player,
       x: 0
     }, 1)
 
