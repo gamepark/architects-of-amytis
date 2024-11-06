@@ -31,19 +31,19 @@ export class BoardHelper extends MaterialRulesPart {
 
   incrementScoreForPlayer(player: number, points: number) {
     if (points === 0) return []
-    const score = this.remind(Memory.Score, player)
+    const score = this.remind(Memory.Score, player) + points
     const moves = []
 
-    this.memorize(Memory.Score, score + points, player)
+    this.memorize(Memory.Score, score, player)
 
     moves.push(this.material(MaterialType.Pawn).location(LocationType.ScoreBoardSpace).id(player).moveItem({
       type: LocationType.ScoreBoardSpace,
-      x: score[player] % 50
+      x: score % 50
     }))
 
     // If the new score passed a 50 range, move the range pawn
-    if (score[player] % 50 < (score[player] - points) % 50) {
-      const posX = Math.floor(score[player] / 50) % 4
+    if (score % 50 < (score - points) % 50) {
+      const posX = Math.floor(score / 50) % 4
       moves.push(this.material(MaterialType.Pawn).location(LocationType.ScoreRangeAreaSpace).id(player).moveItem({
         player: player,
         type: LocationType.ScoreRangeAreaSpace,
