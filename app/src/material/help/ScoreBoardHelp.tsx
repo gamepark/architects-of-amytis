@@ -9,7 +9,6 @@ import { Trans, useTranslation } from "react-i18next"
 export const ScoreBoardHelp: FC<MaterialHelpProps> = () => {
   const { t } = useTranslation()
   const rules = useRules<ArchitectsOfAmytisRules>()!
-  const playerScore = rules.remind(Memory.Score)
   const player = usePlayerId()
   const otherPlayer = rules.players[0] === player ? rules.players[1] : rules.players[0]
   
@@ -19,13 +18,13 @@ export const ScoreBoardHelp: FC<MaterialHelpProps> = () => {
       <p>
         <Trans 
           defaults="score.you"
-          values={{score: playerScore[player]}}
+          values={{score: rules.remind(Memory.Score, player)}}
         ></Trans>
       </p>
       <p>
         <Trans 
           defaults="score.player"
-          values={{player: usePlayerName(otherPlayer), score: playerScore[otherPlayer]}}
+          values={{player: usePlayerName(otherPlayer), score: rules.remind(Memory.Score, otherPlayer)}}
         ></Trans>
       </p>
     </>

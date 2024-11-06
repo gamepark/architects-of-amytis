@@ -21,7 +21,7 @@ export const ArchitectsOfAmytisPlayerPanel: FC<ArchitectsOfAmytisPlayerPanelProp
 
   const counters: CounterProps[] = [{
     image: pawnDescription.images[player.id as PlayerColor],
-    value: rules.remind(Memory.Score)[player.id]
+    value: rules.remind(Memory.Score, player.id)
   }]
 
   return (

@@ -31,11 +31,10 @@ export class BoardHelper extends MaterialRulesPart {
 
   incrementScoreForPlayer(player: number, points: number) {
     if (points === 0) return []
-    const score = this.remind(Memory.Score)
+    const score = this.remind(Memory.Score, player)
     const moves = []
 
-    score[player] += points
-    this.memorize(Memory.Score, score)
+    this.memorize(Memory.Score, score + points, player)
 
     moves.push(this.material(MaterialType.Pawn).location(LocationType.ScoreBoardSpace).id(player).moveItem({
       type: LocationType.ScoreBoardSpace,

@@ -99,7 +99,7 @@ export class ArchitectsOfAmytisSetup extends MaterialGameSetup<PlayerColor, Mate
       })
     }
 
-    this.memorize(Memory.Score, { [this.game.players[0]]: 0, [this.game.players[1]]: 0 })
+    this.memorize(Memory.Score, 0, player)
   }
 
   getBuildingSide(options: ArchitectsOfAmytisOptions, buildingType: BuildingType) {

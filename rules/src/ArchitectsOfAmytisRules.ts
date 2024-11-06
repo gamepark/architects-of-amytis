@@ -1,4 +1,5 @@
 import {
+  CompetitiveScore,
   FillGapStrategy,
   HiddenMaterialRules,
   hideItemId,
@@ -13,13 +14,14 @@ import { MaterialType } from './material/MaterialType'
 import { PlayerColor } from './PlayerColor'
 import { CheckEndGameRule } from './rules/CheckEndGameRule'
 import { CheckProjectsRule } from './rules/CheckProjectsRule'
+import { ChooseBuildingTileRule } from './rules/ChooseBuildingTileRule'
 import { ClaimKingsFavorRule } from './rules/ClaimKingsFavorRule'
 import { EndGameScoreRule } from './rules/EndGameScoreRule'
+import { Memory } from './rules/Memory'
 import { PlaceBuildingTileRule } from './rules/PlaceBuildingTileRule'
 import { RetrieveArchitectsRule } from './rules/RetrieveArchitectsRule'
 import { RuleId } from './rules/RuleId'
 import { SelectProjectCardRule } from './rules/SelectProjectCardRule'
-import { ChooseBuildingTileRule } from './rules/ChooseBuildingTileRule'
 import { StakingStrategy } from './rules/util/StakingStrategy'
 
 /**
@@ -27,7 +29,9 @@ import { StakingStrategy } from './rules/util/StakingStrategy'
  * It must follow Game Park "Rules" API so that the Game Park server can enforce the rules.
  */
 export class ArchitectsOfAmytisRules extends HiddenMaterialRules<PlayerColor, MaterialType, LocationType>
-  implements TimeLimit<MaterialGame<PlayerColor, MaterialType, LocationType>, MaterialMove<PlayerColor, MaterialType, LocationType>, PlayerColor> {
+  implements TimeLimit<MaterialGame<PlayerColor, MaterialType, LocationType>, MaterialMove<PlayerColor, MaterialType, LocationType>, PlayerColor>,
+    CompetitiveScore<MaterialGame<PlayerColor, MaterialType, LocationType>, MaterialMove<PlayerColor, MaterialType, LocationType>, PlayerColor> {
+
   rules = {
     [RuleId.RetrieveArchitects]: RetrieveArchitectsRule,
     [RuleId.ChooseBuildingTile]: ChooseBuildingTileRule,
@@ -62,5 +66,9 @@ export class ArchitectsOfAmytisRules extends HiddenMaterialRules<PlayerColor, Ma
 
   giveTime(): number {
     return 60
+  }
+
+  getScore(player: PlayerColor) {
+    return this.remind(Memory.Score, player)
   }
 }
