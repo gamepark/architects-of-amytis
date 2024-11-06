@@ -24,19 +24,9 @@ export class BoardHelper extends MaterialRulesPart {
       || range(0, 3).every(i => architectsMatrix[i][2 - i])
   }
 
-  getVisibleTilesInStack(tilesInBoard: Material) : Material {
-    const topTiles: number[] = []
-
-    for (let x = 0; x < 3; x++) {
-      for (let y = 0; y < 3; y++) {
-        const stack = tilesInBoard.location(location => location.x === x && location.y === y)
-        if (stack.length) {
-          topTiles.push(stack.sort(item => -item.location.z!).getIndex())
-        }
-      }
-    }
-
-    return tilesInBoard.index(index => topTiles.includes(index))
+  getVisibleTilesInStack(tilesInBoard: Material): Material {
+    const items = tilesInBoard.getItems()
+    return tilesInBoard.location(l => !items.some(item => item.location.x === l.x && item.location.y === l.y && item.location.z! > l.z!))
   }
 
   incrementScoreForPlayer(player: number, points: number) {
