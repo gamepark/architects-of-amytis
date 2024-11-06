@@ -12,20 +12,20 @@ export const SelectProjectCardHeader = () => {
   const rules = useRules<ArchitectsOfAmytisRules>()!
   const activePlayer = rules.getActivePlayer()
   const me = usePlayerId()
-  const playerName = usePlayerName(activePlayer)
+  const player = usePlayerName(activePlayer)
   const selectProjectCardRule = new SelectProjectCardRule(rules.game)
   const itsMe = activePlayer === me
   const palaceCardSide = selectProjectCardRule.palaceCardSide
-  const headerYouLabel = palaceCardSide === BuildingCardSide.SideA ? "header.get-project-and-points.you" : "header.get-project-or-points.you"
-  const headerPlayerLabel = palaceCardSide === BuildingCardSide.SideA ? "header.get-project-and-points.player" : "header.get-project-or-points.player"
+  const headerYouLabel = palaceCardSide === BuildingCardSide.SideA ? 'header.get-project-and-points.you' : 'header.get-project-or-points.you'
+  const headerPlayerLabel = palaceCardSide === BuildingCardSide.SideA ? 'header.get-project-and-points.player' : 'header.get-project-or-points.player'
 
   const palaceAction = useLegalMove(isCustomMoveType(CustomMoveType.Score))
   if (palaceCardSide === BuildingCardSide.SideA) {
-    return <Trans defaults={itsMe ? headerYouLabel : headerPlayerLabel } values={{ player: playerName }}/>
-    
+    return <Trans defaults={itsMe ? headerYouLabel : headerPlayerLabel} values={{ player }}/>
+
   } else {
     const points = new PalaceBRule(rules.game).score
-    return <Trans defaults={itsMe ? headerYouLabel : headerPlayerLabel } values={{ player: playerName, nbr: points }} components={{
+    return <Trans defaults={itsMe ? headerYouLabel : headerPlayerLabel} values={{ player, nbr: points }} components={{
       points: <PlayMoveButton move={palaceAction}/>
     }}/>
   }
