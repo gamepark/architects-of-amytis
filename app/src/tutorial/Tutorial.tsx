@@ -91,9 +91,9 @@ export class Tutorial extends MaterialTutorial<PlayerColor, MaterialType, Locati
       },
       focus: (game: MaterialGame) => ({
         materials: [
-          this.material(game, MaterialType.MainBoard)
+          this.material(game, MaterialType.BuildingTile)
         ],
-        staticItem: mainBoardDescription.staticItem.location.type
+        staticItems: [{ type: MaterialType.MainBoard, item: mainBoardDescription.staticItem }]
       })
     },
     {
