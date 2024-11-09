@@ -247,7 +247,7 @@ export class Tutorial extends MaterialTutorial<PlayerColor, MaterialType, Locati
       move: {
         filter: (move) =>
           isMoveItem(move)
-          && move.location.x == 0 && move.location.y === 0
+          && move.location.x === 0 && move.location.y === 0
       }
     },
     {
