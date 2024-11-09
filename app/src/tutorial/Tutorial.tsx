@@ -17,7 +17,10 @@ import { PlayerColor } from '@gamepark/architects-of-amytis/PlayerColor'
 
 export class Tutorial extends MaterialTutorial<PlayerColor, MaterialType, LocationType> {
   version = 1
-  options = { gardenSide: 1, marketSide: 1, palaceSide: 1, wallSide: 1, residenceSide: 1, theaterSide: 1 }
+  options = {
+    players: [{ id: PlayerColor.White }, { id: PlayerColor.Black }],
+    gardenSide: 1, marketSide: 1, palaceSide: 1, wallSide: 1, residenceSide: 1, theaterSide: 1
+  }
   setup = new TutorialSetup()
 
   players = [{ id: me }, {

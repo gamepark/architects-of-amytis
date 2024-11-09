@@ -5,8 +5,8 @@ import { MaterialType } from '@gamepark/architects-of-amytis/material/MaterialTy
 import { Project, projects } from '@gamepark/architects-of-amytis/material/Project'
 import { PlayerColor } from '@gamepark/architects-of-amytis/PlayerColor'
 
-export const me = PlayerColor.Black
-export const opponent = PlayerColor.White
+export const me = PlayerColor.White
+export const opponent = PlayerColor.Black
 export class TutorialSetup extends ArchitectsOfAmytisSetup {
   setupBuildingTiles() {
     this.material(MaterialType.BuildingTile).createItems(buildings.concat(buildings).map((building, index) => ({
