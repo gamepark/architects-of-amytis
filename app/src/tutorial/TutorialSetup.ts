@@ -1,5 +1,5 @@
 import { ArchitectsOfAmytisSetup } from '@gamepark/architects-of-amytis/ArchitectsOfAmytisSetup'
-import { buildings } from '@gamepark/architects-of-amytis/material/Building'
+import { Building, buildings } from '@gamepark/architects-of-amytis/material/Building'
 import { LocationType } from '@gamepark/architects-of-amytis/material/LocationType'
 import { MaterialType } from '@gamepark/architects-of-amytis/material/MaterialType'
 import { Project, projects } from '@gamepark/architects-of-amytis/material/Project'
@@ -29,7 +29,11 @@ export class TutorialSetup extends ArchitectsOfAmytisSetup {
     }
 
     const topTilesDeck = this.material(MaterialType.BuildingTile).location(LocationType.FavorBoardSpace).deck()
-    const topTilesTypesOrder = [11, 42, 25, 26, 23, 13, 31, 34, 15]
+    const topTilesTypesOrder = [
+      Building.OrangeGarden, Building.PurpleMarket, Building.GreenResidence,
+      Building.GreenTheater, Building.GreenWall, Building.BlueWall,
+      Building.BlueGarden, Building.OrangePalace, Building.BlueResidence
+    ]
     for (let x = 0; x < 3; x++) {
       for (let y = 0; y < 3; y++) {
         topTilesDeck.id(topTilesTypesOrder[y*3 + x]).moveItem({ type: LocationType.MainBoardStackSpace, x, y, z: 4, rotation: false })        

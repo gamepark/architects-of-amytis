@@ -77,7 +77,7 @@ class MarketBRule extends BuildingRule {
 class WallARule extends BuildingRule {
   get score() {
     return sumBy(this.playerTopTiles, tile =>
-      getBuildingType(tile.id) === BuildingType.Wall && (tile.location.x !== 1 || tile.location.y !== 1) ? 1 : 0
+      getBuildingType(tile.id) === BuildingType.Wall && (tile.location.x !== 1 || tile.location.y !== 1) ? 2 : 0
     )
   }
 }

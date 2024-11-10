@@ -13,7 +13,9 @@ import { mainBoardDescription } from '../material/MainBoardDescription'
 import { Building } from '@gamepark/architects-of-amytis/material/Building'
 import { LocationType } from '@gamepark/architects-of-amytis/material/LocationType'
 import { PlayerColor } from '@gamepark/architects-of-amytis/PlayerColor'
-// import { scoreBoardDescription } from '../material/ScoreBoardDescription'
+import { scoreBoardDescription } from '../material/ScoreBoardDescription'
+import { favorBoardDescription } from '../material/FavorBoardDescription'
+import { Project } from '@gamepark/architects-of-amytis/material/Project'
 
 export class Tutorial extends MaterialTutorial<PlayerColor, MaterialType, LocationType> {
   version = 1
@@ -100,22 +102,25 @@ export class Tutorial extends MaterialTutorial<PlayerColor, MaterialType, Locati
       popup: {
         text: () => (
           <Trans defaults="tuto.take-building" />
-        )
+        ),
+        position: { x: -20 },
+        size: { width: 50 }
       },
       focus: (game: MaterialGame) => ({
         materials: [
-          this.material(game, MaterialType.BuildingTile).id(Building.GreenWall).location(l => l.z === 4)
+          this.material(game, MaterialType.BuildingTile).id(Building.GreenWall).location(l => l.z === 4),
+          this.material(game, MaterialType.FirstPlayerCard)
         ],
         margin: {
           left: 1,
-          top: 1,
-          right: 15,
-          bottom: 15
-        }
-      }),
+          top: 15,
+          right: 1,
+          bottom: 1
+        },
+      }),      
       move: {
         filter: (move, game) =>
-          isMoveItem(move) && move.itemType === MaterialType.BuildingTile && move.itemIndex === this.material(game, MaterialType.BuildingTile).id(Building.GreenWall).getIndex(),
+          isMoveItem(move) && move.itemType === MaterialType.BuildingTile && move.itemIndex === this.material(game, MaterialType.BuildingTile).id(Building.GreenWall).getIndex()
       }
     },
     {
@@ -134,24 +139,11 @@ export class Tutorial extends MaterialTutorial<PlayerColor, MaterialType, Locati
           this.material(game, MaterialType.Architect).location(LocationType.MainBoardStackSpace)
         ],
         margin: {
-          left: 1,
+          left: 25,
           top: 1,
-          right: 15,
-          bottom: 15
+          right: 1,
+          bottom: 3
         }
-      })
-    },
-    {
-      popup: {
-        text: () => (
-          <Trans defaults="tuto.building.placement-description" />
-        )
-      },
-      focus: (game: MaterialGame) => ({
-        materials: [
-          this.material(game, MaterialType.PlayerBoard).location(LocationType.PlayerBoardStackSpace).player(me),
-          this.material(game, MaterialType.Architect).location(LocationType.PlayerHand).player(me)
-        ]
       })
     },
     {
@@ -165,11 +157,6 @@ export class Tutorial extends MaterialTutorial<PlayerColor, MaterialType, Locati
           />
         )
       }
-      // focus: (game: MaterialGame) => ({
-      //   materials: [
-      //     this.material(game, MaterialType.BuildingTile).location(LocationType.PlayerBoardStackSpace).player(me)
-      //   ]
-      // })
     },
     {
       popup: {
@@ -197,13 +184,11 @@ export class Tutorial extends MaterialTutorial<PlayerColor, MaterialType, Locati
           />
         )
       },
-      focus: () => ({
-        // materials: [
-        //   this.material(game, MaterialType.BuildingCard).location(LocationType.BuildingCardSpot).player(me)
-        // ],
-        locations: [
-          this.location(LocationType.BuildingCardSpot).location
+      focus: (game) => ({
+        materials: [
+          this.material(game, MaterialType.BuildingCard).player(me)
         ]
+        // staticItems: buildingCardDescription.getStaticItems()
       })
     },
     {
@@ -216,6 +201,8 @@ export class Tutorial extends MaterialTutorial<PlayerColor, MaterialType, Locati
         materials: [
           this.material(game, MaterialType.BuildingCard).location(LocationType.BuildingCardSpot).location(l => l.x === 5)
         ]
+        // ,
+        // staticItems: buildingCardDescription.getStaticItems(useMaterialContext())
       })
     },
     {
@@ -229,11 +216,19 @@ export class Tutorial extends MaterialTutorial<PlayerColor, MaterialType, Locati
           />
         )
       }
-      // focus: (game) => ({
-      //   materials: [
-      //     this.material(game, MaterialType.BuildingCard).location(LocationType.BuildingCardSpot).location(l => l.x === 5)
-      //   ]
-      // })
+    },
+    {
+      popup: {
+        text: () => (
+          <Trans defaults="tuto.building.placement-description" />
+        )
+      },
+      focus: (game: MaterialGame) => ({
+        materials: [
+          this.material(game, MaterialType.PlayerBoard).location(LocationType.PlayerBoardStackSpace).player(me),
+          this.material(game, MaterialType.Architect).location(LocationType.PlayerHand).player(me)
+        ]
+      })
     },
     {
       popup: {
@@ -250,7 +245,7 @@ export class Tutorial extends MaterialTutorial<PlayerColor, MaterialType, Locati
       move: {
         filter: (move) =>
           isMoveItem(move)
-          && move.location.x === 0 && move.location.y === 0
+          && move.location.x === 0 && move.location.y === 0 && move.location.player === me
       }
     },
     {
@@ -259,31 +254,40 @@ export class Tutorial extends MaterialTutorial<PlayerColor, MaterialType, Locati
           <Trans defaults="tuto.wall.score" />
         )
       },
-      focus: () => ({
-        locations: [
-          this.location(LocationType.ScoreBoardSpot).location
-        ]
+      focus: (game: MaterialGame) => ({
+        materials: [
+          this.material(game, MaterialType.ScoreBoard),
+          this.material(game, MaterialType.Pawn).location(LocationType.ScoreBoardSpace).id(me)
+        ],
+        staticItems: [{ type: MaterialType.ScoreBoard, item: scoreBoardDescription.staticItem }],
+        margin: {
+          top: 1,
+          bottom: 5,
+          left: 1,
+          right: 60
+        }
       })
     },
     {
+      // focus: () => ({
+      //   locations: [
+      //     this.location(LocationType.PlayerBoardSpot).player(opponent).location
+      //   ]
+      // }),
+      move: {
+        player: opponent,
+        filter: (move, game) =>
+          isMoveItem(move) && move.itemType === MaterialType.BuildingTile && move.itemIndex === this.material(game, MaterialType.BuildingTile).id(Building.PurpleMarket).getIndex()
+      }
+    },
+    { 
       popup: {
         text: () => (
           <Trans defaults="tuto.opponent.place-market" />
         )
       },
-      focus: () => ({
-        locations: [
-          this.location(LocationType.PlayerBoardSpot).player(opponent).location
-        ]
-        // ,
-        // staticItems: [
-        //   scoreBoardDescription.staticItems.map((item) => ({ type: MaterialType.ScoreBoard, item}))
-        // ]
-      }),
       move: {
         player: opponent,
-        filter: (move, game) =>
-          isMoveItem(move) && move.itemType === MaterialType.BuildingTile && move.itemIndex === this.material(game, MaterialType.BuildingTile).id(Building.PurpleMarket).getIndex(),
         interrupt: (move) => isMoveItemType(MaterialType.BuildingTile)(move)
       }
     },
@@ -321,6 +325,205 @@ export class Tutorial extends MaterialTutorial<PlayerColor, MaterialType, Locati
           left: 25
         }
       })
+    },
+    {
+      popup: {
+        text: () => (
+          <Trans defaults="tuto.take-building" />
+        ),
+        position: { x: -20 },
+        size: { width: 50 }
+      },
+      focus: (game: MaterialGame) => ({
+        materials: [
+          this.material(game, MaterialType.BuildingTile).id(Building.BlueResidence).location(l => l.z === 4),
+          this.material(game, MaterialType.FirstPlayerCard)
+        ],
+        margin: {
+          left: 1,
+          top: 15,
+          right: 1,
+          bottom: 1
+        },
+      }),      
+      move: {
+        filter: (move, game) =>
+          isMoveItem(move) && move.itemType === MaterialType.BuildingTile && move.itemIndex === this.material(game, MaterialType.BuildingTile).id(Building.BlueResidence).getIndex()
+      }
+    },
+    {
+      popup: {
+        text: () => (
+          <Trans defaults="tuto.place-residence" />
+        )
+      },
+      focus: () => ({
+        locations: [
+          this.location(LocationType.PlayerBoardStackSpace).player(me).location,
+          this.location(LocationType.PlayerHand).player(me).location
+        ]
+      }),
+      move: {
+        filter: (move) =>
+          isMoveItem(move)
+          && move.location.x === 1 && move.location.y === 1 && move.location.player === me
+      }
+    },
+    {
+      popup: {
+        text: () => (
+          <Trans
+            defaults="tuto.residence.score"
+            components={{
+              bold: <strong />
+            }}
+          />
+        )
+      }
+    },
+    {
+      // focus: () => ({
+      //   locations: [
+      //     this.location(LocationType.PlayerBoardSpot).player(opponent).location
+      //   ]
+      // }),
+      move: {
+        player: opponent,
+        filter: (move, game) =>
+          isMoveItem(move) && move.itemType === MaterialType.BuildingTile && move.itemIndex === this.material(game, MaterialType.BuildingTile).id(Building.GreenTheater).getIndex()
+      }
+    },
+    { 
+      popup: {
+        text: () => (
+          <Trans defaults="tuto.opponent.place-theater" />
+        )
+      },
+      move: {
+        player: opponent,
+        interrupt: (move) => isMoveItemType(MaterialType.BuildingTile)(move)
+      }
+    },
+    {
+      popup: {
+        text: () => (
+          <Trans defaults="tuto.take-building" />
+        ),
+        position: { x: -20 },
+        size: { width: 40 }
+      },
+      focus: (game: MaterialGame) => ({
+        materials: [
+          this.material(game, MaterialType.BuildingTile).id(Building.OrangeGarden).location(l => l.z === 4),
+          this.material(game, MaterialType.FirstPlayerCard)
+        ],
+        margin: {
+          left: 1,
+          top: 15,
+          right: 1,
+          bottom: 1
+        },
+      }),      
+      move: {
+        filter: (move, game) =>
+          isMoveItem(move) && move.itemType === MaterialType.BuildingTile && move.itemIndex === this.material(game, MaterialType.BuildingTile).id(Building.OrangeGarden).getIndex()
+      }
+    },
+    {
+      popup: {
+        text: () => (
+          <Trans defaults="tuto.place-garden" />
+        )
+      },
+      focus: () => ({
+        locations: [
+          this.location(LocationType.PlayerBoardStackSpace).player(me).location,
+          this.location(LocationType.PlayerHand).player(me).location
+        ]
+      }),
+      move: {
+        filter: (move) =>
+          isMoveItem(move)
+          && move.location.x === 2 && move.location.y === 2 && move.location.player === me
+      }
+    },
+    {
+      popup: {
+        text: () => (
+          <Trans defaults="tuto.project-card.validation" />
+        )
+      },
+      focus: (game: MaterialGame) => ({
+        materials: [
+          this.material(game, MaterialType.BuildingTile).location(LocationType.PlayerBoardStackSpace).player(me),
+          this.material(game, MaterialType.ProjectCard).id(Project.Project1)
+        ],
+        staticItems: [{ type: MaterialType.PlayerBoard, item: mainBoardDescription.staticItem }]
+      })
+      // ,
+      // move: {
+      //   interrupt: (move) => isMoveItemType(MaterialType.ProjectCard)(move)
+      // }
+    },
+    {
+      popup: {
+        text: () => (
+          <Trans
+            defaults="tuto.favor-board"
+            components={{
+              bold: <strong />
+            }}
+          />
+        )
+      },
+      focus: (game: MaterialGame) => ({
+        materials: [
+          this.material(game, MaterialType.FavorBoard)
+        ],
+        staticItems: [{ type: MaterialType.FavorBoard, item: favorBoardDescription.staticItem }],
+        margin: {
+          left: 50,
+          top: 1,
+          right: 1,
+          bottom: 5
+        }
+      })
+    },
+    {
+      popup: {
+        text: () => (
+          <Trans defaults="tuto.favor-board.action" />
+        )
+      },
+      focus: (game: MaterialGame) => ({
+        materials: [
+          this.material(game, MaterialType.FavorBoard)
+        ],
+        staticItems: [{ type: MaterialType.FavorBoard, item: favorBoardDescription.staticItem }],
+        margin: {
+          left: 50,
+          top: 1,
+          right: 1,
+          bottom: 3
+        }
+      }),
+      move: {
+        interrupt: (move) => isMoveItemType(MaterialType.Pawn)(move)
+      }
+    },
+    {
+      popup: {
+        text: () => (
+          <Trans defaults="tuto.end-game" />
+        )
+      }
+    },
+    {
+      popup: {
+        text: () => (
+          <Trans defaults="tuto.over" />
+        )
+      }
     }
   ]
 }
