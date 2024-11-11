@@ -63,17 +63,18 @@ class BuildingCardDescription extends CardDescription {
   help = BuildingCardHelp
   
   getStaticItems({ rules }: MaterialContext) {
-    return playerColors.flatMap(player => buildingTypes.map(buildingType => {
-      const side = rules.remind<Record<BuildingType, BuildingCardSide>>(Memory.BuildingCardsSides)[buildingType]
-      return ({
-        id: player * 100 + side * 10 + buildingType,
-        location: {
-          player,
-          type: LocationType.BuildingCardSpot,
-          x: buildingType - 1
-        }
-      })
-    }))
+    return this.getBuildingCards(rules.remind<Record<BuildingType, BuildingCardSide>>(Memory.BuildingCardsSides))
+  }
+
+  getBuildingCards(sides: Record<BuildingType, BuildingCardSide>) {
+    return playerColors.flatMap(player => buildingTypes.map(buildingType => ({
+      id: player * 100 + sides[buildingType] * 10 + buildingType,
+      location: {
+        player,
+        type: LocationType.BuildingCardSpot,
+        x: buildingType - 1
+      }
+    })))
   }
 }
 
