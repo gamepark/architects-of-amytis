@@ -444,7 +444,8 @@ export class Tutorial extends MaterialTutorial<PlayerColor, MaterialType, Locati
       move: {
         filter: (move) =>
           isMoveItem(move)
-          && move.location.x === 2 && move.location.y === 2 && move.location.player === me
+          && move.location.x === 2 && move.location.y === 2 && move.location.player === me,
+        interrupt: move => isMoveItemType(MaterialType.ProjectCard)(move)
       }
     },
     {
@@ -459,11 +460,8 @@ export class Tutorial extends MaterialTutorial<PlayerColor, MaterialType, Locati
           this.material(game, MaterialType.ProjectCard).id(Project.Project1)
         ],
         staticItems: [{ type: MaterialType.PlayerBoard, item: mainBoardDescription.staticItem }]
-      })
-      // ,
-      // move: {
-      //   interrupt: (move) => isMoveItemType(MaterialType.ProjectCard)(move)
-      // }
+      }),
+      move: {}
     },
     {
       popup: {
