@@ -7,6 +7,7 @@ import {
   MaterialItem,
   MaterialMove,
   PositiveSequenceStrategy,
+  StakingStrategy,
   TimeLimit
 } from '@gamepark/rules-api'
 import { LocationType } from './material/LocationType'
@@ -22,7 +23,6 @@ import { PlaceBuildingTileRule } from './rules/PlaceBuildingTileRule'
 import { RetrieveArchitectsRule } from './rules/RetrieveArchitectsRule'
 import { RuleId } from './rules/RuleId'
 import { SelectProjectCardRule } from './rules/SelectProjectCardRule'
-import { StakingStrategy } from './rules/util/StakingStrategy'
 
 /**
  * This class implements the rules of the board game.
