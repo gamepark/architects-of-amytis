@@ -134,7 +134,7 @@ class TheaterARule extends BuildingRule {
 
 class TheaterBRule extends BuildingRule {
   get score() {
-    return this.material(MaterialType.Architect).location(LocationType.MainBoardStackSpace).player(this.tile.location.player).length * 2
+    return this.material(MaterialType.Architect).location(LocationType.MainBoardStackSpace).id(this.tile.location.player).length * 2
   }
 }
 
