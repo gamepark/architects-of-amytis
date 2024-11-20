@@ -19,7 +19,6 @@ import { ChooseBuildingTileRule } from './rules/ChooseBuildingTileRule'
 import { ClaimKingsFavorRule } from './rules/ClaimKingsFavorRule'
 import { EndGameScoreRule } from './rules/EndGameScoreRule'
 import { Memory } from './rules/Memory'
-import { PlaceBuildingTileRule } from './rules/PlaceBuildingTileRule'
 import { RetrieveArchitectsRule } from './rules/RetrieveArchitectsRule'
 import { RuleId } from './rules/RuleId'
 import { SelectProjectCardRule } from './rules/SelectProjectCardRule'
@@ -35,7 +34,6 @@ export class ArchitectsOfAmytisRules extends HiddenMaterialRules<PlayerColor, Ma
   rules = {
     [RuleId.RetrieveArchitects]: RetrieveArchitectsRule,
     [RuleId.ChooseBuildingTile]: ChooseBuildingTileRule,
-    [RuleId.PlaceBuildingTile]: PlaceBuildingTileRule,
     [RuleId.SelectProjectCard]: SelectProjectCardRule,
     [RuleId.CheckProjects]: CheckProjectsRule,
     [RuleId.ClaimKingsFavor]: ClaimKingsFavorRule,
@@ -44,6 +42,9 @@ export class ArchitectsOfAmytisRules extends HiddenMaterialRules<PlayerColor, Ma
   }
 
   locationsStrategies = {
+    [MaterialType.BuildingTile]: {
+      [LocationType.PlayerBoardStackSpace]: new StakingStrategy()
+    },
     [MaterialType.ProjectCard]: {
       [LocationType.ProjectCardsDeck]: new PositiveSequenceStrategy(),
       [LocationType.ProjectCardsDisplay]: new FillGapStrategy(),
