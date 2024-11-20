@@ -60,6 +60,7 @@ class ProjectCardDescription extends CardDescription {
   menuAlwaysVisible = true
 
   getItemMenu(item: MaterialItem, context: ItemContext) {
+    if (context.rules.game.tutorial && context.rules.game.tutorial.step < 16) return
     if (item.location.type === LocationType.ProjectCardsDisplay
       || (item.location.type === LocationType.PlayerProjectCardsSpot && item.location.player === context.player)) {
       const card = context.rules.material(MaterialType.ProjectCard).index(context.index)
