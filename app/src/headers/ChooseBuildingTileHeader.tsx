@@ -10,8 +10,6 @@ export const ChooseBuildingTileHeader = () => {
   const itsMe = activePlayer === me
   const player = usePlayerName(activePlayer)
   return (
-    <Trans defaults={itsMe ? 'header.choose-building.you' : 'header.choose-building.player'} values={{ player }}>
-      <strong/>
-    </Trans>
+    <Trans defaults={itsMe ? 'header.choose-building.you' : 'header.choose-building.player'} values={{ player }}/>
   )
 }

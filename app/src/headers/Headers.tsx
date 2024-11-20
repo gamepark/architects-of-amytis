@@ -7,10 +7,12 @@ import { ClaimKingsFavorHeader } from './ClaimKingsFavorHeader'
 import { EndGameScoreHeader } from './EndGameScoreHeader'
 import { RetrieveArchitectsHeader } from './RetrieveArchitectsHeader'
 import { SelectProjectCardHeader } from './SelectProjectCardHeader'
+import { ValidateBuildingHeader } from './ValidateBuildingHeader'
 
 export const Headers: Partial<Record<RuleId, ComponentType>> = {
   [RuleId.RetrieveArchitects]: RetrieveArchitectsHeader,
   [RuleId.ChooseBuildingTile]: ChooseBuildingTileHeader,
+  [RuleId.ValidateBuilding]: ValidateBuildingHeader,
   [RuleId.SelectProjectCard]: SelectProjectCardHeader,
   [RuleId.CheckProjects]: CheckProjectsHeader,
   [RuleId.ClaimKingsFavor]: ClaimKingsFavorHeader,

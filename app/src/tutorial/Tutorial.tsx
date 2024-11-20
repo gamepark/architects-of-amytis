@@ -1,5 +1,5 @@
 /** @jsxImportSource @emotion/react */
-import { Building, buildingTypes } from '@gamepark/architects-of-amytis/material/Building'
+import { Building } from '@gamepark/architects-of-amytis/material/Building'
 import { LocationType } from '@gamepark/architects-of-amytis/material/LocationType'
 import { MaterialType } from '@gamepark/architects-of-amytis/material/MaterialType'
 import { Project } from '@gamepark/architects-of-amytis/material/Project'
@@ -51,7 +51,7 @@ export class Tutorial extends MaterialTutorial<PlayerColor, MaterialType, Locati
           <Trans
             defaults="tuto.welcome"
             components={{
-              bold: <strong />
+              bold: <strong/>
             }}
           />
         )
@@ -60,14 +60,14 @@ export class Tutorial extends MaterialTutorial<PlayerColor, MaterialType, Locati
     {
       popup: {
         text: () => (
-          <Trans defaults="tuto.intro" />
+          <Trans defaults="tuto.intro"/>
         )
       }
     },
     {
       popup: {
         text: () => (
-          <Trans defaults="tuto.intro.players-colors" />
+          <Trans defaults="tuto.intro.players-colors"/>
         ),
         position: {
           y: -10
@@ -90,7 +90,7 @@ export class Tutorial extends MaterialTutorial<PlayerColor, MaterialType, Locati
     {
       popup: {
         text: () => (
-          <Trans defaults="tuto.intro.main-board" />
+          <Trans defaults="tuto.intro.main-board"/>
         ),
         position: { x: -30 }
       },
@@ -105,7 +105,7 @@ export class Tutorial extends MaterialTutorial<PlayerColor, MaterialType, Locati
     {
       popup: {
         text: () => (
-          <Trans defaults="tuto.take-building" />
+          <Trans defaults="tuto.take-building"/>
         ),
         position: { x: -21, y: -10 },
         size: { width: 50 }
@@ -120,15 +120,20 @@ export class Tutorial extends MaterialTutorial<PlayerColor, MaterialType, Locati
           top: 15,
           right: 1,
           bottom: 12
-        },
+        }
       }),
       move: {
         filter: (move, game) =>
           isMoveItem(move) && move.itemType === MaterialType.BuildingTile
           && move.itemIndex === this.material(game, MaterialType.BuildingTile).id(Building.GreenWall).location(l => l.x === 1 && l.y === 1).getIndex()
-          && move.location.x === 0 && move.location.y === 0,
-        interrupt: isCustomMove
+          && move.location.x === 0 && move.location.y === 0
       }
+    },
+    {
+      popup: {
+        text: () => <Trans defaults="tuto.validate"/>
+      },
+      move: { interrupt: isCustomMove }
     },
     {
       popup: {
@@ -136,7 +141,7 @@ export class Tutorial extends MaterialTutorial<PlayerColor, MaterialType, Locati
           <Trans
             defaults="tuto.place-architect"
             components={{
-              bold: <strong />
+              bold: <strong/>
             }}
           />
         ),
@@ -156,7 +161,7 @@ export class Tutorial extends MaterialTutorial<PlayerColor, MaterialType, Locati
           <Trans
             defaults="tuto.building.anatomy-description"
             components={{
-              bold: <strong />
+              bold: <strong/>
             }}
           />
         )
@@ -165,7 +170,7 @@ export class Tutorial extends MaterialTutorial<PlayerColor, MaterialType, Locati
     {
       popup: {
         text: () => (
-          <Trans defaults="tuto.building.color-description" />
+          <Trans defaults="tuto.building.color-description"/>
         )
       },
       focus: (game: MaterialGame) => ({
@@ -183,7 +188,7 @@ export class Tutorial extends MaterialTutorial<PlayerColor, MaterialType, Locati
           <Trans
             defaults="tuto.building-cards"
             components={{
-              bold: <strong />
+              bold: <strong/>
             }}
           />
         ),
@@ -205,7 +210,7 @@ export class Tutorial extends MaterialTutorial<PlayerColor, MaterialType, Locati
     {
       popup: {
         text: () => (
-          <Trans defaults="tuto.building-cards.wall" />
+          <Trans defaults="tuto.building-cards.wall"/>
         ),
         position: { x: 15, y: 15 }
       },
@@ -213,29 +218,18 @@ export class Tutorial extends MaterialTutorial<PlayerColor, MaterialType, Locati
         materials: [
           this.material(game, MaterialType.BuildingCard).player(me)
         ],
-        staticItems: buildingTypes.map(() => ({
-          type: MaterialType.BuildingCard, item: buildingCardDescription.getBuildingCards({
-            "1": 1,
-            "2": 1,
-            "3": 1,
-            "4": 1,
-            "5": 1,
-            "6": 1
-          }).filter(elem => elem.location.player === me)[2]
-        })),
-        margin: {
-          top: 1,
-          bottom: 20,
-          left: 1,
-          right: 30
-        }
+        staticItems: {
+          [MaterialType.BuildingCard]: buildingCardDescription.getBuildingCards(game.memory[Memory.BuildingCardsSides])
+            .filter(item => item.location.player === me && item.id === 213)
+        },
+        scale: 0.3
       }),
       move: {}
     },
     {
       popup: {
         text: () => (
-          <Trans defaults="tuto.wall.score" />
+          <Trans defaults="tuto.wall.score"/>
         )
       },
       focus: (game: MaterialGame) => ({
@@ -257,7 +251,7 @@ export class Tutorial extends MaterialTutorial<PlayerColor, MaterialType, Locati
           <Trans
             defaults="tuto.building-cards.effects"
             components={{
-              bold: <strong />
+              bold: <strong/>
             }}
           />
         ),
@@ -292,9 +286,12 @@ export class Tutorial extends MaterialTutorial<PlayerColor, MaterialType, Locati
       }
     },
     {
+      move: { player: opponent }
+    },
+    {
       popup: {
         text: () => (
-          <Trans defaults="tuto.opponent.place-market" />
+          <Trans defaults="tuto.opponent.place-market"/>
         ),
         position: { x: -20, y: 10 }
       },
@@ -304,13 +301,13 @@ export class Tutorial extends MaterialTutorial<PlayerColor, MaterialType, Locati
           this.material(game, MaterialType.Pawn).location(LocationType.ScoreBoardSpace).id(opponent)
         ],
         staticItems: [{ type: MaterialType.ScoreBoard, item: scoreBoardDescription.staticItem }],
-        margin: {left: 10, top: 3, bottom: 5, right: 1}
+        margin: { left: 10, top: 3, bottom: 5, right: 1 }
       })
     },
     {
       popup: {
         text: () => (
-          <Trans defaults="tuto.project-card.intro" />
+          <Trans defaults="tuto.project-card.intro"/>
         )
       },
       focus: (game) => ({
@@ -328,7 +325,7 @@ export class Tutorial extends MaterialTutorial<PlayerColor, MaterialType, Locati
           <Trans
             defaults="tuto.project-card.description"
             components={{
-              bold: <strong />
+              bold: <strong/>
             }}
           />
         )
@@ -345,7 +342,7 @@ export class Tutorial extends MaterialTutorial<PlayerColor, MaterialType, Locati
     {
       popup: {
         text: () => (
-          <Trans defaults="tuto.place-residence" />
+          <Trans defaults="tuto.place-residence"/>
         ),
         position: { x: -20, y: -15 },
         size: { width: 50 }
@@ -360,7 +357,7 @@ export class Tutorial extends MaterialTutorial<PlayerColor, MaterialType, Locati
           top: 15,
           right: 1,
           bottom: 10
-        },
+        }
       }),
       move: {
         filter: (move, game) =>
@@ -371,11 +368,17 @@ export class Tutorial extends MaterialTutorial<PlayerColor, MaterialType, Locati
     },
     {
       popup: {
+        text: () => <Trans defaults="tuto.validate"/>
+      },
+      move: {}
+    },
+    {
+      popup: {
         text: () => (
           <Trans
             defaults="tuto.residence.score"
             components={{
-              bold: <strong />
+              bold: <strong/>
             }}
           />
         )
@@ -390,9 +393,12 @@ export class Tutorial extends MaterialTutorial<PlayerColor, MaterialType, Locati
       }
     },
     {
+      move: { player: opponent }
+    },
+    {
       popup: {
         text: () => (
-          <Trans defaults="tuto.opponent.place-theater" />
+          <Trans defaults="tuto.opponent.place-theater"/>
         )
       },
       focus: (game: MaterialGame) => ({
@@ -410,7 +416,7 @@ export class Tutorial extends MaterialTutorial<PlayerColor, MaterialType, Locati
     {
       popup: {
         text: () => (
-          <Trans defaults="tuto.take-building" />
+          <Trans defaults="tuto.take-building"/>
         ),
         position: { x: -18, y: -8 },
         size: { width: 40 }
@@ -419,26 +425,31 @@ export class Tutorial extends MaterialTutorial<PlayerColor, MaterialType, Locati
         materials: [
           this.material(game, MaterialType.BuildingTile).id(Building.OrangeGarden).location(l => l.x === 0 && l.y === 0)
         ],
-        locations: [{type: LocationType.PlayerBoardStackSpace, x: 2, y: 2, player: me}],
+        locations: [{ type: LocationType.PlayerBoardStackSpace, x: 2, y: 2, player: me }],
         margin: {
           left: 1,
           top: 10,
           right: 1,
           bottom: 5
-        },
+        }
       }),
       move: {
         filter: (move, game) =>
           isMoveItem(move) && move.itemType === MaterialType.BuildingTile
           && move.itemIndex === this.material(game, MaterialType.BuildingTile).id(Building.OrangeGarden).location(l => l.x === 0 && l.y === 0).getIndex()
-          && move.location.x === 2 && move.location.y === 2,
-        interrupt: move => isMoveItemType(MaterialType.ProjectCard)(move)
+          && move.location.x === 2 && move.location.y === 2
       }
     },
     {
       popup: {
+        text: () => <Trans defaults="tuto.validate"/>
+      },
+      move: { interrupt: move => isMoveItemType(MaterialType.ProjectCard)(move) }
+    },
+    {
+      popup: {
         text: () => (
-          <Trans defaults="tuto.project-card.validation" />
+          <Trans defaults="tuto.project-card.validation"/>
         ),
         position: { y: -20 }
       },
@@ -457,7 +468,7 @@ export class Tutorial extends MaterialTutorial<PlayerColor, MaterialType, Locati
           <Trans
             defaults="tuto.favor-board"
             components={{
-              bold: <strong />
+              bold: <strong/>
             }}
           />
         ),
@@ -475,7 +486,7 @@ export class Tutorial extends MaterialTutorial<PlayerColor, MaterialType, Locati
     {
       popup: {
         text: () => (
-          <Trans defaults="tuto.favor-board.action" />
+          <Trans defaults="tuto.favor-board.action"/>
         )
       },
       focus: (game: MaterialGame) => ({
@@ -490,21 +501,19 @@ export class Tutorial extends MaterialTutorial<PlayerColor, MaterialType, Locati
           bottom: 3
         }
       }),
-      move: {
-        interrupt: (move) => isMoveItemType(MaterialType.Pawn)(move)
-      }
+      move: {}
     },
     {
       popup: {
         text: () => (
-          <Trans defaults="tuto.end-game" />
+          <Trans defaults="tuto.end-game"/>
         )
       }
     },
     {
       popup: {
         text: () => (
-          <Trans defaults="tuto.good-luck" />
+          <Trans defaults="tuto.good-luck"/>
         )
       }
     }

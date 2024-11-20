@@ -22,6 +22,7 @@ import { Memory } from './rules/Memory'
 import { RetrieveArchitectsRule } from './rules/RetrieveArchitectsRule'
 import { RuleId } from './rules/RuleId'
 import { SelectProjectCardRule } from './rules/SelectProjectCardRule'
+import { ValidateBuildingRule } from './rules/ValidateBuildingRule'
 
 /**
  * This class implements the rules of the board game.
@@ -34,6 +35,7 @@ export class ArchitectsOfAmytisRules extends HiddenMaterialRules<PlayerColor, Ma
   rules = {
     [RuleId.RetrieveArchitects]: RetrieveArchitectsRule,
     [RuleId.ChooseBuildingTile]: ChooseBuildingTileRule,
+    [RuleId.ValidateBuilding]: ValidateBuildingRule,
     [RuleId.SelectProjectCard]: SelectProjectCardRule,
     [RuleId.CheckProjects]: CheckProjectsRule,
     [RuleId.ClaimKingsFavor]: ClaimKingsFavorRule,

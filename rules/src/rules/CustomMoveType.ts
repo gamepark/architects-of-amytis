@@ -2,7 +2,7 @@ import { MaterialType } from '../material/MaterialType'
 import { PlayerColor } from '../PlayerColor'
 
 export enum CustomMoveType {
-  Score = 1
+  Validate = 1, Score
 }
 
 export type ScoreData = {
