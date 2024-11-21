@@ -1,15 +1,16 @@
 import { MaterialType } from '@gamepark/architects-of-amytis/material/MaterialType'
 import { MaterialDescription } from '@gamepark/react-game'
-import { buildingTileDescription } from './BuildingTileDescription'
-import { projectCardDescription } from './ProjectCardDescription'
-import { favorBoardDescription } from './FavorBoardDescription'
-import { scoreBoardDescription } from './ScoreBoardDescription'
-import { mainBoardDescription } from './MainBoardDescription'
-import { playerBoardDescription } from './PlayerBoardDescription'
-import { pawnDescription } from './PawnDescription'
 import { architectDescription } from './ArchitectDescription'
-import { firstPlayerCardDescription } from './FirstPlayerCardDescription'
 import { buildingCardDescription } from './BuildingCardDescription'
+import { buildingTileDescription } from './BuildingTileDescription'
+import { favorBoardDescription } from './FavorBoardDescription'
+import { firstPlayerCardDescription } from './FirstPlayerCardDescription'
+import { frenchBuildingCardDescription } from './fr/FrenchBuildingCardDescription'
+import { mainBoardDescription } from './MainBoardDescription'
+import { pawnDescription } from './PawnDescription'
+import { playerBoardDescription } from './PlayerBoardDescription'
+import { projectCardDescription } from './ProjectCardDescription'
+import { scoreBoardDescription } from './ScoreBoardDescription'
 
 export const Material: Partial<Record<MaterialType, MaterialDescription>> = {
   [MaterialType.MainBoard]: mainBoardDescription,
@@ -22,4 +23,10 @@ export const Material: Partial<Record<MaterialType, MaterialDescription>> = {
   [MaterialType.Architect]: architectDescription,
   [MaterialType.FirstPlayerCard]: firstPlayerCardDescription,
   [MaterialType.BuildingCard]: buildingCardDescription
+}
+
+export const MaterialI18n = {
+  'fr': {
+    [MaterialType.BuildingCard]: frenchBuildingCardDescription
+  }
 }

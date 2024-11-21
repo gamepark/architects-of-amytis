@@ -29,7 +29,7 @@ import WhiteWallA from '../images/cards/en/WhiteWallA.jpg'
 import WhiteWallB from '../images/cards/en/WhiteWallB.jpg'
 import { BuildingCardHelp } from './help/BuildingCardHelp'
 
-class BuildingCardDescription extends CardDescription {
+export class BuildingCardDescription extends CardDescription {
   width = 7
   height = 7
   borderRadius = 0.5
