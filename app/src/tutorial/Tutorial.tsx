@@ -481,6 +481,23 @@ export class Tutorial extends MaterialTutorial<PlayerColor, MaterialType, Locati
     },
     {
       popup: {
+        text: () => <Trans defaults="tuto.palace" components={{ bold: <strong/> }}/>,
+        position: { y: 10 }
+      },
+      focus: (game: MaterialGame) => ({
+        materials: [
+          this.material(game, MaterialType.ProjectCard).location(LocationType.ProjectCardsDisplay),
+          this.material(game, MaterialType.ProjectCard).location(LocationType.ProjectCardsDeck)
+        ],
+        staticItems: {
+          [MaterialType.BuildingCard]: buildingCardDescription.getBuildingCards(game.memory[Memory.BuildingCardsSides], me)
+            .filter(item => item.location.player === me && item.id === 214)
+        },
+        margin: { right: 30, bottom: 10 }
+      })
+    },
+    {
+      popup: {
         text: () => (
           <Trans
             defaults="tuto.favor-board"
