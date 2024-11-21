@@ -196,7 +196,7 @@ export class Tutorial extends MaterialTutorial<PlayerColor, MaterialType, Locati
       },
       focus: (game: MaterialGame) => ({
         staticItems: {
-          [MaterialType.BuildingCard]: buildingCardDescription.getBuildingCards(game.memory[Memory.BuildingCardsSides])
+          [MaterialType.BuildingCard]: buildingCardDescription.getBuildingCards(game.memory[Memory.BuildingCardsSides], me)
             .filter(elem => elem.location.player === me)
         },
         margin: {
@@ -219,7 +219,7 @@ export class Tutorial extends MaterialTutorial<PlayerColor, MaterialType, Locati
           this.material(game, MaterialType.BuildingCard).player(me)
         ],
         staticItems: {
-          [MaterialType.BuildingCard]: buildingCardDescription.getBuildingCards(game.memory[Memory.BuildingCardsSides])
+          [MaterialType.BuildingCard]: buildingCardDescription.getBuildingCards(game.memory[Memory.BuildingCardsSides], me)
             .filter(item => item.location.player === me && item.id === 213)
         },
         scale: 0.3
@@ -259,7 +259,7 @@ export class Tutorial extends MaterialTutorial<PlayerColor, MaterialType, Locati
       },
       focus: (game: MaterialGame) => ({
         staticItems: {
-          [MaterialType.BuildingCard]: buildingCardDescription.getBuildingCards(game.memory[Memory.BuildingCardsSides])
+          [MaterialType.BuildingCard]: buildingCardDescription.getBuildingCards(game.memory[Memory.BuildingCardsSides], me)
             .filter(elem => elem.location.player === me)
         },
         margin: {

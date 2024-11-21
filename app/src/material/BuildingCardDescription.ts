@@ -1,6 +1,6 @@
 import { BuildingCardSide, BuildingType, buildingTypes } from '@gamepark/architects-of-amytis/material/Building'
 import { LocationType } from '@gamepark/architects-of-amytis/material/LocationType'
-import { PlayerColor, playerColors } from '@gamepark/architects-of-amytis/PlayerColor'
+import { PlayerColor } from '@gamepark/architects-of-amytis/PlayerColor'
 import { Memory } from '@gamepark/architects-of-amytis/rules/Memory'
 import { CardDescription, MaterialContext } from '@gamepark/react-game'
 import BlackGardenA from '../images/cards/en/BlackGardenA.jpg'
@@ -61,20 +61,20 @@ class BuildingCardDescription extends CardDescription {
   }
 
   help = BuildingCardHelp
-  
-  getStaticItems({ rules }: MaterialContext) {
-    return this.getBuildingCards(rules.remind<Record<BuildingType, BuildingCardSide>>(Memory.BuildingCardsSides))
+
+  getStaticItems({ rules, player = rules.players[0] }: MaterialContext) {
+    return this.getBuildingCards(rules.remind<Record<BuildingType, BuildingCardSide>>(Memory.BuildingCardsSides), player)
   }
 
-  getBuildingCards(sides: Record<BuildingType, BuildingCardSide>) {
-    return playerColors.flatMap(player => buildingTypes.map(buildingType => ({
+  getBuildingCards(sides: Record<BuildingType, BuildingCardSide>, player: PlayerColor) {
+    return buildingTypes.map(buildingType => ({
       id: player * 100 + sides[buildingType] * 10 + buildingType,
       location: {
         player,
         type: LocationType.BuildingCardSpot,
         x: buildingType - 1
       }
-    })))
+    }))
   }
 }
 
