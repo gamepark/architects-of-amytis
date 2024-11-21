@@ -250,6 +250,8 @@
       "header.retrieve-architects.player": "{player} récupère ses Architectes",
       "header.choose-building.you": "Prenez une tuile du plateau Principal et placez-la sur votre plateau",
       "header.choose-building.player": "{player} doit placer une tuile bâtiment",
+      "header.validate-building.you": "Vous devez <validate>Valider</validate> ou <undo>Annuler</undo>",
+      "header.validate-building.player": "{player} doit valider le choix de son bâtiment",
       "header.get-project-and-points.you": "Vous devez prendre une carte Projet",
       "header.get-project-and-points.player": "{player} doit prendre un carte Projet",
       "header.get-project-or-points.you": "Vous pouvez prendre une carte Projet ou <points>marquer {nbr, plural, one{# point} other{# points}}</points>",
