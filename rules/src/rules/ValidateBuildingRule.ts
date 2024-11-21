@@ -1,4 +1,4 @@
-import { CustomMove, Location, MaterialMove, PlayerTurnRule } from '@gamepark/rules-api'
+import { CustomMove, isMoveItemType, ItemMove, Location, MaterialMove, PlayerTurnRule } from '@gamepark/rules-api'
 import { BuildingCardSide, BuildingType, getBuildingType } from '../material/Building'
 import { LocationType } from '../material/LocationType'
 import { MaterialType } from '../material/MaterialType'
@@ -26,7 +26,6 @@ export class ValidateBuildingRule extends PlayerTurnRule {
 
   validate() {
     const moves: MaterialMove[] = []
-    const tile = this.remind<number>(Memory.PlacedTile)
     const location = this.remind<Location>(Memory.PlacedTileOrigin)
     const tileBelow = this.material(MaterialType.BuildingTile)
       .location(LocationType.MainBoardStackSpace)
@@ -37,20 +36,29 @@ export class ValidateBuildingRule extends PlayerTurnRule {
     }
     moves.push(this.material(MaterialType.Architect).location(LocationType.PlayerArchitectsSupply).player(this.player).moveItem(location))
 
-    const buildingType = getBuildingType(this.material(MaterialType.BuildingTile).getItem(tile).id)
-    if (buildingType !== BuildingType.Palace) {
-      const buildingCardSide = this.remind(Memory.BuildingCardsSides)[buildingType] as BuildingCardSide
-      const buildingRule = new BuildingRules[buildingType][buildingCardSide](this.game)
-      const scoreData: ScoreData = {
-        player: this.player,
-        points: buildingRule.score,
-        item: { type: MaterialType.BuildingTile, indexes: [this.remind(Memory.PlacedTile)] }
-      }
-      moves.push(this.customMove(CustomMoveType.Score, scoreData))
-      moves.push(this.startRule(RuleId.CheckProjects))
-    } else {
-      moves.push(this.startRule(RuleId.SelectProjectCard))
-    }
     return moves
+  }
+
+  afterItemMove(move: ItemMove) {
+    if (isMoveItemType(MaterialType.Architect)(move)) {
+      const moves: MaterialMove[] = []
+      const tile = this.remind<number>(Memory.PlacedTile)
+      const buildingType = getBuildingType(this.material(MaterialType.BuildingTile).getItem(tile).id)
+      if (buildingType !== BuildingType.Palace) {
+        const buildingCardSide = this.remind(Memory.BuildingCardsSides)[buildingType] as BuildingCardSide
+        const buildingRule = new BuildingRules[buildingType][buildingCardSide](this.game)
+        const scoreData: ScoreData = {
+          player: this.player,
+          points: buildingRule.score,
+          item: { type: MaterialType.BuildingTile, indexes: [this.remind(Memory.PlacedTile)] }
+        }
+        moves.push(this.customMove(CustomMoveType.Score, scoreData))
+        moves.push(this.startRule(RuleId.CheckProjects))
+      } else {
+        moves.push(this.startRule(RuleId.SelectProjectCard))
+      }
+      return moves
+    }
+    return []
   }
 }
