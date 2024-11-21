@@ -1,10 +1,12 @@
+import { faHandBackFist } from '@fortawesome/free-solid-svg-icons'
 import { faRotateRight } from '@fortawesome/free-solid-svg-icons/faRotateRight'
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome'
 import { LocationType } from '@gamepark/architects-of-amytis/material/LocationType'
 import { MaterialType } from '@gamepark/architects-of-amytis/material/MaterialType'
 import { Project } from '@gamepark/architects-of-amytis/material/Project'
 import { CardDescription, ItemContext, ItemMenuButton, MaterialContext } from '@gamepark/react-game'
-import { MaterialItem, MaterialMoveBuilder } from '@gamepark/rules-api'
+import { isMoveItemType, MaterialItem, MaterialMove, MaterialMoveBuilder } from '@gamepark/rules-api'
+import { Trans } from 'react-i18next'
 import Project1 from '../images/cards/ProjectCard1.jpg'
 import Project10 from '../images/cards/ProjectCard10.jpg'
 import Project11 from '../images/cards/ProjectCard11.jpg'
@@ -59,20 +61,31 @@ class ProjectCardDescription extends CardDescription {
 
   menuAlwaysVisible = true
 
-  getItemMenu(item: MaterialItem, context: ItemContext) {
+  getItemMenu(item: MaterialItem, context: ItemContext, legalMoves: MaterialMove[]) {
     if (context.rules.game.tutorial && context.rules.game.tutorial.step < 18) return
-    if (item.location.type === LocationType.ProjectCardsDisplay
-      || (item.location.type === LocationType.PlayerProjectCardsSpot && item.location.player === context.player)) {
-      const card = context.rules.material(MaterialType.ProjectCard).index(context.index)
-      const rotation = item.location.rotation ?? 0
-      return <>
+    const showRotateButton = this.showRotateButton(item, context)
+    const take = legalMoves.find(move => isMoveItemType(MaterialType.ProjectCard)(move) && move.itemIndex === context.index)
+    if (!showRotateButton && !take) return
+    const card = context.rules.material(MaterialType.ProjectCard).index(context.index)
+    const rotation = item.location.rotation ?? 0
+    return <>
+      {take &&
+        <ItemMenuButton label={<Trans defaults="Take"/>}  radius={3} move={take}>
+          <FontAwesomeIcon icon={faHandBackFist}/>
+        </ItemMenuButton>
+      }
+      {showRotateButton &&
         <ItemMenuButton label="" angle={90} radius={3}
                         move={card.rotateItem((rotation + 1) % 4)} options={{ transient: true }}>
           <FontAwesomeIcon icon={faRotateRight}/>
         </ItemMenuButton>
-      </>
-    }
-    return
+      }
+    </>
+  }
+
+  showRotateButton(item: MaterialItem, context: ItemContext) {
+    return item.location.type === LocationType.ProjectCardsDisplay
+      || (item.location.type === LocationType.PlayerProjectCardsSpot && item.location.player === context.player)
   }
 
   help = ProjectCardHelp
