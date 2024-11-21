@@ -382,7 +382,20 @@ export class Tutorial extends MaterialTutorial<PlayerColor, MaterialType, Locati
             }}
           />
         )
-      }
+      },
+      focus: (game: MaterialGame) => ({
+        materials: [
+          this.material(game, MaterialType.BuildingTile).location(LocationType.PlayerBoardStackSpace)
+            .id(Building.BlueResidence).player(me),
+          this.material(game, MaterialType.Pawn).location(LocationType.ScoreBoardSpace)
+        ],
+        staticItems: {
+          [MaterialType.ScoreBoard]: [scoreBoardDescription.staticItem],
+          [MaterialType.BuildingCard]: buildingCardDescription.getBuildingCards(game.memory[Memory.BuildingCardsSides], me)
+            .filter(item => item.location.player === me && item.id === 212)
+        },
+        margin: { left: 3 }
+      })
     },
     {
       move: {
@@ -399,18 +412,22 @@ export class Tutorial extends MaterialTutorial<PlayerColor, MaterialType, Locati
       popup: {
         text: () => (
           <Trans defaults="tuto.opponent.place-theater"/>
-        )
+        ),
+        position: { x: -15, y: 25 }
       },
       focus: (game: MaterialGame) => ({
         materials: [
           this.material(game, MaterialType.BuildingTile).location(LocationType.PlayerBoardStackSpace)
             .id(Building.GreenTheater).player(opponent),
-          this.material(game, MaterialType.Pawn).location(LocationType.ScoreBoardSpace)
+          this.material(game, MaterialType.Pawn).location(LocationType.ScoreBoardSpace),
+          this.material(game, MaterialType.Architect).location(LocationType.MainBoardStackSpace)
         ],
         staticItems: {
-          [MaterialType.ScoreBoard]: [scoreBoardDescription.staticItem]
+          [MaterialType.ScoreBoard]: [scoreBoardDescription.staticItem],
+          [MaterialType.BuildingCard]: buildingCardDescription.getBuildingCards(game.memory[Memory.BuildingCardsSides], me)
+            .filter(item => item.location.player === me && item.id === 212)
         },
-        scale: 0.3
+        margin: { left: 3 }
       })
     },
     {
