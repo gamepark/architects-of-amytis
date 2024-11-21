@@ -151,7 +151,7 @@ export class EndGameScoreRule extends PlayerTurnRule {
   }
 
   countValidatedProjects(player: PlayerColor): number {
-    return this.material(MaterialType.ProjectCard).location(LocationType.ProjectCardsDisplay).player(player).getQuantity()
+    return this.material(MaterialType.ProjectCard).location(LocationType.PlayerValidatedProjectCardsPile).player(player).getQuantity()
   }
 
   pawnsInBottomRowScore(player: PlayerColor): number {
