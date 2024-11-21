@@ -6,8 +6,8 @@ import { ArchitectHelp } from "./help/ArchitectHelp"
 
 class ArchitectDescription extends TokenDescription {
   borderRadius = 0.5
-  width = 2.3 * 0.7
-  height = 3.5 * 0.7
+  width = 2.6 * 0.7
+  height = 3.9 * 0.7
   
   images = {
     [PlayerColor.Black]: BlackArchitect,
