@@ -19,7 +19,7 @@ export const PlayerValidatedProjectCardsPileHelp = ({ location }: LocationHelpPr
   return <>
     <h2>{t('projects.validated')}</h2>
     <p>{t(`projects.validated.${me === location.player ? 'you' : 'player'}`, { player, number })}</p>
-    {rules.isOver() &&
+    {(me === location.player || rules.isOver()) &&
       <ol css={grid}>
         {cards?.entries.map(([index, card]) =>
           <li key={index}>
