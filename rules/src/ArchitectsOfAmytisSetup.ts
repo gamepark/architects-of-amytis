@@ -90,15 +90,6 @@ export class ArchitectsOfAmytisSetup extends MaterialGameSetup<PlayerColor, Mate
       player: player
     }, player === this.players[0] ? 2 : 3)
 
-    if (player === this.game.players[0]) {
-      this.material(MaterialType.FirstPlayerCard).createItem({
-        location: {
-          type: LocationType.FirstPlayerCardSpot,
-          player: player
-        }
-      })
-    }
-
     this.memorize(Memory.Score, 0, player)
   }
 
