@@ -510,7 +510,6 @@ export class Tutorial extends MaterialTutorial<PlayerColor, MaterialType, Locati
       },
       focus: (game: MaterialGame) => ({
         materials: [
-          this.material(game, MaterialType.FavorBoard),
           this.material(game, MaterialType.Architect).id(me).location(LocationType.MainBoardStackSpace)
         ],
         staticItems: [{ type: MaterialType.FavorBoard, item: favorBoardDescription.staticItem }],
@@ -523,10 +522,7 @@ export class Tutorial extends MaterialTutorial<PlayerColor, MaterialType, Locati
           <Trans defaults="tuto.favor-board.action"/>
         )
       },
-      focus: (game: MaterialGame) => ({
-        materials: [
-          this.material(game, MaterialType.FavorBoard)
-        ],
+      focus: () => ({
         staticItems: [{ type: MaterialType.FavorBoard, item: favorBoardDescription.staticItem }],
         margin: {
           left: 50,
@@ -536,6 +532,18 @@ export class Tutorial extends MaterialTutorial<PlayerColor, MaterialType, Locati
         }
       }),
       move: {}
+    },
+    {
+      popup: {
+        text: () => <Trans defaults="tuto.take-back-architects" components={{ bold: <strong/> }}/>,
+        position: { x: -20 }
+      },
+      focus: (game: MaterialGame) => ({
+        materials: [
+          this.material(game, MaterialType.Architect).id(me).location(LocationType.MainBoardStackSpace)
+        ],
+        margin: { left: 40, right: 5, bottom: 3, top: 3 }
+      })
     },
     {
       popup: {
