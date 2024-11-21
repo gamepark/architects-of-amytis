@@ -7,6 +7,7 @@ import { StrictMode } from 'react'
 import ReactDOM from 'react-dom'
 import { gameAnimations } from './animations/GameAnimations'
 import App from './App'
+import { ArchitectsOfAmytisScoringDescription } from './ArchitectsOfAmytisScoringDescription'
 import { Locators } from './locators/Locators'
 import { Material, MaterialI18n } from './material/Material'
 import translations from './translations.json'
@@ -25,7 +26,8 @@ ReactDOM.render(
       materialI18n={MaterialI18n}
       locators={Locators}
       animations={gameAnimations}
-      tutorial={new Tutorial()}>
+      tutorial={new Tutorial()}
+      scoring={new ArchitectsOfAmytisScoringDescription()}>
       <App/>
     </GameProvider>
   </StrictMode>,
