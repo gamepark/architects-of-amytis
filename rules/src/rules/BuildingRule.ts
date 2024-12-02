@@ -87,6 +87,8 @@ class WallBRule extends BuildingRule {
     const cornerTiles = this.playerTopTiles.filter(item => item.location.x !== 1 && item.location.y !== 1)
     const wallsInCorners = sumBy(cornerTiles, tile => getBuildingType(tile.id) === BuildingType.Wall ? 1 : 0)
     switch (wallsInCorners) {
+      case 0:
+        return 0
       case 1:
         return 1
       case 2:
