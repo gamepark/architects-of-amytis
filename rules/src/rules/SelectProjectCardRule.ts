@@ -13,8 +13,10 @@ export class SelectProjectCardRule extends PlayerTurnRule {
     const moves: MaterialMove[] = []
     const availableCards = this.material(MaterialType.ProjectCard).location(LocationType.ProjectCardsDisplay)
     moves.push(...availableCards.moveItems({ type: LocationType.PlayerProjectCardsSpot, player: this.player }))
-    const projectCardsDeck = this.material(MaterialType.ProjectCard).deck()
-    moves.push(projectCardsDeck.dealOne({ type: LocationType.PlayerProjectCardsSpot, player: this.player }))
+    const projectCardsDeck = this.material(MaterialType.ProjectCard).location(LocationType.ProjectCardsDeck).deck()
+    if (projectCardsDeck.length > 0) {
+      moves.push(projectCardsDeck.dealOne({ type: LocationType.PlayerProjectCardsSpot, player: this.player }))
+    }
     if (this.palaceCardSide === BuildingCardSide.SideB) {
       const scoreData: ScoreData = {
         player: this.player,
@@ -31,8 +33,8 @@ export class SelectProjectCardRule extends PlayerTurnRule {
     const moves = []
     if (isMoveItemType(MaterialType.ProjectCard)(move) && move.location.type !== LocationType.ProjectCardsDisplay) {
 
-      if (this.material(MaterialType.ProjectCard).location(LocationType.ProjectCardsDisplay).getQuantity() < 3) {
-        const projectCardsDeck = this.material(MaterialType.ProjectCard).deck()
+      const projectCardsDeck = this.material(MaterialType.ProjectCard).location(LocationType.ProjectCardsDeck).deck()
+      if (this.material(MaterialType.ProjectCard).location(LocationType.ProjectCardsDisplay).getQuantity() < 3 && projectCardsDeck.length > 0) {
         moves.push(projectCardsDeck.dealOne({ type: LocationType.ProjectCardsDisplay }))
       }
 
