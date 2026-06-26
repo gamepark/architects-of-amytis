@@ -28,14 +28,14 @@ export class ClaimKingsFavorRule extends PlayerTurnRule {
             type: LocationType.FavorBoardSpace,
             id: favorType,
             x: pawnsInFavor.length
-          }))
+          }, 1))
         }
       } else {
         if (!pawnsInFavor.length) {
           moves.push(pawnsSupply.moveItem({
             type: LocationType.FavorBoardSpace,
             id: favorType
-          }))
+          }, 1))
         }
       }
     }

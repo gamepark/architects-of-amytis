@@ -34,7 +34,7 @@ export class ValidateBuildingRule extends PlayerTurnRule {
     if (tileBelow.length) {
       moves.push(tileBelow.rotateItem(false))
     }
-    moves.push(this.material(MaterialType.Architect).location(LocationType.PlayerArchitectsSupply).player(this.player).moveItem(location))
+    moves.push(this.material(MaterialType.Architect).location(LocationType.PlayerArchitectsSupply).player(this.player).moveItem(location, 1))
 
     return moves
   }
