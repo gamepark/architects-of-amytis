@@ -25,7 +25,7 @@ export const BuildingTileHelp = (props: MaterialHelpProps) => {
     const type = 'building.' + buildingType
     const buildingEffect = 'building.' + buildingType + '.' + (rules.remind(Memory.BuildingCardsSides)[buildingType] === BuildingCardSide.SideA ? 'A' : 'B')
     return <>
-      <h2><Trans i18nKey="building-tile" values={{color: colorLabel, type: t(type)}}></Trans></h2>
+      <h2><Trans i18nKey="building-tile" values={{color: colorLabel ? t(colorLabel) : '', type: t(type)}}></Trans></h2>
       <p>{t('building-tile.help', { buildingEffect: t(buildingEffect) })}</p>
     </>
   } else {
