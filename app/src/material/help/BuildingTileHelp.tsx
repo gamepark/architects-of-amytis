@@ -1,4 +1,3 @@
-/** @jsxImportSource @emotion/react */
 import { ArchitectsOfAmytisRules } from '@gamepark/architects-of-amytis/ArchitectsOfAmytisRules'
 import { MaterialType } from '@gamepark/architects-of-amytis/material/MaterialType'
 import { MaterialHelpProps, useRules } from '@gamepark/react-game'
@@ -26,12 +25,12 @@ export const BuildingTileHelp = (props: MaterialHelpProps) => {
     const type = 'building.' + buildingType
     const buildingEffect = 'building.' + buildingType + '.' + (rules.remind(Memory.BuildingCardsSides)[buildingType] === BuildingCardSide.SideA ? 'A' : 'B')
     return <>
-      <h2><Trans defaults="building-tile" values={{color: colorLabel, type: t(type)}}></Trans></h2>
+      <h2><Trans i18nKey="building-tile" values={{color: colorLabel, type: t(type)}}></Trans></h2>
       <p>{t('building-tile.help', { buildingEffect: t(buildingEffect) })}</p>
     </>
   } else {
     return <>
-      <h2><Trans defaults="building-tile" values={{color: '', type: ''}}></Trans></h2>
+      <h2><Trans i18nKey="building-tile" values={{color: '', type: ''}}></Trans></h2>
     </>
   }
 }

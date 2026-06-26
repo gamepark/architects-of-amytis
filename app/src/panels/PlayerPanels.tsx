@@ -1,4 +1,3 @@
-/** @jsxImportSource @emotion/react */
 import { css } from '@emotion/react'
 import { PlayerColor } from '@gamepark/architects-of-amytis/PlayerColor'
 import { usePlayers } from '@gamepark/react-game'
@@ -6,7 +5,7 @@ import { FC } from 'react'
 import { createPortal } from 'react-dom'
 import { ArchitectsOfAmytisPlayerPanel } from './ArchitectsOfAmytisPlayerPanel'
 
-export const PlayerPanels: FC<any> = () => {
+export const PlayerPanels: FC = () => {
   const players = usePlayers({ sortFromMe: true })
   const root = document.getElementById('root')
   if (!root) {
@@ -17,7 +16,7 @@ export const PlayerPanels: FC<any> = () => {
     <>
       {players.map((player, index) =>
         <ArchitectsOfAmytisPlayerPanel key={player.id} player={player} color={playerColorCode[player.id as PlayerColor]}
-                                       css={[panelCss, index === 0 ? bottom : top]} index={0}/>
+                                       css={[panelCss, index === 0 ? bottom : top]}/>
       )}
     </>,
     root
@@ -39,7 +38,7 @@ const bottom = css`
   bottom: 2em
 `
 
-export const playerColorCode: Record<PlayerColor, string> = {
+const playerColorCode: Record<PlayerColor, string> = {
   [PlayerColor.Black]: 'black',
   [PlayerColor.White]: 'white'
 }

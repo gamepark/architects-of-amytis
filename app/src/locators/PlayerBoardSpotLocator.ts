@@ -1,4 +1,4 @@
-import { ItemContext, Locator } from '@gamepark/react-game'
+import { ItemContext, Locator, MaterialContext } from '@gamepark/react-game'
 import { Location } from '@gamepark/rules-api'
 import { playerBoardDescription } from '../material/PlayerBoardDescription'
 import { projectCardDescription } from '../material/ProjectCardDescription'
@@ -10,6 +10,10 @@ class PlayerBoardSpotLocator extends Locator {
       x: -playerBoardDescription.width - 2,
       y: player === location.player ? deltaY : -deltaY
     }
+  }
+
+  getPositionDependencies(_location: Location, context: MaterialContext) {
+    return { player: context.player ?? context.rules.players[0] }
   }
 }
 

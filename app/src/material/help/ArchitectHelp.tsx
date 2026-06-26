@@ -1,4 +1,3 @@
-/** @jsxImportSource @emotion/react */
 import { MaterialType } from '@gamepark/architects-of-amytis/material/MaterialType'
 import { linkButtonCss, MaterialHelpProps, PlayMoveButton } from '@gamepark/react-game'
 import { MaterialMoveBuilder } from '@gamepark/rules-api'
@@ -13,7 +12,7 @@ export const ArchitectHelp: FC<MaterialHelpProps> = () => {
       <h2>{t('architect')}</h2>
       <p>
         <Trans
-          defaults="architect.help"
+          i18nKey="architect.help"
           components={{
             main: <PlayMoveButton css={linkButtonCss} move={displayMaterialHelp(MaterialType.MainBoard)} transient/>
           }}

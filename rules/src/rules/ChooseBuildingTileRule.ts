@@ -1,5 +1,5 @@
 import { isMoveItemType, ItemMove, PlayerTurnRule } from '@gamepark/rules-api'
-import { range } from 'lodash'
+import { range } from 'es-toolkit'
 import { LocationType } from '../material/LocationType'
 import { MaterialType } from '../material/MaterialType'
 import { Memory } from './Memory'

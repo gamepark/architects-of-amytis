@@ -1,4 +1,3 @@
-/** @jsxImportSource @emotion/react */
 
 import { Project, projectsProperties } from "@gamepark/architects-of-amytis/material/Project"
 import { MaterialHelpProps } from "@gamepark/react-game"
@@ -13,7 +12,7 @@ export const ProjectCardHelp = (props: MaterialHelpProps) => {
       <h2>{t('project-card')}</h2>
       <p>
         <Trans 
-          defaults="project-card.help"
+          i18nKey="project-card.help"
           components={{
             bold: <strong/>
           }}
@@ -22,7 +21,7 @@ export const ProjectCardHelp = (props: MaterialHelpProps) => {
       { item.id !== undefined &&
         <p>
           <Trans 
-            defaults="project-card.score"
+            i18nKey="project-card.score"
             values={{score: projectsProperties[item.id as Project].points
             }}
             components={{

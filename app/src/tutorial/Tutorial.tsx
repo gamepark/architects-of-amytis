@@ -1,4 +1,3 @@
-/** @jsxImportSource @emotion/react */
 import { Building } from '@gamepark/architects-of-amytis/material/Building'
 import { LocationType } from '@gamepark/architects-of-amytis/material/LocationType'
 import { MaterialType } from '@gamepark/architects-of-amytis/material/MaterialType'
@@ -49,7 +48,7 @@ export class Tutorial extends MaterialTutorial<PlayerColor, MaterialType, Locati
       popup: {
         text: () => (
           <Trans
-            defaults="tuto.welcome"
+            i18nKey="tuto.welcome"
             components={{
               bold: <strong/>
             }}
@@ -60,14 +59,14 @@ export class Tutorial extends MaterialTutorial<PlayerColor, MaterialType, Locati
     {
       popup: {
         text: () => (
-          <Trans defaults="tuto.intro"/>
+          <Trans i18nKey="tuto.intro"/>
         )
       }
     },
     {
       popup: {
         text: () => (
-          <Trans defaults="tuto.intro.players-colors"/>
+          <Trans i18nKey="tuto.intro.players-colors"/>
         ),
         position: {
           y: -10
@@ -90,7 +89,7 @@ export class Tutorial extends MaterialTutorial<PlayerColor, MaterialType, Locati
     {
       popup: {
         text: () => (
-          <Trans defaults="tuto.intro.main-board"/>
+          <Trans i18nKey="tuto.intro.main-board"/>
         ),
         position: { x: -30 }
       },
@@ -105,7 +104,7 @@ export class Tutorial extends MaterialTutorial<PlayerColor, MaterialType, Locati
     {
       popup: {
         text: () => (
-          <Trans defaults="tuto.take-building"/>
+          <Trans i18nKey="tuto.take-building"/>
         ),
         position: { x: -21, y: -10 },
         size: { width: 50 }
@@ -131,7 +130,7 @@ export class Tutorial extends MaterialTutorial<PlayerColor, MaterialType, Locati
     },
     {
       popup: {
-        text: () => <Trans defaults="tuto.validate"/>
+        text: () => <Trans i18nKey="tuto.validate"/>
       },
       move: { interrupt: isCustomMove }
     },
@@ -139,7 +138,7 @@ export class Tutorial extends MaterialTutorial<PlayerColor, MaterialType, Locati
       popup: {
         text: () => (
           <Trans
-            defaults="tuto.place-architect"
+            i18nKey="tuto.place-architect"
             components={{
               bold: <strong/>
             }}
@@ -159,7 +158,7 @@ export class Tutorial extends MaterialTutorial<PlayerColor, MaterialType, Locati
       popup: {
         text: () => (
           <Trans
-            defaults="tuto.building.anatomy-description"
+            i18nKey="tuto.building.anatomy-description"
             components={{
               bold: <strong/>
             }}
@@ -170,7 +169,7 @@ export class Tutorial extends MaterialTutorial<PlayerColor, MaterialType, Locati
     {
       popup: {
         text: () => (
-          <Trans defaults="tuto.building.color-description"/>
+          <Trans i18nKey="tuto.building.color-description"/>
         )
       },
       focus: (game: MaterialGame) => ({
@@ -186,7 +185,7 @@ export class Tutorial extends MaterialTutorial<PlayerColor, MaterialType, Locati
       popup: {
         text: () => (
           <Trans
-            defaults="tuto.building-cards"
+            i18nKey="tuto.building-cards"
             components={{
               bold: <strong/>
             }}
@@ -210,7 +209,7 @@ export class Tutorial extends MaterialTutorial<PlayerColor, MaterialType, Locati
     {
       popup: {
         text: () => (
-          <Trans defaults="tuto.building-cards.wall"/>
+          <Trans i18nKey="tuto.building-cards.wall"/>
         ),
         position: { x: 15, y: 15 }
       },
@@ -229,7 +228,7 @@ export class Tutorial extends MaterialTutorial<PlayerColor, MaterialType, Locati
     {
       popup: {
         text: () => (
-          <Trans defaults="tuto.wall.score"/>
+          <Trans i18nKey="tuto.wall.score"/>
         )
       },
       focus: (game: MaterialGame) => ({
@@ -249,7 +248,7 @@ export class Tutorial extends MaterialTutorial<PlayerColor, MaterialType, Locati
       popup: {
         text: () => (
           <Trans
-            defaults="tuto.building-cards.effects"
+            i18nKey="tuto.building-cards.effects"
             components={{
               bold: <strong/>
             }}
@@ -273,7 +272,7 @@ export class Tutorial extends MaterialTutorial<PlayerColor, MaterialType, Locati
     {
       popup: {
         text: () => (
-          <Trans defaults="tuto.opponent-turn"/>
+          <Trans i18nKey="tuto.opponent-turn"/>
         )
       }
     },
@@ -291,7 +290,7 @@ export class Tutorial extends MaterialTutorial<PlayerColor, MaterialType, Locati
     {
       popup: {
         text: () => (
-          <Trans defaults="tuto.opponent.place-market"/>
+          <Trans i18nKey="tuto.opponent.place-market"/>
         ),
         position: { x: -20, y: 10 }
       },
@@ -307,7 +306,7 @@ export class Tutorial extends MaterialTutorial<PlayerColor, MaterialType, Locati
     {
       popup: {
         text: () => (
-          <Trans defaults="tuto.project-card.intro"/>
+          <Trans i18nKey="tuto.project-card.intro"/>
         )
       },
       focus: (game) => ({
@@ -323,7 +322,7 @@ export class Tutorial extends MaterialTutorial<PlayerColor, MaterialType, Locati
       popup: {
         text: () => (
           <Trans
-            defaults="tuto.project-card.description"
+            i18nKey="tuto.project-card.description"
             components={{
               bold: <strong/>
             }}
@@ -342,7 +341,7 @@ export class Tutorial extends MaterialTutorial<PlayerColor, MaterialType, Locati
     {
       popup: {
         text: () => (
-          <Trans defaults="tuto.place-residence"/>
+          <Trans i18nKey="tuto.place-residence"/>
         ),
         position: { x: -20, y: -15 },
         size: { width: 50 }
@@ -368,7 +367,7 @@ export class Tutorial extends MaterialTutorial<PlayerColor, MaterialType, Locati
     },
     {
       popup: {
-        text: () => <Trans defaults="tuto.validate"/>
+        text: () => <Trans i18nKey="tuto.validate"/>
       },
       move: {}
     },
@@ -376,7 +375,7 @@ export class Tutorial extends MaterialTutorial<PlayerColor, MaterialType, Locati
       popup: {
         text: () => (
           <Trans
-            defaults="tuto.residence.score"
+            i18nKey="tuto.residence.score"
             components={{
               bold: <strong/>
             }}
@@ -411,7 +410,7 @@ export class Tutorial extends MaterialTutorial<PlayerColor, MaterialType, Locati
     {
       popup: {
         text: () => (
-          <Trans defaults="tuto.opponent.place-theater"/>
+          <Trans i18nKey="tuto.opponent.place-theater"/>
         ),
         position: { x: -15, y: 25 }
       },
@@ -433,7 +432,7 @@ export class Tutorial extends MaterialTutorial<PlayerColor, MaterialType, Locati
     {
       popup: {
         text: () => (
-          <Trans defaults="tuto.take-building"/>
+          <Trans i18nKey="tuto.take-building"/>
         ),
         position: { x: -18, y: -8 },
         size: { width: 40 }
@@ -459,14 +458,14 @@ export class Tutorial extends MaterialTutorial<PlayerColor, MaterialType, Locati
     },
     {
       popup: {
-        text: () => <Trans defaults="tuto.validate"/>
+        text: () => <Trans i18nKey="tuto.validate"/>
       },
       move: { interrupt: move => isMoveItemType(MaterialType.ProjectCard)(move) }
     },
     {
       popup: {
         text: () => (
-          <Trans defaults="tuto.project-card.validation"/>
+          <Trans i18nKey="tuto.project-card.validation"/>
         ),
         position: { y: -20 }
       },
@@ -481,7 +480,7 @@ export class Tutorial extends MaterialTutorial<PlayerColor, MaterialType, Locati
     },
     {
       popup: {
-        text: () => <Trans defaults="tuto.palace" components={{ bold: <strong/> }}/>,
+        text: () => <Trans i18nKey="tuto.palace" components={{ bold: <strong/> }}/>,
         position: { y: 10 }
       },
       focus: (game: MaterialGame) => ({
@@ -500,7 +499,7 @@ export class Tutorial extends MaterialTutorial<PlayerColor, MaterialType, Locati
       popup: {
         text: () => (
           <Trans
-            defaults="tuto.favor-board"
+            i18nKey="tuto.favor-board"
             components={{
               bold: <strong/>
             }}
@@ -519,7 +518,7 @@ export class Tutorial extends MaterialTutorial<PlayerColor, MaterialType, Locati
     {
       popup: {
         text: () => (
-          <Trans defaults="tuto.favor-board.action"/>
+          <Trans i18nKey="tuto.favor-board.action"/>
         )
       },
       focus: () => ({
@@ -535,7 +534,7 @@ export class Tutorial extends MaterialTutorial<PlayerColor, MaterialType, Locati
     },
     {
       popup: {
-        text: () => <Trans defaults="tuto.take-back-architects" components={{ bold: <strong/> }}/>,
+        text: () => <Trans i18nKey="tuto.take-back-architects" components={{ bold: <strong/> }}/>,
         position: { x: -20 }
       },
       focus: (game: MaterialGame) => ({
@@ -548,14 +547,14 @@ export class Tutorial extends MaterialTutorial<PlayerColor, MaterialType, Locati
     {
       popup: {
         text: () => (
-          <Trans defaults="tuto.end-game"/>
+          <Trans i18nKey="tuto.end-game"/>
         )
       }
     },
     {
       popup: {
         text: () => (
-          <Trans defaults="tuto.good-luck"/>
+          <Trans i18nKey="tuto.good-luck"/>
         )
       }
     }

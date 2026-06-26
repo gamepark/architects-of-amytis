@@ -1,5 +1,5 @@
 import { MaterialGame, MaterialRulesPart } from '@gamepark/rules-api'
-import { sumBy } from 'lodash'
+import { sumBy } from 'es-toolkit'
 import { BuildingCardSide, BuildingType, getBuildingColor, getBuildingType } from '../material/Building'
 import { LocationType } from '../material/LocationType'
 import { MaterialType } from '../material/MaterialType'

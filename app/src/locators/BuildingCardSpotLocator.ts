@@ -1,4 +1,4 @@
-import { FlexLocator, ItemContext } from '@gamepark/react-game'
+import { FlexLocator, ItemContext, MaterialContext } from '@gamepark/react-game'
 import { Location, MaterialItem } from '@gamepark/rules-api'
 import { buildingCardDescription } from '../material/BuildingCardDescription'
 
@@ -12,6 +12,10 @@ class BuildingCardSpotLocator extends FlexLocator {
       x: -54,
       y: player === location.player ? 9 : -22
     }
+  }
+
+  getPositionDependencies(_location: Location, context: MaterialContext) {
+    return { player: context.player ?? context.rules.players[0] }
   }
 
   getHoverTransform(item: MaterialItem) {

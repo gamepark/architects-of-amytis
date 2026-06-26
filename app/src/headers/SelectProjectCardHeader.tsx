@@ -1,4 +1,3 @@
-/** @jsxImportSource @emotion/react */
 import { ArchitectsOfAmytisRules } from '@gamepark/architects-of-amytis/ArchitectsOfAmytisRules'
 import { BuildingCardSide } from '@gamepark/architects-of-amytis/material/Building'
 import { PalaceBRule } from '@gamepark/architects-of-amytis/rules/BuildingRule'
@@ -21,11 +20,11 @@ export const SelectProjectCardHeader = () => {
 
   const palaceAction = useLegalMove(isCustomMoveType(CustomMoveType.Score))
   if (palaceCardSide === BuildingCardSide.SideA) {
-    return <Trans defaults={itsMe ? headerYouLabel : headerPlayerLabel} values={{ player }}/>
+    return <Trans i18nKey={itsMe ? headerYouLabel : headerPlayerLabel} values={{ player }}/>
 
   } else {
     const points = new PalaceBRule(rules.game).score
-    return <Trans defaults={itsMe ? headerYouLabel : headerPlayerLabel} values={{ player, nbr: points }} components={{
+    return <Trans i18nKey={itsMe ? headerYouLabel : headerPlayerLabel} values={{ player, nbr: points }} components={{
       points: <PlayMoveButton move={palaceAction}/>
     }}/>
   }

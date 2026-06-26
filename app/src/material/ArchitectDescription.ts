@@ -8,7 +8,8 @@ class ArchitectDescription extends TokenDescription {
   borderRadius = 0.5
   width = 2.6 * 0.7
   height = 3.9 * 0.7
-  
+  transparency = true
+
   images = {
     [PlayerColor.Black]: BlackArchitect,
     [PlayerColor.White]: WhiteArchitect

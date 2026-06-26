@@ -6,9 +6,9 @@ import { Project, projectsProperties } from '@gamepark/architects-of-amytis/mate
 import { PlayerColor } from '@gamepark/architects-of-amytis/PlayerColor'
 import { EndGameScoreRule } from '@gamepark/architects-of-amytis/rules/EndGameScoreRule'
 import { Memory } from '@gamepark/architects-of-amytis/rules/Memory'
-import { ScoringDescription } from '@gamepark/react-client'
+import { ScoringDescription } from '@gamepark/react-game'
 import { getEnumValues } from '@gamepark/rules-api'
-import { sumBy } from 'lodash'
+import { sumBy } from 'es-toolkit'
 import { Trans } from 'react-i18next'
 
 enum ScoringKeys {
@@ -21,11 +21,11 @@ export class ArchitectsOfAmytisScoringDescription implements ScoringDescription 
   getScoringHeader(key: ScoringKeys) {
     switch (key) {
       case ScoringKeys.BuildingTiles:
-        return <Trans defaults="building-tiles"/>
+        return <Trans i18nKey="building-tiles"/>
       case ScoringKeys.ValidatedProjects:
-        return <Trans defaults="projects.validated"/>
+        return <Trans i18nKey="projects.validated"/>
       case ScoringKeys.Favors:
-        return <Trans defaults="favor-board"/>
+        return <Trans i18nKey="favor-board"/>
     }
   }
 

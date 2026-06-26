@@ -1,4 +1,3 @@
-/** @jsxImportSource @emotion/react */
 import { RuleId } from '@gamepark/architects-of-amytis/rules/RuleId'
 import { ComponentType } from 'react'
 import { CheckProjectsHeader } from './CheckProjectsHeader'

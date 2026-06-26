@@ -1,4 +1,3 @@
-/** @jsxImportSource @emotion/react */
 import { ArchitectsOfAmytisRules } from '@gamepark/architects-of-amytis/ArchitectsOfAmytisRules'
 import { CustomMoveType } from '@gamepark/architects-of-amytis/rules/CustomMoveType'
 import { PlayMoveButton, UndoMovesButton, useLegalMove, usePlayerId, usePlayerName, useRules } from '@gamepark/react-game'
@@ -15,12 +14,12 @@ export const ValidateBuildingHeader = () => {
   if (itsMe) {
     if (!validate) return null
     return (
-      <Trans defaults="header.validate-building.you" components={{
+      <Trans i18nKey="header.validate-building.you" components={{
         validate: <PlayMoveButton move={validate} auto={15}/>,
         undo: <UndoMovesButton/>
       }}/>
     )
   } else {
-    return <Trans defaults="header.validate-building.player" values={{ player }}/>
+    return <Trans i18nKey="header.validate-building.player" values={{ player }}/>
   }
 }

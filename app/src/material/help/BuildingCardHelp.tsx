@@ -1,4 +1,3 @@
-/** @jsxImportSource @emotion/react */
 import { ArchitectsOfAmytisRules } from '@gamepark/architects-of-amytis/ArchitectsOfAmytisRules'
 import { BuildingCardSide, getBuildingType } from '@gamepark/architects-of-amytis/material/Building'
 import { Memory } from '@gamepark/architects-of-amytis/rules/Memory'

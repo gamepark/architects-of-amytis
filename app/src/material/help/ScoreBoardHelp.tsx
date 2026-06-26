@@ -1,4 +1,3 @@
-/** @jsxImportSource @emotion/react */
 
 import { ArchitectsOfAmytisRules } from '@gamepark/architects-of-amytis/ArchitectsOfAmytisRules'
 import { PlayerColor } from '@gamepark/architects-of-amytis/PlayerColor'
@@ -18,7 +17,7 @@ export const ScoreBoardHelp: FC<MaterialHelpProps> = () => {
       {rules.players.map(player =>
         <p key={player}>
           {player === me ?
-            <Trans defaults="score.you" values={{ score: rules.remind(Memory.Score, player) }}/>
+            <Trans i18nKey="score.you" values={{ score: rules.remind(Memory.Score, player) }}/>
             : <PlayerScoreText playerColor={player} score={rules.remind(Memory.Score, player)}/>}
         </p>
       )}
@@ -28,5 +27,5 @@ export const ScoreBoardHelp: FC<MaterialHelpProps> = () => {
 
 const PlayerScoreText = ({ playerColor, score }: { playerColor: PlayerColor, score: number }) => {
   const player = usePlayerName(playerColor)
-  return <Trans defaults="score.player" values={{ player, score }}/>
+  return <Trans i18nKey="score.player" values={{ player, score }}/>
 }

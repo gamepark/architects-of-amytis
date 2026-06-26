@@ -1,4 +1,4 @@
-import { DeckLocator, ItemContext, LocationDescription } from '@gamepark/react-game'
+import { DeckLocator, ItemContext, LocationDescription, MaterialContext } from '@gamepark/react-game'
 import { Location } from '@gamepark/rules-api'
 import { projectCardDescription } from '../material/ProjectCardDescription'
 import { PlayerValidatedProjectCardsPileHelp } from './component/PlayerValidatedProjectCardsPileHelp'
@@ -9,6 +9,10 @@ class PlayerValidatedProjectCardsPileLocator extends DeckLocator {
       x: 2.5,
       y: player === location.player ? 16 : -16
     }
+  }
+
+  getPositionDependencies(_location: Location, context: MaterialContext) {
+    return { player: context.player ?? context.rules.players[0] }
   }
 
   locationDescription = new PlayerValidatedProjectCardsPileDescription(projectCardDescription)

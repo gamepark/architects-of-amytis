@@ -1,4 +1,3 @@
-/** @jsxImportSource @emotion/react */
 import { css } from '@emotion/react'
 import { MaterialType } from '@gamepark/architects-of-amytis/material/MaterialType'
 import { linkButtonCss, MaterialHelpProps, PlayMoveButton } from '@gamepark/react-game'
@@ -14,7 +13,7 @@ export const FavorBoardHelp: FC<MaterialHelpProps> = () => {
       <h2>{t('favor-board')}</h2>
       <p>
         <Trans
-          defaults="favor-board.help"
+          i18nKey="favor-board.help"
           components={{
             bold: <strong/>,
             main: <PlayMoveButton css={linkButtonCss} move={displayMaterialHelp(MaterialType.MainBoard)} transient/>

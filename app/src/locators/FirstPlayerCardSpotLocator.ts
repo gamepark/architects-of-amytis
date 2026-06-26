@@ -1,4 +1,4 @@
-import { ItemContext, Locator } from '@gamepark/react-game'
+import { ItemContext, Locator, MaterialContext } from '@gamepark/react-game'
 import { Location } from '@gamepark/rules-api'
 import { firstPlayerCardDescription } from '../material/FirstPlayerCardDescription'
 import { mainBoardDescription } from '../material/MainBoardDescription'
@@ -9,6 +9,10 @@ class FirstPlayerCardSpotLocator extends Locator {
       x: -mainBoardDescription.width / 2 + firstPlayerCardDescription.width / 2,
       y: player === location.player ? 16 : -16
     }
+  }
+
+  getPositionDependencies(_location: Location, context: MaterialContext) {
+    return { player: context.player ?? context.rules.players[0] }
   }
 }
 

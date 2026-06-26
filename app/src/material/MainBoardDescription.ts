@@ -1,7 +1,7 @@
 import { LocationType } from '@gamepark/architects-of-amytis/material/LocationType'
 import { BoardDescription } from '@gamepark/react-game'
 import MainBoard from '../images/boards/MainBoard.jpg'
-import { range } from 'lodash'
+import { range } from 'es-toolkit'
 import { MainBoardHelp } from './help/MainBoardHelp'
 
 class MainBoardDescription extends BoardDescription {

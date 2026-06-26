@@ -1,5 +1,5 @@
 import { MaterialGameSetup } from '@gamepark/rules-api'
-import { keyBy, mapValues } from 'lodash'
+import { keyBy, mapValues } from 'es-toolkit'
 import { ArchitectsOfAmytisOptions } from './ArchitectsOfAmytisOptions'
 import { ArchitectsOfAmytisRules } from './ArchitectsOfAmytisRules'
 import { BuildingCardSide, buildings, BuildingType, buildingTypes } from './material/Building'
@@ -110,7 +110,7 @@ export class ArchitectsOfAmytisSetup extends MaterialGameSetup<PlayerColor, Mate
 
   setupBuildingCards(options: ArchitectsOfAmytisOptions) {
     this.memorize(Memory.BuildingCardsSides,
-      mapValues(keyBy(buildingTypes), buildingType =>
+      mapValues(keyBy(buildingTypes, buildingType => buildingType), buildingType =>
         this.getBuildingSide(options, buildingType) ?? (Math.random() < 0.5 ? BuildingCardSide.SideA : BuildingCardSide.SideB)
       )
     )

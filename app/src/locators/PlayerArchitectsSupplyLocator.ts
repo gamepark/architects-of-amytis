@@ -1,4 +1,4 @@
-import { ItemContext, ListLocator } from '@gamepark/react-game'
+import { ItemContext, ListLocator, MaterialContext } from '@gamepark/react-game'
 import { Location } from '@gamepark/rules-api'
 import { architectDescription } from '../material/ArchitectDescription'
 import { mainBoardDescription } from '../material/MainBoardDescription'
@@ -12,6 +12,10 @@ class PlayerArchitectsSupplyLocator extends ListLocator {
       y: player === location.player ? 12 : -12,
       z: 0.1
     }
+  }
+
+  getPositionDependencies(_location: Location, context: MaterialContext) {
+    return { player: context.player ?? context.rules.players[0] }
   }
 }
 

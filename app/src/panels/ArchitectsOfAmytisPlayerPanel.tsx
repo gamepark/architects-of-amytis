@@ -1,4 +1,3 @@
-/** @jsxImportSource @emotion/react */
 import { css } from '@emotion/react'
 import { ArchitectsOfAmytisRules } from '@gamepark/architects-of-amytis/ArchitectsOfAmytisRules'
 import { PlayerColor } from '@gamepark/architects-of-amytis/PlayerColor'
@@ -11,12 +10,11 @@ import WhiteBackground from '../images/cards/WhiteBackground.jpg'
 import { pawnDescription } from '../material/PawnDescription'
 
 type ArchitectsOfAmytisPlayerPanelProps = {
-  player: Player,
-  index: number
+  player: Player
 } & HTMLAttributes<HTMLDivElement>
 
 export const ArchitectsOfAmytisPlayerPanel: FC<ArchitectsOfAmytisPlayerPanelProps> = (props) => {
-  const { player, index, ...rest } = props
+  const { player, ...rest } = props
   const rules = useRules<ArchitectsOfAmytisRules>()!
 
   const counters: CounterProps[] = [{

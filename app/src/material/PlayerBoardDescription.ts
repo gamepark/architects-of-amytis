@@ -2,7 +2,7 @@ import { LocationType } from '@gamepark/architects-of-amytis/material/LocationTy
 import { playerColors } from '@gamepark/architects-of-amytis/PlayerColor'
 import { BoardDescription } from '@gamepark/react-game'
 import { MaterialItem } from '@gamepark/rules-api'
-import { range } from 'lodash'
+import { range } from 'es-toolkit'
 import PlayerBoard from '../images/boards/PlayerBoard.jpg'
 import { PlayerBoardHelp } from './help/PlayerBoardHelp'
 

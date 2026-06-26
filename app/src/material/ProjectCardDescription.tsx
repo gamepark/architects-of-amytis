@@ -70,7 +70,7 @@ class ProjectCardDescription extends CardDescription {
     const rotation = item.location.rotation ?? 0
     return <>
       {take &&
-        <ItemMenuButton label={<Trans defaults="Take"/>}  radius={3} move={take}>
+        <ItemMenuButton label={<Trans i18nKey="Take"/>}  radius={3} move={take}>
           <FontAwesomeIcon icon={faHandBackFist}/>
         </ItemMenuButton>
       }
