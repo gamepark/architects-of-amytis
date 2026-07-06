@@ -38,6 +38,7 @@
   "main-board": "Main board",
   "main-board.help": "<bold>Each turn you choose one of the available stacks</bold> on the Main board (a stack without an Architect pawn on it), <bold>take the top tile</bold> and place an Architect pawn on the stack.\n\nIf you form with your Architects a row, a column or a diagonal of your color (like in tic-tac-toe), you earn a Favor from the King on the <favor>Favor board</favor>.",
   "favor-board": "Favor board",
+  "total": "Total",
   "favor-board.help": "You gain a Favor when you align 3 Architects of your color on the <main>Main board</main>.",
   "favor-board.space-1.help": "Gain 3 points for each stack on your Player board that contains exactly 1 tile.",
   "favor-board.space-2.help": "Gain 2 points for each stack on your Player board that contains exactly 2 tiles.",

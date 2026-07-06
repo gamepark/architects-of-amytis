@@ -38,6 +38,7 @@
   "main-board": "Hauptplan",
   "main-board.help": "<bold>Wähle in jedem Zug einen der freien Stapel</bold> auf dem Hauptplan (einen Stapel ohne Architekten-Spielstein), <bold>nimm das oberste Plättchen</bold> und stelle einen Architekten auf den Stapel.\n\nWenn deine Architekten eine Reihe, eine Spalte oder eine Diagonale deiner Farbe bilden (wie bei Tic-Tac-Toe), erhältst du eine Gunst des Königs auf dem <favor>Gunstplan</favor>.",
   "favor-board": "Gunstplan",
+  "total": "Gesamt",
   "favor-board.help": "Du erhältst eine Gunst, wenn du 3 Architekten deiner Farbe auf dem <main>Hauptplan</main> in einer Linie ausrichtest.",
   "favor-board.space-1.help": "Erhalte 3 Punkte für jeden Stapel auf deinem Spielerplan, der genau 1 Plättchen enthält.",
   "favor-board.space-2.help": "Erhalte 2 Punkte für jeden Stapel auf deinem Spielerplan, der genau 2 Plättchen enthält.",

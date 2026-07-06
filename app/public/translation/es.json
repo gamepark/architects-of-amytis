@@ -38,6 +38,7 @@
   "main-board": "Tablero Principal",
   "main-board.help": "<bold>En cada turno eliges una de las pilas disponibles</bold> en el tablero Principal (una pila sin un Arquitecto sobre ella), <bold>coges el edificio de arriba</bold> y colocas un Arquitecto en la pila.\n\nSi formas con tus Arquitectos una fila, una columna o una diagonal de tu color (como en tres en raya), ganas un Favor del Rey en el <favor>tablero de Favores</favor>.",
   "favor-board": "Tablero de Favores",
+  "total": "Total",
   "favor-board.help": "Ganas un Favor cuando alineas 3 Arquitectos de tu color en el <main>tablero Principal</main>.",
   "favor-board.space-1.help": "Ganas 3 puntos por cada pila en tu tablero de jugador que contenga exactamente 1 edificio.",
   "favor-board.space-2.help": "Ganas 2 puntos por cada pila en tu tablero de jugador que contenga exactamente 2 edificios.",

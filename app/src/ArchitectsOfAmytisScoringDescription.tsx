@@ -12,7 +12,7 @@ import { sumBy } from 'es-toolkit'
 import { Trans } from 'react-i18next'
 
 enum ScoringKeys {
-  BuildingTiles, ValidatedProjects, Favors
+  BuildingTiles, ValidatedProjects, Favors, Total
 }
 
 export class ArchitectsOfAmytisScoringDescription implements ScoringDescription {
@@ -26,6 +26,8 @@ export class ArchitectsOfAmytisScoringDescription implements ScoringDescription 
         return <Trans i18nKey="projects.validated"/>
       case ScoringKeys.Favors:
         return <Trans i18nKey="favor-board"/>
+      case ScoringKeys.Total:
+        return <Trans i18nKey="total"/>
     }
   }
 
@@ -37,6 +39,8 @@ export class ArchitectsOfAmytisScoringDescription implements ScoringDescription 
         return this.getProjectsScore(rules, player)
       case ScoringKeys.Favors:
         return this.getFavorsScore(rules, player)
+      case ScoringKeys.Total:
+        return rules.remind(Memory.Score, player)
     }
   }
 

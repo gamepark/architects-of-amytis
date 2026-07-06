@@ -38,6 +38,7 @@
   "main-board": "Plateau Principal",
   "main-board.help": "<bold>A chaque tour, choisissez une des piles libres</bold> du plateau Principal (une pile sans pion Architecte), <bold>prenez la tuile du dessus</bold> de cette pile puis placez un pion Architecte sur la pile.\n\nSi l'architecte que vous avez placé a complété une ligne, colonne ou diagonale de votre couleur (comme au Morpion), vous obtenez une Faveur du Roi sur le plateau <favor>Faveurs</favor>.",
   "favor-board": "Plateau Faveurs",
+  "total": "Total",
   "favor-board.help": "Vous gagnez une Faveur lorsque vous alignez 3 Architectes de votre couleur sur le <main>plateau Principal</main>.",
   "favor-board.space-1.help": "Gagnez 3 points pour chaque pile de votre plateau Joueur qui contient exactement 1 tuile.",
   "favor-board.space-2.help": "Gagnez 2 points pour chaque pile de votre plateau Joueur qui contient exactement 2 tuiles.",

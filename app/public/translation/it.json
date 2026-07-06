@@ -38,6 +38,7 @@
   "main-board": "Plancia principale",
   "main-board.help": "<bold>Ad ogni turno scegli una delle pile disponibili</bold> sulla plancia principale (una pila senza un Architetto sopra), <bold>prendi la tessera in cima</bold> e posiziona un Architetto sulla pila.\n\nSe con i tuoi Architetti formi una riga, una colonna o una diagonale del tuo colore (come nel tris), ottieni un Favore del Re sulla <favor>plancia dei Favori</favor>.",
   "favor-board": "Plancia dei Favori",
+  "total": "Totale",
   "favor-board.help": "Ottieni un Favore quando allinei 3 Architetti del tuo colore sulla <main>plancia principale</main>.",
   "favor-board.space-1.help": "Guadagni 3 punti per ogni pila sulla tua plancia giocatore che contiene esattamente 1 tessera.",
   "favor-board.space-2.help": "Guadagni 2 punti per ogni pila sulla tua plancia giocatore che contiene esattamente 2 tessere.",
