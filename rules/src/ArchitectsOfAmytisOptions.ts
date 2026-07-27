@@ -1,5 +1,4 @@
-import { EnumOption, OptionsSpec } from '@gamepark/rules-api'
-import { TFunction } from 'i18next'
+import { EnumOption, OptionsSpec, TFunction } from '@gamepark/rules-api'
 import { BuildingCardSide, buildingCardSides, BuildingType } from './material/Building'
 import { PlayerColor, playerColors } from './PlayerColor'
 
