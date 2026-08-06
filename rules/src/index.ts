@@ -1,3 +1,3 @@
 export { ArchitectsOfAmytisRules } from './ArchitectsOfAmytisRules'
-export { ArchitectsOfAmytisOptionsSpec } from './ArchitectsOfAmytisOptions'
+export { ArchitectsOfAmytisOptionsSpecV2 } from './ArchitectsOfAmytisOptions'
 export { ArchitectsOfAmytisSetup } from './ArchitectsOfAmytisSetup'

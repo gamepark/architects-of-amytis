@@ -1,4 +1,4 @@
-import { ArchitectsOfAmytisOptionsSpec } from '@gamepark/architects-of-amytis/ArchitectsOfAmytisOptions'
+import { ArchitectsOfAmytisOptionsSpecV2 } from '@gamepark/architects-of-amytis/ArchitectsOfAmytisOptions'
 import { ArchitectsOfAmytisRules } from '@gamepark/architects-of-amytis/ArchitectsOfAmytisRules'
 import { ArchitectsOfAmytisSetup } from '@gamepark/architects-of-amytis/ArchitectsOfAmytisSetup'
 import { GameProvider } from '@gamepark/react-game'
@@ -16,7 +16,7 @@ createRoot(document.getElementById('root')!).render(
     <GameProvider
       game="architects-of-amytis"
       Rules={ArchitectsOfAmytisRules}
-      optionsSpec={ArchitectsOfAmytisOptionsSpec}
+      optionsSpec={ArchitectsOfAmytisOptionsSpecV2}
       GameSetup={ArchitectsOfAmytisSetup}
       material={Material}
       materialI18n={MaterialI18n}

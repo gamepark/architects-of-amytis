@@ -1,5 +1,5 @@
-import { EnumOption, OptionsSpec, TFunction } from '@gamepark/rules-api'
-import { BuildingCardSide, buildingCardSides, BuildingType } from './material/Building'
+import { TFunction, OptionsSpecV2 } from '@gamepark/rules-api'
+import { BuildingCardSide } from './material/Building'
 import { PlayerColor, playerColors } from './PlayerColor'
 
 /**
@@ -21,34 +21,25 @@ export type ArchitectsOfAmytisOptions = {
   theaterSide: BuildingCardSide,
 }
 
-const buildingOption = (buildingType: BuildingType): EnumOption<BuildingCardSide> => ({
-  label: t => t('building.side', { building: t(`building.${buildingType}`) }),
-  values: buildingCardSides,
-  valueSpec: (side: BuildingCardSide) => ({
-    label: t => side === BuildingCardSide.SideA ? t('Side A') : t('Side B'),
-    help: t => t(`building.${buildingType}.${side === BuildingCardSide.SideA ? 'A' : 'B'}`)
-  }),
-  competitiveDisabled: true
-})
-
 /**
- * This object describes all the options a game can have, and will be used by GamePark website to create automatically forms for you game
- * (forms for friendly games, or forms for matchmaking preferences, for instance).
+ * The option space of architects-of-amytis: structure only.
+ *
+ * Labels live in the game's presentation document, published beside its translations at
+ * `/options/<locale>.json` and keyed by convention. Subscription and competitive gates live in
+ * the platform database, so they can change without releasing the game again.
  */
-export const ArchitectsOfAmytisOptionsSpec: OptionsSpec<ArchitectsOfAmytisOptions> = {
-  players: {
-    id: {
-      label: (t: TFunction) => t('Player color'),
-      values: playerColors,
-      valueSpec: color => ({ label: t => getPlayerName(color, t) })
-    }
-  },
-  gardenSide: buildingOption(BuildingType.Garden),
-  marketSide: buildingOption(BuildingType.Market),
-  wallSide: buildingOption(BuildingType.Wall),
-  palaceSide: buildingOption(BuildingType.Palace),
-  residenceSide: buildingOption(BuildingType.Residence),
-  theaterSide: buildingOption(BuildingType.Theater)
+export const ArchitectsOfAmytisOptionsSpecV2: OptionsSpecV2 = {
+  specVersion: 2,
+  players: { min: 2, max: 2 },
+  identities: { values: playerColors },
+  options: {
+    gardenSide: { kind: 'enum', values: [1, 2] },
+    marketSide: { kind: 'enum', values: [1, 2] },
+    wallSide: { kind: 'enum', values: [1, 2] },
+    palaceSide: { kind: 'enum', values: [1, 2] },
+    residenceSide: { kind: 'enum', values: [1, 2] },
+    theaterSide: { kind: 'enum', values: [1, 2] }
+  }
 }
 
 export function getPlayerName(playerId: PlayerColor, t: TFunction) {
